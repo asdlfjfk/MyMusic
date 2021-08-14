@@ -1,6 +1,6 @@
 <template>
     <div id="discovermusic">
-        <el-header>
+        <el-header slot="mainbar">
             <div id="discovermusichome">
                 <div class="titlebar">
                     <router-link to="personal" class="link" id="personal">
@@ -22,11 +22,11 @@
             </div>
         </el-header>
 
-        <el-container>
-            <el-main>
+        <el-main style="height:560px" id="main">
+            <div>
                 <router-view></router-view>
-            </el-main>
-        </el-container>
+            </div>
+        </el-main>
     </div>
 </template>
 
@@ -78,16 +78,29 @@
 </script>
 
 <style scoped>
+
+    #main{
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
+    }
+
     #discovermusichome{
         margin: 0 auto;
-        width: 80%;
+        width: 100%;
         text-align: center;
+        background-color: #fff;
+        position: relative;
+        right: 10%;
+
     }
 
     .titlebar{
         display: flex;
         justify-content: center;
         width: 44%;
+        height: 50%;
         position: absolute;
         left: 37%;
     }
@@ -97,7 +110,8 @@
         font-family: 微软雅黑;
         opacity: .4;
         font-size: 14px;
-        padding: 18px;
+        padding: 16px;
+        white-space: nowrap;
     }
 
     .titleItem:hover{
@@ -109,7 +123,7 @@
         font-size: 20px;
         opacity: .8;
         border-bottom: 2px solid #c62f2f;
-        padding: 15px;
+        padding: 12px;
     }
 
     .link{
@@ -118,5 +132,17 @@
 
     #songlist,#leader,#singer,#latestmusic{
         margin-left: 5px;
+    }
+
+    ::-webkit-scrollbar
+    {
+        width: 10px;
+        background-color: #fff;
+    }
+
+    ::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        background-color: #e6e7ea;
     }
 </style>

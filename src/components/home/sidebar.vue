@@ -6,16 +6,16 @@
                 <div>
                     <router-link to="/home" class="link">
                         <li class="item" :class="{active: current === 1}" @click="currentitem(1)">
-                        <span class="iconfont icon-music">&#xe600</span>
-                        <span>发现音乐</span>
-                    </li>
+                            <span class="iconfont icon-music">&#xe600</span>
+                            <span>发现音乐</span>
+                        </li>
                     </router-link>
 
                     <router-link to="/video" class="link">
                         <li class="item" :class="{active: current === 2}" @click="currentitem(2)">
-                        <span class="iconfont icon-video">&#xe620</span>
-                        <span>推荐视频</span>
-                    </li>
+                            <span class="iconfont icon-video">&#xe620</span>
+                            <span>推荐视频</span>
+                        </li>
                     </router-link>
 
                 </div>
@@ -116,6 +116,7 @@
         font-family: 微软雅黑;
         opacity: .56;
         transition: border-color .3s,background-color .3s,color .3s;
+        white-space: nowrap;
     }
 
     .item:hover{
