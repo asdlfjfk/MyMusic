@@ -38,6 +38,17 @@ export default {
 
 <style>
 
+    @font-face {
+        font-family: 'iconfont';  /* Project id 2739601 */
+        src: url('//at.alicdn.com/t/font_2739601_xxk7b1y5swn.woff2?t=1629270234763') format('woff2'),
+        url('//at.alicdn.com/t/font_2739601_xxk7b1y5swn.woff?t=1629270234763') format('woff'),
+        url('//at.alicdn.com/t/font_2739601_xxk7b1y5swn.ttf?t=1629270234763') format('truetype');
+    }
+
+    #app{
+        min-width: 1528px;
+    }
+
     #main{
         padding: 10px;
         overflow-x: hidden;
@@ -48,11 +59,12 @@ export default {
     #footer{
         background-color: #fff;
         position: absolute;
-        bottom: 0;
+        bottom: 24px;
         left: 0;
         right: 0;
         border-top:2px solid #afafaf;
         z-index:20;
+        min-width: 1528px;
     }
 
     ::-webkit-scrollbar

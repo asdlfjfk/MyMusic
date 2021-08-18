@@ -2,7 +2,7 @@
     <div id="personal">
 
         <!--轮播图-->
-        <div  class="container">
+        <div class="container">
                 <el-carousel type="card" class="swiper" height="244px">
                     <el-carousel-item v-for="item in banners" :key="item.id" class="swiperitem">
                         <div class="new" ><div>新歌首发</div></div>
@@ -156,14 +156,17 @@
 
 <style scoped>
 
+    #personal{
+        padding: 24px;
+    }
+
     .swiper{
         width: 100%;
         align: center;
         border-radius: 15px;
-        margin: 0 auto;
         padding: 0;
         vertical-align: center;
-        bottom: -10px;
+        margin-top: -10px;
     }
     .swiperitem{
         border-radius: 10px;
@@ -386,8 +389,11 @@
     }
 
     .newsongname{
+        width: 200px;
+        flex-wrap: wrap;
+        font-size: 14px;
         position: relative;
-        right: 6%;
+        right:20px;
         font-family: 微软雅黑;
         opacity: .7;
         margin-bottom: 18%;
@@ -403,7 +409,7 @@
         display: flex;
         align-items: center;
         position: relative;
-        top: 60px;
+        top: 40px;
     }
 
     #button2{
@@ -471,9 +477,9 @@
         font-family: 微软雅黑;
         opacity: .5;
         font-size: 13px;
-        line-height: 70px;
+        line-height: 110px;
         position: relative;
-        bottom: 10%;
+        bottom: 20%;
     }
 
     .mvname:hover{

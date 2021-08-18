@@ -71,13 +71,6 @@
 
 <style scoped>
 
-    @font-face {
-        font-family: 'iconfont';
-        src: url('//at.alicdn.com/t/font_2739601_a1eqjvfd2y.woff2?t=1628735328026') format('woff2'),
-        url('//at.alicdn.com/t/font_2739601_a1eqjvfd2y.woff?t=1628735328026') format('woff'),
-        url('//at.alicdn.com/t/font_2739601_a1eqjvfd2y.ttf?t=1628735328026') format('truetype');
-    }
-
     .sidebar{
         text-align: left;
         border-right: 1px solid #e6e6e6;
@@ -98,9 +91,12 @@
         font-family: 微软雅黑;
     }
 
-    .iconfont {
-        font-family: iconfont !important;
+    .iconfont{
+        font-family:"iconfont" !important;
         margin-right: 8px;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     span{

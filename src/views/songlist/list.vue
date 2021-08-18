@@ -2,7 +2,7 @@
     <div v-loading="loading">
         <div class="title"><span>音乐标题</span><span>歌手</span><span>专辑</span><span>时长</span></div>
         <div class="allsong">
-            <div v-for="(item,index) in songdetails" class="songs" id="song" :class="{bgc: index%2 === 0}">
+            <div v-for="(item,index) in songdetails" class="songs" id="song" :class="{bgc: index%2 === 0}" @click="addsongtoplay(item)">
                 <div class="number"><span id="serial">{{index + 1}}</span></div>
                 <div class="name"><span>{{item.name}}</span></div>
                 <div class="single"><span>{{item.ar[0].name}}</span></div>
@@ -38,13 +38,16 @@
                 for (let songitem of this.songid){
                     getsongdetail(songitem.id).then(res => {
                         this.songdetails.push(res.data.songs[0])
-                        this.loading = false
-                            console.log(this.songdetails);
                     })
                 }
             }catch (e) {
                 console.log(e);
             }
+        },
+        mounted(){
+          this.$nextTick(() => {
+              this.loading = false
+          })
         },
         methods:{
             format (data) {
@@ -52,6 +55,10 @@
                 var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
                 var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
+            },
+            addsongtoplay(item){
+                console.log(item.id);
+                this.$store.commit('changesong',item.id)
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div id="discovermusic">
-        <el-header slot="mainbar">
+        <el-header>
             <div id="discovermusichome">
                 <div class="titlebar">
                     <router-link to="personal" class="link" id="personal">
@@ -85,20 +85,19 @@
     }
 
     #discovermusichome{
-        margin: 0 auto;
         width: 100%;
         text-align: center;
         background-color: #fff;
         position: relative;
         right: 10%;
-
+        top: 8px;
     }
 
     .titlebar{
         display: flex;
         justify-content: center;
         width: 44%;
-        height: 50%;
+        height: 60%;
         position: absolute;
         left: 37%;
     }
@@ -121,7 +120,7 @@
         font-size: 20px;
         opacity: .8;
         border-bottom: 2px solid #c62f2f;
-        padding: 12px;
+        padding: 10px;
     }
 
     .link{
