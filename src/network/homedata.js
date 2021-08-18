@@ -38,3 +38,24 @@ export function getrecommendMV() {
     })
 }
 
+//获取歌单
+export function  getplaylist(id) {
+    return request({
+        url:'/playlist/detail',
+        params:{
+            id
+        }
+    })
+}
+
+export function  getsongdetail(ids) {
+    return request({
+        url:'/song/detail',
+        params:{
+            ids
+        }
+    })
+}
+
+
+

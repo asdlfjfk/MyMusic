@@ -5,6 +5,7 @@
         <div  class="container">
                 <el-carousel type="card" class="swiper" height="244px">
                     <el-carousel-item v-for="item in banners" :key="item.id" class="swiperitem">
+                        <div class="new" ><div>新歌首发</div></div>
                         <img :src="item.imageUrl" alt="">
                     </el-carousel-item>
                 </el-carousel>
@@ -19,7 +20,8 @@
 
         <div class="recommonlist">
             <div v-for="item in recommonlist" class="listdiv">
-                <div class="imgbox">
+
+                <div class="imgbox" @click="listdetail(item.id)">
                     <div class="imgboxcontent">
                         <i class="el-icon-caret-right"></i>
                         {{parseInt(item.playCount/10000)}}万
@@ -93,12 +95,14 @@
                 </div>
 
                 <div class="recommendMvitem">
+                    <div class="hot"><div class="hotname">最新热门MV推荐</div></div>
                     <img :src="item.picUrl" alt="" class="recommendMvimg">
                     <div class="mvtitle">{{item.name}}</div>
                     <div class="mvname">{{item.artists[0].name}}</div>
                 </div>
             </div>
         </div>
+
 
     </div>
 </template>
@@ -109,7 +113,7 @@
         getrecommonlist,
         getprivatecontent,
         getnewsongs,
-        getrecommendMV
+        getrecommendMV,
     } from "network/homedata";
 
     export default {
@@ -120,7 +124,12 @@
                 recommonlist:[],
                 privatecontent:[],
                 newsongs:[],
-                recommendMV:[]
+                recommendMV:[],
+            }
+        },
+        methods:{
+            listdetail(id){
+                this.$router.push({name:'songlist',params:{listid:id}})
             }
         },
         created(){
@@ -137,12 +146,10 @@
                 this.newsongs = res.data.result
             })
             getrecommendMV().then(res => {
-                console.log(res);
                 this.recommendMV.push(res.data.result[0])
                 this.recommendMV.push(res.data.result[1])
                 this.recommendMV.push(res.data.result[2])
             })
-
         }
     }
 </script>
@@ -156,9 +163,10 @@
         margin: 0 auto;
         padding: 0;
         vertical-align: center;
+        bottom: -10px;
     }
     .swiperitem{
-        border-radius: 15px;
+        border-radius: 10px;
     }
 
     .swiperitem img{
@@ -166,6 +174,23 @@
         height: 100%;
     }
 
+    .new{
+        background-color: #409eff;
+        color: #fff;
+        font-family: 微软雅黑;
+        font-size: 12px;
+        position: absolute;
+        top: 90%;
+        left: 86.4%;
+        width: 80px;
+        line-height: 25px;
+        border-radius: 10px;
+        align:center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     .recommend{
         display: flex;
         align-items: center;
@@ -241,19 +266,10 @@
         /*filter:drop-shadow(0 0 3px #000);*/
     }
 
+
+
     .imgbox:hover #button{
         display: inherit;
-    }
-
-    .name{
-        font-family: 微软雅黑;
-        width: 200px;
-        height: auto;
-        font-size: 14px;
-        margin-top: 10%;
-        opacity: .8;
-        display: flex;
-        justify-content: center;
     }
 
     #button{
@@ -268,6 +284,17 @@
         z-index: 10;
         display: none;
         cursor: pointer;
+    }
+
+    .name {
+        font-family: 微软雅黑;
+        width: 200px;
+        height: auto;
+        font-size: 14px;
+        margin-top: 10%;
+        opacity: .8;
+        display: flex;
+        justify-content: center;
     }
 
     #player{
@@ -383,14 +410,18 @@
         width: 34px;
         height: 34px;
         border-radius: 20px;
-        background-color: #e2e2e2;
-        opacity: .8;
+        background-color: rgba(226,226,226,.8);
         z-index: 10;
         position: relative;
         right: 21%;
         cursor: pointer;
     }
 
+    #button2:hover{
+        background-color: #fff;
+        opacity: .9;
+    }
+    
     #player3{
         color: #c62f2f;
         position: absolute;
@@ -410,7 +441,7 @@
         align-items: center;
         justify-content: space-evenly;
         position: relative;
-        bottom: 24px;
+        bottom: 55px;
     }
 
     .recommendMvitem{
@@ -440,9 +471,9 @@
         font-family: 微软雅黑;
         opacity: .5;
         font-size: 13px;
-        line-height: 100px;
+        line-height: 70px;
         position: relative;
-        bottom: 14%;
+        bottom: 10%;
     }
 
     .mvname:hover{
@@ -453,7 +484,31 @@
     .mvplaycount{
         color: #fff;
         position: relative;
-        top: 30px;
-        left: 300px;
+        top: 66px;
+        left: 310px;
+    }
+
+    .recommendMvitem:hover .hot{
+        transform: translateY(14%);
+        transition: transform 0.8s;
+        width: 370px;
+        background-color: rgba(0,0,0,.5);
+        opacity: 1;
+        border-radius: 10px;
+        z-index:5;
+    }
+    .hot{
+        line-height: 40px;
+        position: relative;
+        top: 195px;
+        opacity: 0;
+        z-index: -5;
+        overflow: hidden;
+    }
+
+    .recommendMvitem:hover .hotname{
+        color: #fff;
+        margin-left: 10px;
+        font-family: 微软雅黑;
     }
 </style>

@@ -9,7 +9,7 @@
                 <el-container>
                     <sidebar></sidebar>
                     <el-main width="80%" style="height: 640px" id="main">
-                        <router-view></router-view>
+                        <keep-alive exclude="songlist"><router-view></router-view></keep-alive>
                     </el-main>
                 </el-container>
 
@@ -39,7 +39,10 @@ export default {
 <style>
 
     #main{
-        overflow: hidden;
+        padding: 10px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
     }
 
     #footer{
@@ -48,7 +51,19 @@ export default {
         bottom: 0;
         left: 0;
         right: 0;
-        border-top:1px solid black ;
+        border-top:2px solid #afafaf;
         z-index:20;
+    }
+
+    ::-webkit-scrollbar
+    {
+        width: 10px;
+        background-color: #fff;
+    }
+
+    ::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        background-color: #e6e7ea;
     }
 </style>

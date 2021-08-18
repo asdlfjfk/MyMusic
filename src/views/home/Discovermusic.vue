@@ -80,8 +80,6 @@
 <style scoped>
 
     #main{
-        overflow-y: scroll;
-        scroll-behavior: smooth;
         margin: 0;
         padding: 0;
     }
@@ -134,15 +132,4 @@
         margin-left: 5px;
     }
 
-    ::-webkit-scrollbar
-    {
-        width: 10px;
-        background-color: #fff;
-    }
-
-    ::-webkit-scrollbar-thumb
-    {
-        border-radius: 10px;
-        background-color: #e6e7ea;
-    }
 </style>

@@ -12,6 +12,8 @@ const songlist = () => import('../views/home/DiscoverChildview/songlist.vue')
 const leader = () => import('../views/home/DiscoverChildview/leader.vue')
 const singer = () => import('../views/home/DiscoverChildview/singer.vue')
 const latestmusic = () => import('../views/home/DiscoverChildview/latestmusic.vue')
+const Songlist = () => import('../views/songlist/songlist.vue')
+
 
 const routes = [
     {
@@ -45,7 +47,7 @@ const routes = [
             {
                 path:'latestmusic',
                 component:latestmusic
-            }
+            },
         ]
     },
     {
@@ -55,11 +57,15 @@ const routes = [
     {
         path:'/disk',
         component:disk
+    },
+    {
+        path:'/songlist',
+        name:'songlist',
+        component:Songlist,
     }
 ]
 
 export default new VueRouter({
     routes,
     mode:'history',
-    // linkActiveClass:'is-active',
 })
