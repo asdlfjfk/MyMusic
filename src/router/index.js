@@ -14,7 +14,6 @@ const singer = () => import('../views/home/DiscoverChildview/singer.vue')
 const latestmusic = () => import('../views/home/DiscoverChildview/latestmusic.vue')
 const Songlist = () => import('../views/songlist/songlist.vue')
 
-
 const routes = [
     {
         path:'',
@@ -59,8 +58,7 @@ const routes = [
         component:disk
     },
     {
-        path:'/songlist',
-        name:'songlist',
+        path:'/songlist/:id',
         component:Songlist,
     }
 ]

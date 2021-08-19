@@ -86,7 +86,7 @@
             comment
         },
         created(){
-            let id = this.$route.params.listid;
+            let id = this.$route.params.id;
             this.listid = id
 
             getplaylist(this.listid).then(res => {
@@ -311,11 +311,12 @@
     }
 
     .desr:hover{
-        width: 1000px;
+        width: 700px;
         position: absolute;
         left: 35.8px;
         font-size: 14px;
         cursor: pointer;
+        white-space: normal;
     }
 
     #main{

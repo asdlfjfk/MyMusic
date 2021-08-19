@@ -3,19 +3,57 @@
             <div class="iconfont">
                 &#xe602;
             </div>
-            <div  class="iconfont2">
+            <div  class="iconfont2" @click="play" v-html="icon">
                 &#xe618;
             </div>
             <div  class="iconfont">
                 &#xe61b;
             </div>
-            <!--<audio></audio>-->
+            <!--<audio :src="url" controls="controls" id="audio" autoplay></audio>-->
+            <audio :src="url" id="audio" autoplay></audio>
         </div>
 </template>
 
 <script>
     export default {
-        name: "musicplayer"
+        name: "musicplayer",
+        data(){
+          return{
+              detail:{},
+              url:"",
+              playpause:false,
+              icon:"&#xe618;",
+          }
+        },
+        computed:{
+            song(){
+                return this.$store.getters.song
+            }
+        },
+        watch:{
+          song(val){
+              console.log(val);
+              this.detail = val.data.data[0]
+              this.url = val.data.data[0].url
+
+              let audio = document.getElementById("audio")
+              this.icon = "&#xe710;"
+              this.playpause = true
+          },
+        },
+        methods:{
+            play(){
+                this.playpause = !this.playpause
+                if (this.playpause === true){
+                    document.getElementById("audio").play()
+                    this.icon = "&#xe710;"
+
+                }else {
+                    document.getElementById("audio").pause()
+                    this.icon = "&#xe618;"
+                }
+            }
+        },
     }
 </script>
 

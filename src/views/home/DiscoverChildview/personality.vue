@@ -129,7 +129,7 @@
         },
         methods:{
             listdetail(id){
-                this.$router.push({name:'songlist',params:{listid:id}})
+                this.$router.push('/songlist/' + id)
             }
         },
         created(){
@@ -491,7 +491,8 @@
         color: #fff;
         position: relative;
         top: 66px;
-        left: 310px;
+        left: 300px;
+        font-family: 微软雅黑;
     }
 
     .recommendMvitem:hover .hot{

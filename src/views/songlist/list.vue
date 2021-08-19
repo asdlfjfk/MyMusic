@@ -16,7 +16,7 @@
 
 <script>
     import {getsongdetail} from 'network/homedata'
-
+    import {getsongurl} from '../../network/homedata'
     export default {
         name: "list",
         props:{
@@ -34,15 +34,11 @@
             }
         },
         created(){
-            try {
                 for (let songitem of this.songid){
                     getsongdetail(songitem.id).then(res => {
                         this.songdetails.push(res.data.songs[0])
                     })
                 }
-            }catch (e) {
-                console.log(e);
-            }
         },
         mounted(){
           this.$nextTick(() => {
@@ -57,10 +53,11 @@
                 return m + s
             },
             addsongtoplay(item){
-                console.log(item.id);
-                this.$store.commit('changesong',item.id)
+                getsongurl(item.id).then(res => {
+                    this.$store.commit('changesong',res)
+                })
             }
-        }
+        },
     }
 </script>
 
@@ -88,6 +85,7 @@
         opacity: .55;
         position: relative;
         width: 100%;
+        font-family: 微软雅黑;
     }
 
     .number{

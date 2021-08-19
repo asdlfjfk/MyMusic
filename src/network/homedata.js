@@ -48,6 +48,7 @@ export function  getplaylist(id) {
     })
 }
 
+//获取歌曲详情
 export function  getsongdetail(ids) {
     return request({
         url:'/song/detail',
@@ -56,6 +57,17 @@ export function  getsongdetail(ids) {
         }
     })
 }
+
+//获取歌曲文件
+export function getsongurl(id) {
+    return request({
+        url:'/song/url',
+        params:{
+            id
+        }
+    })
+}
+
 
 
 

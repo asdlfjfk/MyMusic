@@ -1,18 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
-        songid:0
+        song:{},
     },
     mutations:{
         changesong(state,payload) {
-            state.songid = payload
-        }
+            state.song = payload
+        },
     },
     actions:{},
+    getters
 })
 
 export default store
