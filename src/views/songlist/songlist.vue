@@ -158,7 +158,7 @@
         position: relative;
         align-items: flex-start;
         left: 70px;
-        top: 22px;
+        top: 20px;
     }
 
     .line1{
@@ -167,6 +167,8 @@
         justify-content: flex-start;
         margin-left: 22px;
         font-family: 微软雅黑;
+        position: relative;
+        top: 8px;
     }
 
 
@@ -176,7 +178,7 @@
         align-items: center;
         justify-content: flex-start;
         position: relative;
-        bottom: 14px;
+        bottom: 8px;
         font-family: 微软雅黑;
     }
 

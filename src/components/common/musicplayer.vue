@@ -1,29 +1,39 @@
 <template>
-        <div id="player">
+    <div id="player">
+        <div class="songinfo">
+            <div class="imgbox"><img :src="songdetail.picUrl" alt=""></div>
+            <div class="info"><div class="songname">{{songdetail.name}}</div><div class="singlename">{{singledetail.name}}</div></div>
+        </div>
+
+        <div class="button">
             <div class="iconfont">
                 &#xe602;
             </div>
-            <div  class="iconfont2" @click="play" v-html="icon">
+            <div class="iconfont2" @click="play" v-html="icon">
                 &#xe618;
             </div>
-            <div  class="iconfont">
+            <div class="iconfont">
                 &#xe61b;
             </div>
-            <!--<audio :src="url" controls="controls" id="audio" autoplay></audio>-->
-            <audio :src="url" id="audio" autoplay></audio>
         </div>
+
+        <audio :src="url" id="audio" autoplay></audio>
+    </div>
 </template>
 
 <script>
+    import {getsongdetail} from '../../network/homedata'
     export default {
         name: "musicplayer",
         data(){
-          return{
-              detail:{},
-              url:"",
-              playpause:false,
-              icon:"&#xe618;",
-          }
+            return{
+                detail:{},
+                url:"",
+                playpause:false,
+                icon:"&#xe618;",
+                songdetail:{},
+                singledetail:{}
+            }
         },
         computed:{
             song(){
@@ -31,15 +41,20 @@
             }
         },
         watch:{
-          song(val){
-              console.log(val);
-              this.detail = val.data.data[0]
-              this.url = val.data.data[0].url
+            song(val){
+                console.log(val);
+                this.detail = val.data.data[0]
+                this.url = val.data.data[0].url
+                getsongdetail(this.detail.id).then(res => {
+                    this.songdetail = res.data.songs[0].al
+                    this.singledetail = res.data.songs[0].ar[0]
+                })
 
-              let audio = document.getElementById("audio")
-              this.icon = "&#xe710;"
-              this.playpause = true
-          },
+
+                let audio = document.getElementById("audio")
+                this.icon = "&#xe710;"
+                this.playpause = true
+            },
         },
         methods:{
             play(){
@@ -85,8 +100,63 @@
 
     #player{
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         margin-top: 10px;
+    }
+
+    .imgbox img{
+        width: 60px;
+        border-radius: 5px;
+    }
+
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 44.8%;
+        bottom: 6px;
+    }
+
+    .songinfo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        left: 10px;
+        top: 1.5px;
+    }
+
+    .info{
+        margin-left: 12px;
+        margin-bottom: 4px;
+        font-family: 微软雅黑;
+    }
+
+    .songname{
+        font-size: 14px;
+        position: relative;
+        bottom: 5px;
+        color: rgb(0,0,0,.6);
+    }
+
+    .songname:hover{
+        color: #000;
+        opacity: .8;
+        cursor: pointer;
+    }
+
+    .singlename{
+        font-size: 8px;
+        position: relative;
+        top: 8px;
+        color: rgb(0,0,0,.5);
+    }
+
+    .singlename:hover{
+        color: #000;
+        opacity: .8;
+        cursor: pointer;
     }
 </style>

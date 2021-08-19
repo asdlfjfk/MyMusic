@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state:{
-        song:{},
+        song:0,
     },
     mutations:{
         changesong(state,payload) {
