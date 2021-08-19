@@ -55,7 +55,6 @@
             },
             addsongtoplay(item,index){
                 this.currentindex = index
-                console.log(item.id);
                 getsongurl(item.id).then(res => {
                     this.$store.commit('changesong',res)
                 })

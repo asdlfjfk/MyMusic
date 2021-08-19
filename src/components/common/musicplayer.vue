@@ -5,19 +5,29 @@
             <div class="info"><div class="songname">{{songdetail.name}}</div><div class="singlename">{{singledetail.name}}</div></div>
         </div>
 
-        <div class="button">
-            <div class="iconfont">
-                &#xe602;
+        <div>
+            <div class="button">
+                <div class="iconfont">
+                    &#xe602;
+                </div>
+                <div class="iconfont2" @click="play" v-html="icon">
+                    &#xe618;
+                </div>
+                <div class="iconfont">
+                    &#xe61b;
+                </div>
             </div>
-            <div class="iconfont2" @click="play" v-html="icon">
-                &#xe618;
-            </div>
-            <div class="iconfont">
-                &#xe61b;
+            <div class="playbar">
+                <span class="current">{{format(currentTime * 1000)}}</span>
+                <div class="block">
+                    <el-slider id="slider" v-model="currentTime" :max="format2(this.alltime)"></el-slider>
+                </div>
+                <span class="size">{{format(alltime)}}</span>
             </div>
         </div>
 
-        <audio :src="url" id="audio" autoplay></audio>
+
+        <audio :src="url" ref="audio" @timeupdate="update()" autoplay></audio>
     </div>
 </template>
 
@@ -32,7 +42,9 @@
                 playpause:false,
                 icon:"&#xe618;",
                 songdetail:{},
-                singledetail:{}
+                singledetail:{},
+                currentTime:null,
+                alltime:null
             }
         },
         computed:{
@@ -42,7 +54,6 @@
         },
         watch:{
             song(val){
-                console.log(val);
                 this.detail = val.data.data[0]
                 this.url = val.data.data[0].url
                 getsongdetail(this.detail.id).then(res => {
@@ -50,8 +61,6 @@
                     this.singledetail = res.data.songs[0].ar[0]
                 })
 
-
-                let audio = document.getElementById("audio")
                 this.icon = "&#xe710;"
                 this.playpause = true
             },
@@ -60,13 +69,31 @@
             play(){
                 this.playpause = !this.playpause
                 if (this.playpause === true){
-                    document.getElementById("audio").play()
+                    this.$refs.audio.play()
                     this.icon = "&#xe710;"
 
                 }else {
-                    document.getElementById("audio").pause()
+                    this.$refs.audio.pause()
                     this.icon = "&#xe618;"
                 }
+            },
+            format (data) {
+                var date = new Date(data)
+                var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
+                var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
+                return m + s
+            },
+            //获取歌曲总秒数
+            format2(data){
+                var date = new Date(data)
+                var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+                var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
+                return m*60 + s
+            },
+            update() {
+                let audio = document.querySelector("audio");
+                this.currentTime = audio.currentTime;
+                this.alltime = audio.duration * 1000;
             }
         },
     }
@@ -108,6 +135,8 @@
     .imgbox img{
         width: 60px;
         border-radius: 5px;
+        cursor: pointer;
+        filter:drop-shadow(0 0 2px rgb(0,0,0,.7));
     }
 
     .button{
@@ -116,7 +145,7 @@
         align-items: center;
         position: absolute;
         left: 44.8%;
-        bottom: 6px;
+        bottom: 8px;
     }
 
     .songinfo{
@@ -158,5 +187,24 @@
         color: #000;
         opacity: .8;
         cursor: pointer;
+    }
+
+    .block{
+        width: 700px;
+        position: absolute;
+        top: 40px;
+        left: 410px;
+    }
+
+    .current{
+        position: absolute;
+        top: 47.5px;
+        left: 23.2%;
+    }
+
+    .size{
+        position: absolute;
+        left: 73.3%;
+        top: 47.5px;
     }
 </style>
