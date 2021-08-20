@@ -232,7 +232,7 @@
         justify-content: center;
         position: relative;
         left: 10px;
-        top: 1.5px;
+        bottom: .5px;
     }
 
     .info{

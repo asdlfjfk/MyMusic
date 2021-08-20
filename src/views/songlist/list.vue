@@ -10,7 +10,6 @@
                 <div class="length"><span>{{format(item.dt)}}</span></div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -102,6 +101,7 @@
         display: flex;
         justify-content: center;
         white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .single{
@@ -110,12 +110,15 @@
         display: flex;
         justify-content: center;
         white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .album{
         width: 300px;
         display: flex;
         justify-content: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .length{
         width: 160px;

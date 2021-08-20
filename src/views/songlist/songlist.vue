@@ -123,6 +123,8 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        position: relative;
+        bottom: 10px;
     }
 
     .headimg{

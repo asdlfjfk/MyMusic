@@ -59,7 +59,7 @@ export default {
     #footer{
         background-color: #fff;
         position: absolute;
-        bottom: 24px;
+        bottom: 20px;
         left: 0;
         right: 0;
         border-top:2px solid #afafaf;
