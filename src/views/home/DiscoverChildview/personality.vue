@@ -477,9 +477,9 @@
         font-family: 微软雅黑;
         opacity: .5;
         font-size: 13px;
-        line-height: 110px;
+        line-height: 100px;
         position: relative;
-        bottom: 20%;
+        bottom: 15%;
     }
 
     .mvname:hover{
