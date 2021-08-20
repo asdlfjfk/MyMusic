@@ -29,7 +29,12 @@
             </div>
         </div>
 
-
+        <div class="right">
+            <div class="iconfont3" @click="mute" v-html="volumeicon"></div>
+            <div class="volume">
+                <el-slider v-model="volume" @change="changevolume"></el-slider>
+            </div>
+        </div>
         <audio :src="url" ref="audio" @timeupdate="update()" autoplay></audio>
     </div>
 </template>
@@ -49,7 +54,10 @@
                 currentTime:null,
                 alltime:null,
                 isChange:false,
-                dt:null
+                dt:null,
+                volume:50,
+                volumeicon:"&#xe6d2;",
+                vo:true
             }
         },
         computed:{
@@ -70,6 +78,15 @@
                 this.icon = "&#xe710;"
                 this.playpause = true
             },
+            volume(val){
+                let audio = document.querySelector("audio");
+                if (val === 0){
+                    audio.volume = 0
+                    this.volumeicon = "&#xe623;"
+                }else {
+                    this.volumeicon = "&#xe6d2;"
+                }
+            }
         },
         methods:{
             play(){
@@ -120,12 +137,31 @@
             //格式化进度条拖动时显示的进度
             timestepToolTip(){
                 return this.format(this.currentTime * 1000)
+            },
+
+            changevolume(){
+                let audio = document.querySelector("audio");
+                audio.volume = this.volume / 100
+            },
+
+            mute(){
+                this.vo = !this.vo
+                let audio = document.querySelector("audio");
+                if (this.vo === true){
+                    audio.volume = 0.5
+                    this.volume = 50
+                    this.volumeicon = "&#xe6d2;"
+                }else {
+                    audio.volume = 0
+                    this.volume = 0
+                    this.volumeicon = "&#xe623;"
+                }
             }
         },
     }
 </script>
 
-<style>
+<style scoped>
 
     .iconfont{
         font-family:"iconfont" !important;
@@ -146,9 +182,25 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .iconfont3{
+        font-family:"iconfont" !important;
+        font-size:24px;font-style:normal;
+        margin-right: 8px;
+        margin-top: 0.7px;
+        color: rgb(0,0,0,.7);
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     .iconfont,.iconfont2:hover{
         cursor: pointer;
         color: #000;
+    }
+
+    .iconfont3:hover{
+        cursor: pointer;
+        color:  #c62f2f;
     }
 
     #player{
@@ -234,15 +286,42 @@
         top: 47.5px;
     }
 
-    .el-slider__button {
+    .block >>>  .el-slider__button {
         background-color: #fff;
         width: 12px;
         height: 12px;
         border: 2px solid #c62f2f;
     }
 
-    .el-slider__bar{
+    .block >>> .el-slider__bar{
         background-color: #ff4e4e;
-        /*opacity: .7;*/
+    }
+
+    .right{
+        display: flex;
+        position: absolute;
+        left: 80%;
+        align-items: center;
+        top: 24px;
+    }
+
+    .volume{
+        width: 100px;
+        margin-left: 8px;
+    }
+
+    .volume >>>  .el-slider__button {
+        background-color: #ff4e4e;
+        width: 3px;
+        height: 3px;
+        border: 2px solid #ff4e4e;
+    }
+
+    .volume >>> .el-slider__bar{
+        background-color: #ff4e4e;
+    }
+
+    .volume >>> .el-slider__runway{
+        height: 5px;
     }
 </style>
