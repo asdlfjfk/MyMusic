@@ -20,9 +20,12 @@
             <div class="playbar">
                 <span class="current">{{format(currentTime * 1000)}}</span>
                 <div class="block">
-                    <el-slider id="slider" v-model="currentTime" :max="format2(this.alltime)"></el-slider>
+                    <el-slider id="slider" v-model="currentTime" :max="format2(this.alltime)" @change="changeMusicduration"
+                               @mousedown.native="isChange = true" @mouseup.native="isChange = false"
+                               :format-tooltip="timestepToolTip">
+                    </el-slider>
                 </div>
-                <span class="size">{{format(alltime)}}</span>
+                <span class="size">{{format(dt)}}</span>
             </div>
         </div>
 
@@ -44,7 +47,9 @@
                 songdetail:{},
                 singledetail:{},
                 currentTime:null,
-                alltime:null
+                alltime:null,
+                isChange:false,
+                dt:null
             }
         },
         computed:{
@@ -59,6 +64,7 @@
                 getsongdetail(this.detail.id).then(res => {
                     this.songdetail = res.data.songs[0].al
                     this.singledetail = res.data.songs[0].ar[0]
+                    this.dt = res.data.songs[0].dt
                 })
 
                 this.icon = "&#xe710;"
@@ -67,13 +73,18 @@
         },
         methods:{
             play(){
-                this.playpause = !this.playpause
-                if (this.playpause === true){
-                    this.$refs.audio.play()
-                    this.icon = "&#xe710;"
+                if (this.$store.getters.song != 0){
+                    this.playpause = !this.playpause
+                    if (this.playpause === true){
+                        this.$refs.audio.play()
+                        this.icon = "&#xe710;"
 
-                }else {
-                    this.$refs.audio.pause()
+                    }else {
+                        this.$refs.audio.pause()
+                        this.icon = "&#xe618;"
+                    }
+                } else {
+                    this.$message.error('当前没有可播放的歌曲哦');
                     this.icon = "&#xe618;"
                 }
             },
@@ -91,15 +102,30 @@
                 return m*60 + s
             },
             update() {
+                //当鼠标拖动进度条时 禁用timeupdate方法
+                if (this.isChange === false) {
+                    let audio = document.querySelector("audio");
+                    this.currentTime = audio.currentTime;
+                    this.alltime = audio.duration * 1000;
+                }
+            },
+
+            //进度条拖动时更改歌曲播放进度
+            changeMusicduration(){
                 let audio = document.querySelector("audio");
-                this.currentTime = audio.currentTime;
-                this.alltime = audio.duration * 1000;
+                audio.currentTime = this.currentTime
+                this.isChange = false
+            },
+
+            //格式化进度条拖动时显示的进度
+            timestepToolTip(){
+                return this.format(this.currentTime * 1000)
             }
         },
     }
 </script>
 
-<style scoped>
+<style>
 
     .iconfont{
         font-family:"iconfont" !important;
@@ -204,7 +230,19 @@
 
     .size{
         position: absolute;
-        left: 73.3%;
+        left: 73.1%;
         top: 47.5px;
+    }
+
+    .el-slider__button {
+        background-color: #fff;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #c62f2f;
+    }
+
+    .el-slider__bar{
+        background-color: #ff4e4e;
+        /*opacity: .7;*/
     }
 </style>

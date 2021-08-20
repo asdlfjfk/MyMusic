@@ -132,6 +132,6 @@
     }
 
     .active .name{
-        color: red;
+        color: #c62f2f;
     }
 </style>
