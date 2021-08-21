@@ -33,14 +33,6 @@ export default {
       sidebar,
       musicplayer,
   },
-    mounted() {
-        window.addEventListener('unload', this.saveState)
-    },
-    methods: {
-        saveState() {
-            sessionStorage.setItem('state', JSON.stringify(this.$store.state))
-        }
-    }
 }
 </script>
 
@@ -48,9 +40,9 @@ export default {
 
     @font-face {
         font-family: 'iconfont';  /* Project id 2739601 */
-        src: url('//at.alicdn.com/t/font_2739601_g9ymn2mxqra.woff2?t=1629425473796') format('woff2'),
-        url('//at.alicdn.com/t/font_2739601_g9ymn2mxqra.woff?t=1629425473796') format('woff'),
-        url('//at.alicdn.com/t/font_2739601_g9ymn2mxqra.ttf?t=1629425473796') format('truetype');
+        src: url('//at.alicdn.com/t/font_2739601_6cn3d61hqew.woff2?t=1629511081847') format('woff2'),
+        url('//at.alicdn.com/t/font_2739601_6cn3d61hqew.woff?t=1629511081847') format('woff'),
+        url('//at.alicdn.com/t/font_2739601_6cn3d61hqew.ttf?t=1629511081847') format('truetype');
     }
 
     #app{

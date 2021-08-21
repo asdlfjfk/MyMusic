@@ -5,11 +5,11 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-    state:sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state')):{
+    state:{
         song:0,
         songset:[],
         id:0,
-        index:""
+        playerbackid:""
     },
     mutations:{
         changesong(state,payload) {
@@ -28,8 +28,8 @@ const store = new Vuex.Store({
         changeid(state,payload){
             state.id = payload
         },
-        changeindex(state,payload){
-            state.index = payload
+        changebackid(state,payload){
+            state.playerbackid = payload
         }
     },
     actions:{},

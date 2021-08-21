@@ -178,7 +178,11 @@
                 for (let songindex in this.songset){
                     if (this.songset[songindex].data.songs[0].id === id) {
                         index = songindex*1 - 1
-                        this.$store.commit('changeindex',index)
+                        if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                            index = songindex*1 - 2
+                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                        }
+                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                     }
                 }
                 if (index != null && index >= 0){
@@ -197,7 +201,11 @@
                 for (let songindex in this.songset){
                     if (this.songset[songindex].data.songs[0].id === id) {
                         index = songindex*1 + 1
-                        this.$store.commit('changeindex',index)
+                        if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                            index = songindex*1 + 2
+                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                        }
+                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                     }
                 }
                 try {
@@ -271,6 +279,7 @@
         width: 60px;
         border-radius: 5px;
         cursor: pointer;
+        align-items: center;
         filter:drop-shadow(0 0 2px rgb(0,0,0,.7));
     }
 

@@ -72,8 +72,8 @@
                 else if (val.path.match(RegExp(/lealatestmusicder/))){
                     this.current = 5;
                 }
-            }
-        }
+            },
+        },
     }
 </script>
 

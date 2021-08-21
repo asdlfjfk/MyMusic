@@ -52,10 +52,8 @@
         </div>
 
         <div class="listmain">
-            <keep-alive>
                 <list v-if="current === 1 && trackids.length > 0"></list>
                 <comment v-if="current === 2"></comment>
-            </keep-alive>
         </div>
     </div>
 </template>
@@ -63,7 +61,7 @@
 <script>
 
     import {formatDate} from '../../common/util'
-    import {getplaylist,getsongdetail} from "network/homedata";
+    import {getplaylist,getsongdetail,getsongurl} from "network/homedata";
     const list = () => import('../../views/songlist/list.vue')
     const comment = () => import('../../views/songlist/comment.vue')
 
@@ -88,36 +86,52 @@
             comment
         },
         created(){
-            let id = this.$route.params.id;
+            let id = this.routeid;
             this.listid = id
 
             this.$store.commit('cleansongset')
+            this.$store.commit('cleanindex')
 
-            new Promise((resolve,reject) => {
+            new Promise((resolve) => {
                 getplaylist(this.listid).then(res => {
                     this.playlist = res.data.playlist
                     this.creator = this.playlist.creator
                     this.createTime = formatDate(res.data.playlist.createTime)
                     this.tags = this.playlist.tags
                     this.trackids = res.data.playlist.trackIds
-                    this.loading = false
                     resolve(res)
                 })
-            }).then(res => {
+            }).then(() => {
                 for (let trackid of this.trackids){
                     this.ids.push(trackid.id)
                 }
+                this.ids.sort()
+
+                //保证请求按id顺序执行
+                let promise = null
                 if (this.ids.length >= this.trackids.length){
-                    for(let id of this.ids){
-                        getsongdetail(id).then(res => {
-                            this.$store.commit('pushallsong',res)
-                        })
-                    }
+                    promise = this.ids.map(item => {
+                        return this.getInfo(item)  //将每个请求封装为promise
+                    })
+
+                    Promise.all(promise).then(res => {  //遍历所有请求的数据
+                        let count = 0
+                        for (let song of res){
+                            this.$store.commit('pushallsong',song)
+                            localStorage.setItem("song", song);
+                            count += 1
+                        }
+                        if (count >= res.length){
+                            this.loading = false
+                        }
+                    })
                 }
             })
-
-
-
+        },
+        computed:{
+            routeid(){
+                return this.$route.params.id
+            }
         },
         methods:{
             itemCurrent(num){
@@ -140,6 +154,13 @@
                 //         this.$store.commit('pushallsong',res)
                 //     })
                 // }
+            },
+            getInfo(id){
+                return new Promise((resolve,reject) => {
+                    getsongdetail(id).then(res => {
+                        resolve(res)
+                    })
+                })
             }
         },
     }
