@@ -2,42 +2,24 @@
     <div v-loading="loading">
         <div class="title"><span>音乐标题</span><span>歌手</span><span>专辑</span><span>时长</span></div>
         <div class="allsong">
-            <div v-for="(item,index) in songdetails" class="songs" id="song" :class="{bgc: index%2 === 0,active: index === currentindex}" @click="addsongtoplay(item,index)">
+            <div v-for="(item,index) in allsong" class="songs" id="song" :class="{bgc: index%2 === 0,active: index === index2}" @click="addsongtoplay(item,index)">
                 <div class="number"><span id="serial">{{index + 1}}</span></div>
-                <div class="name"><span>{{item.name}}</span></div>
-                <div class="single"><span>{{item.ar[0].name}}</span></div>
-                <div class="album"><span>{{item.al.name}}</span></div>
-                <div class="length"><span>{{format(item.dt)}}</span></div>
+                <div class="name"><span>{{item.data.songs[0].name}}</span></div>
+                <div class="single"><span>{{item.data.songs[0].ar[0].name}}</span></div>
+                <div class="album"><span>{{item.data.songs[0].al.name}}</span></div>
+                <div class="length"><span>{{format(item.data.songs[0].dt)}}</span></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {getsongdetail} from 'network/homedata'
     import {getsongurl} from '../../network/homedata'
     export default {
         name: "list",
-        props:{
-            songid:{
-                type:Array,
-                default(){
-                    return []
-                }
-            }
-        },
         data(){
             return {
-                songdetails:[],
                 loading:true,
-                currentindex:null
-            }
-        },
-        created(){
-            for (let songitem of this.songid){
-                getsongdetail(songitem.id).then(res => {
-                    this.songdetails.push(res.data.songs[0])
-                })
             }
         },
         mounted(){
@@ -53,10 +35,18 @@
                 return m + s
             },
             addsongtoplay(item,index){
-                this.currentindex = index
-                getsongurl(item.id).then(res => {
-                    this.$store.commit('changesong',res)
+                this.$store.commit('changeindex',index)
+                getsongurl(item.data.songs[0].id).then(res => {
+                    this.$store.commit('changesong',{res,item})
                 })
+            },
+        },
+        computed:{
+            allsong(){
+                return this.$store.state.songset
+            },
+            index2(){
+                return this.$store.state.index
             }
         },
     }

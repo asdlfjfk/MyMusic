@@ -2,18 +2,18 @@
     <div id="player">
         <div class="songinfo">
             <div class="imgbox"><img :src="songdetail.picUrl" alt=""></div>
-            <div class="info"><div class="songname">{{songdetail.name}}</div><div class="singlename">{{singledetail.name}}</div></div>
+            <div class="info"><div class="songname">{{songname}}</div><div class="singlename">{{singledetail.name}}</div></div>
         </div>
 
         <div>
             <div class="button">
-                <div class="iconfont">
+                <div class="iconfont" @click="up(id)">
                     &#xe602;
                 </div>
                 <div class="iconfont2" @click="play" v-html="icon">
                     &#xe618;
                 </div>
-                <div class="iconfont">
+                <div class="iconfont" @click="down(id)">
                     &#xe61b;
                 </div>
             </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import {getsongdetail} from '../../network/homedata'
+    import {getsongdetail,getsongurl} from '../../network/homedata'
     export default {
         name: "musicplayer",
         data(){
@@ -49,20 +49,27 @@
                 url:"",
                 playpause:false,
                 icon:"&#xe618;",
+                songname:"",
                 songdetail:{},
                 singledetail:{},
                 currentTime:null,
-                alltime:null,
+                alltime:"",
                 isChange:false,
                 dt:null,
                 volume:50,
                 volumeicon:"&#xe6d2;",
-                vo:true
+                vo:true,
             }
         },
         computed:{
             song(){
                 return this.$store.getters.song
+            },
+            songset(){
+                return this.$store.getters.songset
+            },
+            id(){
+                return this.$store.state.id
             }
         },
         watch:{
@@ -71,6 +78,7 @@
                 this.url = val.data.data[0].url
                 getsongdetail(this.detail.id).then(res => {
                     this.songdetail = res.data.songs[0].al
+                    this.songname = res.data.songs[0].name
                     this.singledetail = res.data.songs[0].ar[0]
                     this.dt = res.data.songs[0].dt
                 })
@@ -78,6 +86,12 @@
                 this.icon = "&#xe710;"
                 this.playpause = true
             },
+            // songset(val){
+            //     const allsong = val[0].data.data;
+            //     for (let song of allsong){
+            //
+            //     }
+            // },
             volume(val){
                 let audio = document.querySelector("audio");
                 if (val === 0){
@@ -156,6 +170,49 @@
                     this.volume = 0
                     this.volumeicon = "&#xe623;"
                 }
+            },
+
+            // 上一首
+            up(id){
+                let index = null
+                for (let songindex in this.songset){
+                    if (this.songset[songindex].data.songs[0].id === id) {
+                        index = songindex*1 - 1
+                        this.$store.commit('changeindex',index)
+                    }
+                }
+                if (index != null && index >= 0){
+                    let id = this.songset[index].data.songs[0].id
+                    this.$store.commit('changeid',id)
+                    getsongurl(this.id).then(res => {
+                        this.$store.commit('changesong2',res)
+                    })
+                }else{
+                    this.$message.error('已经到顶了哦');
+                }
+            },
+            // 下一首
+            down(id){
+                let index = null
+                for (let songindex in this.songset){
+                    if (this.songset[songindex].data.songs[0].id === id) {
+                        index = songindex*1 + 1
+                        this.$store.commit('changeindex',index)
+                    }
+                }
+                try {
+                    if (index != null && index >= 0){
+                        let id = this.songset[index].data.songs[0].id
+                        this.$store.commit('changeid',id)
+                        getsongurl(this.id).then(res => {
+                            this.$store.commit('changesong2',res)
+                        })
+                    }
+                }catch(e)
+                {
+                    this.$message.error('已经到底了哦');
+                }
+
             }
         },
     }

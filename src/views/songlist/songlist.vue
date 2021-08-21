@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="line3">
-                        <div class="playall"><div class="text"><i class="el-icon-caret-right"></i>播放全部</div></div>
+                        <div class="playall" @click="pushallsong"><div class="text"><i class="el-icon-caret-right"></i>播放全部</div></div>
                         <div class="button"><div class="text"><i class="el-icon-folder-add"></i>收藏({{playlist.subscribedCount}})</div></div>
                         <div class="button"><div class="text"><i class="el-icon-share"></i>分享({{playlist.shareCount}})</div></div>
                     </div>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="listmain">
-            <list v-if="current === 1 && trackids.length > 0" :songid="trackids"></list>
+            <list v-if="current === 1 && trackids.length > 0"></list>
             <comment v-if="current === 2"></comment>
         </div>
     </div>
@@ -61,7 +61,7 @@
 <script>
 
     import {formatDate} from '../../common/util'
-    import {getplaylist} from "network/homedata";
+    import {getplaylist,getsongdetail} from "network/homedata";
     const list = () => import('../../views/songlist/list.vue')
     const comment = () => import('../../views/songlist/comment.vue')
 
@@ -78,7 +78,9 @@
                 current:1,
                 trackids:[],
                 songdetails:[],
-                loading:true
+                loading:true,
+                ids:[],
+                isreload:true
             }
         },
         components:{
@@ -89,6 +91,8 @@
             let id = this.$route.params.id;
             this.listid = id
 
+            this.$store.commit('cleansongset')
+
             getplaylist(this.listid).then(res => {
                 this.playlist = res.data.playlist
                 this.creator = this.playlist.creator
@@ -96,9 +100,20 @@
                 this.tags = this.playlist.tags
                 this.trackids = res.data.playlist.trackIds
                 this.loading = false
+
+                for (let trackid of this.trackids){
+                    this.ids.push(trackid.id)
+                }
+                if (this.ids.length >= this.trackids.length){
+                    for(let id of this.ids){
+                        getsongdetail(id).then(res => {
+                            this.$store.commit('pushallsong',res)
+                        })
+                    }
+                }
+
             })
         },
-
         methods:{
             itemCurrent(num){
                 switch (num) {
@@ -107,6 +122,19 @@
                     case 2:this.current = 2;
                         break;
                 }
+            },
+
+            //播放全部
+            pushallsong(){
+                console.log(111);
+                // for (let trackid of this.trackids){
+                //     this.ids.push(trackid.id)
+                // }
+                // if (this.ids.length >= this.trackids.length){
+                //     getsongurl(this.ids).then(res => {
+                //         this.$store.commit('pushallsong',res)
+                //     })
+                // }
             }
         },
     }
