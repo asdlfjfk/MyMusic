@@ -52,8 +52,10 @@
         </div>
 
         <div class="listmain">
-            <list v-if="current === 1 && trackids.length > 0"></list>
-            <comment v-if="current === 2"></comment>
+            <keep-alive>
+                <list v-if="current === 1 && trackids.length > 0"></list>
+                <comment v-if="current === 2"></comment>
+            </keep-alive>
         </div>
     </div>
 </template>
@@ -77,10 +79,8 @@
                 tags:[],
                 current:1,
                 trackids:[],
-                songdetails:[],
                 loading:true,
                 ids:[],
-                isreload:true
             }
         },
         components:{
@@ -93,14 +93,17 @@
 
             this.$store.commit('cleansongset')
 
-            getplaylist(this.listid).then(res => {
-                this.playlist = res.data.playlist
-                this.creator = this.playlist.creator
-                this.createTime = formatDate(res.data.playlist.createTime)
-                this.tags = this.playlist.tags
-                this.trackids = res.data.playlist.trackIds
-                this.loading = false
-
+            new Promise((resolve,reject) => {
+                getplaylist(this.listid).then(res => {
+                    this.playlist = res.data.playlist
+                    this.creator = this.playlist.creator
+                    this.createTime = formatDate(res.data.playlist.createTime)
+                    this.tags = this.playlist.tags
+                    this.trackids = res.data.playlist.trackIds
+                    this.loading = false
+                    resolve(res)
+                })
+            }).then(res => {
                 for (let trackid of this.trackids){
                     this.ids.push(trackid.id)
                 }
@@ -111,8 +114,10 @@
                         })
                     }
                 }
-
             })
+
+
+
         },
         methods:{
             itemCurrent(num){

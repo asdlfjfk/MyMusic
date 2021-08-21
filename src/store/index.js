@@ -5,7 +5,7 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-    state:{
+    state:sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state')):{
         song:0,
         songset:[],
         id:0,
@@ -33,7 +33,8 @@ const store = new Vuex.Store({
         }
     },
     actions:{},
-    getters
+    getters,
+
 })
 
 export default store
