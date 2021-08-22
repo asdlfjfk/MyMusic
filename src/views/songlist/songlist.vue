@@ -90,7 +90,6 @@
             this.listid = id
 
             this.$store.commit('cleansongset')
-            this.$store.commit('cleanindex')
 
             new Promise((resolve) => {
                 getplaylist(this.listid).then(res => {
@@ -105,7 +104,6 @@
                 for (let trackid of this.trackids){
                     this.ids.push(trackid.id)
                 }
-                this.ids.sort()
 
                 //保证请求按id顺序执行
                 let promise = null
@@ -118,7 +116,7 @@
                         let count = 0
                         for (let song of res){
                             this.$store.commit('pushallsong',song)
-                            localStorage.setItem("song", song);
+                            console.log(res);
                             count += 1
                         }
                         if (count >= res.length){

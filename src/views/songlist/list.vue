@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="title"><span>音乐标题</span><span>歌手</span><span>专辑</span><span>时长</span></div>
+    <div class="lists">
+        <div class="title"><span class="songtitle">音乐标题</span><span class="singletitle">歌手</span><span class="albumtitle">专辑</span><span class="time">时长</span></div>
         <div class="allsong">
             <div v-for="(item,index) in allsong" class="songs" id="song"
                  :class="{bgc: index%2 === 0,active: item.data.songs[0].id === playerbackid,
@@ -53,7 +53,7 @@
                     this.$store.commit('changebackid',item.data.songs[0].id)
                     getsongurl(item.data.songs[0].id).then(res => {
                         this.$store.commit('changesong',{res,item})
-                    })
+                    },500)
                 }
             },
         },
@@ -79,73 +79,91 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-    .title{
-        position: relative;
-        width: 100%;
-        font-family: 微软雅黑;
-        display: flex;
-        justify-content: space-evenly;
-        color: #000;
-        opacity: .4;
+    .lists{
+        margin-bottom: 14px;
     }
 
     .allsong{
         margin-top: 16px;
     }
 
+    .title{
+        position: relative;
+        width: 100%;
+        font-family: 微软雅黑;
+        display: flex;
+        color: #000;
+        opacity: .4;
+    }
+
     .icon{
         display: flex;
         justify-content: flex-end;
         width: 50px;
-        margin-left: 42px;
+        margin-left: 34px;
+        position: relative;
+        right: 16px;
+    }
+
+    .songtitle{
+        position: relative;
+        left: 15%;
+    }
+
+    .singletitle{
+        position: relative;
+        left: 39%;
+    }
+
+    .albumtitle{
+        position: relative;
+        left: 57%;
+    }
+
+    .time{
+        position: relative;
+        left: 75%;
     }
 
     .songs{
         display: flex;
-        justify-content: flex-start;
         cursor: pointer;
         background-color: #fff;
         line-height: 50px;
         opacity: .55;
-        position: relative;
         width: 100%;
         font-family: 微软雅黑;
+        font-size: 15px;
     }
 
     .number{
         width: 70px;
-        display: flex;
-        justify-content: flex-start;
         opacity: .6;
         margin-left: 26px;
     }
 
     .name{
-        width: 140px;
-        display: flex;
-        justify-content: flex-start;
-        margin-left: 10px;
+        width: 240px;
+        position: relative;
+        right: 5px;
     }
 
     .single{
         color: rgb(80, 125, 175);
-        width: 170px;
-        display: flex;
-        justify-content: flex-start;
-        margin-left: 123px;
+        width: 160px;
+        position: relative;
+        left: 95px;
     }
 
     .album{
-        width: 140px;
-        display: flex;
-        justify-content: flex-start;
-        margin-left: 62px;
+        width: 180px;
+        position: relative;
+        left: 175px;
     }
     .length{
-        width: 160px;
-        display: flex;
-        justify-content: flex-start;
-        margin-left: 88px;
+        width: 40px;
+        position: relative;
+        left: 235px;
     }
 
     span{
@@ -169,4 +187,5 @@
     .copyrights .name{
         opacity: .2;
     }
+
 </style>
