@@ -247,11 +247,11 @@
         white-space: nowrap;
         z-index: 5;
         position: relative;
-        top: 10px;
-        left: 10px;
+        top: 8px;
+        left: 110px;
         display: flex;
         align-items: center;
-        justify-content: flex-start     ;
+        justify-content: flex-end;
         color: #fff;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;

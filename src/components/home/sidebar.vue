@@ -102,6 +102,7 @@
     span{
         font-family: 微软雅黑;
         font-size: 14px;
+        margin-left: 5px;
     }
 
     li{

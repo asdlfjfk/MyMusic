@@ -140,12 +140,18 @@
         width: 70px;
         opacity: .6;
         margin-left: 26px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .name{
         width: 240px;
         position: relative;
         right: 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .single{
@@ -153,20 +159,23 @@
         width: 160px;
         position: relative;
         left: 95px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .album{
         width: 180px;
         position: relative;
         left: 175px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .length{
         width: 40px;
         position: relative;
         left: 235px;
-    }
-
-    span{
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
