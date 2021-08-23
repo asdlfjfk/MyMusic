@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import navbar from './components/common/navbar'
+import navbar from './components/home/navbar'
 import sidebar from './components/home/sidebar'
-import musicplayer from './components/common/musicplayer'
+import musicplayer from './components/home/musicplayer'
 export default {
   name: 'App',
   components: {
@@ -40,9 +40,9 @@ export default {
 
     @font-face {
         font-family: 'iconfont';  /* Project id 2739601 */
-        src: url('//at.alicdn.com/t/font_2739601_6cn3d61hqew.woff2?t=1629511081847') format('woff2'),
-        url('//at.alicdn.com/t/font_2739601_6cn3d61hqew.woff?t=1629511081847') format('woff'),
-        url('//at.alicdn.com/t/font_2739601_6cn3d61hqew.ttf?t=1629511081847') format('truetype');
+        src: url('//at.alicdn.com/t/font_2739601_71l6z6ormam.woff2?t=1629709963817') format('woff2'),
+        url('//at.alicdn.com/t/font_2739601_71l6z6ormam.woff?t=1629709963817') format('woff'),
+        url('//at.alicdn.com/t/font_2739601_71l6z6ormam.ttf?t=1629709963817') format('truetype');
     }
 
     #app{

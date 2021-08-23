@@ -8,11 +8,12 @@
                  @click="addsongtoplay(item)">
 
                 <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
-                <div class="icon">
-                    <span class="iconfont" v-if="item.data.songs[0].mv !== 0">&#xe62c;</span>
-                    <span class="iconfont" v-if="item.data.songs[0].fee === 1">&#xe7d4;</span>
+                <div class="allicon">
+                    <span class="icon iconfont1" v-if="item.data.songs[0].mv !== 0">&#xe62c;</span>
+                    <span class="icon iconfont" v-if="item.data.songs[0].fee === 1">&#xe7d4;</span>
+                    <span class="icon iconfont2" v-if="item.data.songs[0].fee === 1">&#xe671;</span>
                 </div>
-                <div class="name"><span>{{item.data.songs[0].name}}</span></div>
+                <div class="name"><span>{{item.data.songs[0].name}}</span><span v-if="item.data.songs[0].alia[0]" class="alia">({{item.data.songs[0].alia[0]}})</span></div>
                 <div class="single"><span>{{item.data.songs[0].ar[0].name}}</span></div>
                 <div class="album"><span>{{item.data.songs[0].al.name}}</span></div>
                 <div class="length"><span>{{format(item.data.songs[0].dt)}}</span></div>
@@ -26,11 +27,6 @@
     import {getsongurl} from '../../network/homedata'
     export default {
         name: "list",
-        data(){
-          return {
-              // currentindex: ""
-          }
-        },
         methods:{
             format (data) {
                 var date = new Date(data)
@@ -70,13 +66,38 @@
 
 <style scoped>
 
-    .iconfont{
+    .allicon{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 50px;
+        margin-left: 34px;
+        position: relative;
+        right: 16px;
+        position: relative;
+        top: 1px;
+    }
+
+    .icon{
         font-family:"iconfont" !important;
-        font-size:20px;font-style:normal;
-        color: red;margin-left: 4px;
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .iconfont{
+        font-size:22px;font-style:normal;
+        color: red;margin-left: 4px;
+    }
+
+    .iconfont1{
+        font-size:18px;font-style:normal;
+        color: red;margin-left: 4px;
+    }
+
+    .iconfont2{
+        font-size:26px;font-style:normal;
+        color: red;margin-left: 4px;
     }
 
     .lists{
@@ -94,15 +115,6 @@
         display: flex;
         color: #000;
         opacity: .4;
-    }
-
-    .icon{
-        display: flex;
-        justify-content: flex-end;
-        width: 50px;
-        margin-left: 34px;
-        position: relative;
-        right: 16px;
     }
 
     .songtitle{
@@ -130,9 +142,10 @@
         cursor: pointer;
         background-color: #fff;
         line-height: 50px;
-        opacity: .55;
+        opacity: .8;
         width: 100%;
-        font-family: 微软雅黑;
+        font-weight: 300;
+        mso-bidi-font-weight:200;
         font-size: 15px;
     }
 
@@ -143,6 +156,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        z-index: 10;
     }
 
     .name{
@@ -152,6 +166,11 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+    }
+
+    .alia{
+        position: relative;
+        left: 5px;
     }
 
     .single{
@@ -190,6 +209,10 @@
     }
 
     .active .name{
+        color: #c62f2f;
+    }
+
+    .active .number{
         color: #c62f2f;
     }
 

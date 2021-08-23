@@ -79,6 +79,7 @@
                 trackids:[],
                 loading:true,
                 ids:[],
+                ids2:[]
             }
         },
         components:{
@@ -116,7 +117,6 @@
                         let count = 0
                         for (let song of res){
                             this.$store.commit('pushallsong',song)
-                            console.log(res);
                             count += 1
                         }
                         if (count >= res.length){
@@ -143,23 +143,21 @@
 
             //播放全部
             pushallsong(){
-                console.log(111);
-                // for (let trackid of this.trackids){
-                //     this.ids.push(trackid.id)
-                // }
-                // if (this.ids.length >= this.trackids.length){
-                //     getsongurl(this.ids).then(res => {
-                //         this.$store.commit('pushallsong',res)
-                //     })
-                // }
+                    let item = this.$store.state.songset[0]
+                    this.$store.commit('changebackid',item.data.songs[0].id)
+                    getsongurl(item.data.songs[0].id).then(res => {
+                        this.$store.commit('changesong',{res,item})
+                    },500)
             },
+
+
             getInfo(id){
-                return new Promise((resolve,reject) => {
+                return new Promise((resolve) => {
                     getsongdetail(id).then(res => {
                         resolve(res)
                     })
                 })
-            }
+            },
         },
     }
 </script>

@@ -7,35 +7,39 @@
 
         <div>
             <div class="button">
-                <div class="iconfont" @click="up(id)">
+                <div class="icon iconfont4">
+                    &#xe60a;
+                </div>
+                <div class="icon iconfont" @click="up(id)">
                     &#xe602;
                 </div>
-                <div class="iconfont2" @click="play" v-html="icon">
+                <div class="icon iconfont2" @click="play" v-html="icon">
                     &#xe618;
                 </div>
-                <div class="iconfont" @click="down(id)">
+                <div class="icon iconfont" @click="down(id)">
                     &#xe61b;
                 </div>
             </div>
             <div class="playbar">
                 <span class="current">{{format(currentTime * 1000)}}</span>
                 <div class="block">
-                    <el-slider id="slider" v-model="currentTime" :max="format2(this.alltime)" @change="changeMusicduration"
+                    <el-slider class="slider" :disabled="disab" v-model="currentTime" :max="format2(this.alltime)" @change="changeMusicduration"
                                @mousedown.native="isChange = true" @mouseup.native="isChange = false"
                                :format-tooltip="timestepToolTip">
                     </el-slider>
                 </div>
-                <span class="size">{{format(dt)}}</span>
+                <span class="size" v-if="vip !== 1">{{format(dt)}}</span>
+                <span class="size" v-if="vip === 1">{{format(sum)}}</span>
             </div>
         </div>
 
         <div class="right">
-            <div class="iconfont3" @click="mute" v-html="volumeicon"></div>
+            <div class="icon iconfont3" @click="mute" v-html="volumeicon"></div>
             <div class="volume">
                 <el-slider v-model="volume" @change="changevolume"></el-slider>
             </div>
         </div>
-        <audio :src="url" ref="audio" @timeupdate="update()" autoplay></audio>
+        <audio :src="url" id="audio" ref="audio" @timeupdate="update()" autoplay @ended="loop(id)"></audio>
     </div>
 </template>
 
@@ -55,10 +59,14 @@
                 currentTime:null,
                 alltime:"",
                 isChange:false,
-                dt:null,
+                dt:0,
                 volume:50,
                 volumeicon:"&#xe6d2;",
                 vo:true,
+                vip:"",
+                disab:true,
+                range:[],
+                sum: 0
             }
         },
         computed:{
@@ -70,37 +78,40 @@
             },
             id(){
                 return this.$store.state.id
-            }
+            },
         },
         watch:{
             song(val){
                 this.detail = val.data.data[0]
                 this.url = val.data.data[0].url
+                if (val !== 0){
+                    this.disab = false
+                }
                 getsongdetail(this.detail.id).then(res => {
                     this.songdetail = res.data.songs[0].al
                     this.songname = res.data.songs[0].name
                     this.singledetail = res.data.songs[0].ar[0]
                     this.dt = res.data.songs[0].dt
+                    this.vip = res.data.songs[0].fee
+                    if (this.vip === 1){
+                        this.range[0] = val.data.data[0].freeTrialInfo.start
+                        this.range[1] = val.data.data[0].freeTrialInfo.end
+                        this.sum = (this.range[1] - this.range[0])*1000
+                    }
                 })
 
                 this.icon = "&#xe710;"
                 this.playpause = true
             },
-            // songset(val){
-            //     const allsong = val[0].data.data;
-            //     for (let song of allsong){
-            //
-            //     }
-            // },
             volume(val){
                 let audio = document.querySelector("audio");
                 if (val === 0){
                     audio.volume = 0
-                    this.volumeicon = "&#xe623;"
+                    this.volumeicon = "&#xe66c;"
                 }else {
                     this.volumeicon = "&#xe6d2;"
                 }
-            }
+            },
         },
         methods:{
             play(){
@@ -153,6 +164,10 @@
                 return this.format(this.currentTime * 1000)
             },
 
+            timestepToolTipvip(){
+                return this.format((this.range[0] + this.currentTime) * 1000)
+            },
+
             changevolume(){
                 let audio = document.querySelector("audio");
                 audio.volume = this.volume / 100
@@ -168,7 +183,7 @@
                 }else {
                     audio.volume = 0
                     this.volume = 0
-                    this.volumeicon = "&#xe623;"
+                    this.volumeicon = "&#xe66c;"
                 }
             },
 
@@ -178,11 +193,13 @@
                 for (let songindex in this.songset){
                     if (this.songset[songindex].data.songs[0].id === id) {
                         index = songindex*1 - 1
-                        if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
-                            index = songindex*1 - 2
+                        if (index >= 0) {
+                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                index = songindex*1 - 2
+                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                            }
                             this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                         }
-                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                     }
                 }
                 if (index != null && index >= 0){
@@ -201,26 +218,56 @@
                 for (let songindex in this.songset){
                     if (this.songset[songindex].data.songs[0].id === id) {
                         index = songindex*1 + 1
-                        if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
-                            index = songindex*1 + 2
+                        if (index + 1 <= this.songset.length) {
+                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                index = songindex*1 + 2
+                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                            }
                             this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                         }
-                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                     }
                 }
-                try {
-                    if (index != null && index >= 0){
-                        let id = this.songset[index].data.songs[0].id
-                        this.$store.commit('changeid',id)
-                        getsongurl(this.id).then(res => {
-                            this.$store.commit('changesong2',res)
-                        })
-                    }
-                }catch(e)
-                {
+                if (index != null && index >= 0 && index + 1 <= this.songset.length){
+                    let id = this.songset[index].data.songs[0].id
+                    this.$store.commit('changeid',id)
+                    getsongurl(this.id).then(res => {
+                        this.$store.commit('changesong2',res)
+                    })
+                }else {
                     this.$message.error('已经到底了哦');
                 }
+            },
 
+
+            //原理与下一首一致 到底后自动回到第一首
+            loop(id){
+                let index = null
+                for (let songindex in this.songset){
+                    if (this.songset[songindex].data.songs[0].id === id) {
+                        index = songindex*1 + 1
+                        if (index + 1 <= this.songset.length) {
+                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                index = songindex*1 + 2
+                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                            }
+                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                        }
+                    }
+                }
+                if (index != null && index >= 0 && index + 1 <= this.songset.length){
+                    let id = this.songset[index].data.songs[0].id
+                    this.$store.commit('changeid',id)
+                    getsongurl(this.id).then(res => {
+                        this.$store.commit('changesong2',res)
+                    })
+                }else {
+                    // this.$message.error('已经到底了哦');
+                    let item = this.$store.state.songset[0]
+                    this.$store.commit('changebackid',item.data.songs[0].id)
+                    getsongurl(item.data.songs[0].id).then(res => {
+                        this.$store.commit('changesong',{res,item})
+                    },500)
+                }
             }
         },
     }
@@ -228,34 +275,37 @@
 
 <style scoped>
 
-    .iconfont{
+    .icon{
         font-family:"iconfont" !important;
-        font-size:20px;font-style:normal;
-        color: rgb(0,0,0,.7);
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .iconfont{
+        font-size:20px;font-style:normal;
+        color: rgb(0,0,0,.7);
     }
 
     .iconfont2{
-        font-family:"iconfont" !important;
         font-size:40px;font-style:normal;
         padding: 0px 40px 0px 40px;
         color: rgb(0,0,0,.7);
-        -webkit-font-smoothing: antialiased;
-        -webkit-text-stroke-width: 0.2px;
-        -moz-osx-font-smoothing: grayscale;
     }
 
     .iconfont3{
-        font-family:"iconfont" !important;
         font-size:24px;font-style:normal;
         margin-right: 8px;
         margin-top: 0.7px;
         color: rgb(0,0,0,.7);
-        -webkit-font-smoothing: antialiased;
-        -webkit-text-stroke-width: 0.2px;
-        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .iconfont4{
+        font-size:24px;font-style:normal;
+        position: relative;
+        right: 50px;
+        top: 2px;
+        cursor: pointer;
     }
 
     .iconfont,.iconfont2:hover{
@@ -288,7 +338,7 @@
         justify-content: center;
         align-items: center;
         position: absolute;
-        left: 44.8%;
+        left: 43%;
         bottom: 8px;
     }
 
@@ -344,18 +394,20 @@
         position: absolute;
         top: 47.5px;
         left: 23.2%;
+        font-weight: 300;
     }
 
     .size{
         position: absolute;
         left: 73.1%;
         top: 47.5px;
+        font-weight: 300;
     }
 
     .block >>>  .el-slider__button {
         background-color: #fff;
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
         border: 2px solid #c62f2f;
     }
 
