@@ -7,7 +7,7 @@
 
         <div>
             <div class="button">
-                <div class="icon iconfont4">
+                <div class="icon iconfont4" @click="changemodel"  v-html="icon2">
                     &#xe60a;
                 </div>
                 <div class="icon iconfont" @click="up(id)">
@@ -23,7 +23,7 @@
             <div class="playbar">
                 <span class="current">{{format(currentTime * 1000)}}</span>
                 <div class="block">
-                    <el-slider class="slider" :disabled="disab" v-model="currentTime" :max="format2(this.alltime)" @change="changeMusicduration"
+                    <el-slider class="slider" :disabled="disab" v-model="currentTime" :max="alltime" @change="changeMusicduration"
                                @mousedown.native="isChange = true" @mouseup.native="isChange = false"
                                :format-tooltip="timestepToolTip">
                     </el-slider>
@@ -39,7 +39,7 @@
                 <el-slider v-model="volume" @change="changevolume"></el-slider>
             </div>
         </div>
-        <audio :src="url" id="audio" ref="audio" @timeupdate="update()" autoplay @ended="loop(id)"></audio>
+        <audio :src="url" id="audio" ref="audio" @timeupdate="update()" autoplay @ended="loop(id,model)"></audio>
     </div>
 </template>
 
@@ -53,6 +53,7 @@
                 url:"",
                 playpause:false,
                 icon:"&#xe618;",
+                icon2:"&#xe60a;",
                 songname:"",
                 songdetail:{},
                 singledetail:{},
@@ -66,7 +67,8 @@
                 vip:"",
                 disab:true,
                 range:[],
-                sum: 0
+                sum: 0,
+                model:0
             }
         },
         computed:{
@@ -112,6 +114,17 @@
                     this.volumeicon = "&#xe6d2;"
                 }
             },
+            model(val){
+                //单曲循环
+                let audio = document.getElementById("audio");
+                if (val === 2){
+                    audio.setAttribute("loop","loop")
+                }else {
+                    if (audio.hasAttribute("loop")){
+                        audio.removeAttribute("loop")
+                    }
+                }
+            }
         },
         methods:{
             play(){
@@ -136,23 +149,16 @@
                 var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
             },
-            //获取歌曲总秒数
-            format2(data){
-                var date = new Date(data)
-                var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
-                var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
-                return m*60 + s
-            },
             update() {
                 //当鼠标拖动进度条时 禁用timeupdate方法
                 if (this.isChange === false) {
                     let audio = document.querySelector("audio");
                     this.currentTime = audio.currentTime;
-                    this.alltime = audio.duration * 1000;
+                    this.alltime = audio.duration;
                 }
             },
 
-            //进度条拖动时更改歌曲播放进度
+            //进度条移动时更改歌曲播放进度
             changeMusicduration(){
                 let audio = document.querySelector("audio");
                 audio.currentTime = this.currentTime
@@ -162,10 +168,6 @@
             //格式化进度条拖动时显示的进度
             timestepToolTip(){
                 return this.format(this.currentTime * 1000)
-            },
-
-            timestepToolTipvip(){
-                return this.format((this.range[0] + this.currentTime) * 1000)
             },
 
             changevolume(){
@@ -239,34 +241,64 @@
             },
 
 
-            //原理与下一首一致 到底后自动回到第一首
-            loop(id){
-                let index = null
-                for (let songindex in this.songset){
-                    if (this.songset[songindex].data.songs[0].id === id) {
-                        index = songindex*1 + 1
-                        if (index + 1 <= this.songset.length) {
-                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
-                                index = songindex*1 + 2
-                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+
+            loop(id,model){
+
+                switch (model) {
+                    case 0: //顺序播放
+                        this.down(id)
+                        break;
+
+                    case 1: //列表循环    //原理与下一首一致 到底后自动回到第一首
+                        if (model === 1) {
+                            let index = null
+                            for (let songindex in this.songset){
+                                if (this.songset[songindex].data.songs[0].id === id) {
+                                    index = songindex*1 + 1
+                                    if (index + 1 <= this.songset.length) {
+                                        if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                            index = songindex*1 + 2
+                                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                        }
+                                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                    }
+                                }
                             }
-                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                            if (index != null && index >= 0 && index + 1 <= this.songset.length){
+                                let id = this.songset[index].data.songs[0].id
+                                this.$store.commit('changeid',id)
+                                getsongurl(this.id).then(res => {
+                                    this.$store.commit('changesong2',res)
+                                })
+                            }else {
+                                let item = this.$store.state.songset[0]
+                                this.$store.commit('changebackid',item.data.songs[0].id)
+                                getsongurl(item.data.songs[0].id).then(res => {
+                                    this.$store.commit('changesong',{res,item})
+                                },500)
+                            }
                         }
-                    }
+                        break;
                 }
-                if (index != null && index >= 0 && index + 1 <= this.songset.length){
-                    let id = this.songset[index].data.songs[0].id
-                    this.$store.commit('changeid',id)
-                    getsongurl(this.id).then(res => {
-                        this.$store.commit('changesong2',res)
-                    })
-                }else {
-                    // this.$message.error('已经到底了哦');
-                    let item = this.$store.state.songset[0]
-                    this.$store.commit('changebackid',item.data.songs[0].id)
-                    getsongurl(item.data.songs[0].id).then(res => {
-                        this.$store.commit('changesong',{res,item})
-                    },500)
+            },
+            changemodel(){
+                this.model += 1
+                if (this.model > 2){
+                    this.model = 0
+                }
+                switch (this.model) {
+                    case 0:
+                        this.icon2 = "&#xe60a;"
+                        this.$message.success("已切换为列表顺序播放")
+                        break;
+                    case 1:
+                        this.icon2 = "&#xe604;"
+                        this.$message.success("已切换为列表循环播放")
+                        break;
+                    case 2:
+                        this.icon2 = "&#xe657;"
+                        this.$message.success("已切换为单曲循环播放")
+                        break;
                 }
             }
         },
@@ -297,7 +329,9 @@
         font-size:24px;font-style:normal;
         margin-right: 8px;
         margin-top: 0.7px;
-        color: rgb(0,0,0,.7);
+        color: black;
+        cursor: pointer;
+        opacity: .8;
     }
 
     .iconfont4{
@@ -314,7 +348,10 @@
     }
 
     .iconfont3:hover{
-        cursor: pointer;
+        color: #c62f2f;
+    }
+
+    .iconfont4:hover{
         color:  #c62f2f;
     }
 
@@ -393,7 +430,7 @@
     .current{
         position: absolute;
         top: 47.5px;
-        left: 23.2%;
+        left: 23.4%;
         font-weight: 300;
     }
 

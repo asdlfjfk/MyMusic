@@ -19,6 +19,9 @@ const store = new Vuex.Store({
         changesong2(state,payload) {
             state.song = payload
         },
+        cleansong(state){
+            state.song =  0
+        },
         pushallsong(state,payload){
             state.songset.push(payload)
         },
