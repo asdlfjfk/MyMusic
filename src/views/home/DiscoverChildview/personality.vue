@@ -157,7 +157,7 @@
 <style scoped>
 
     #personal{
-        padding: 24px;
+        padding: 14px;
     }
 
     .swiper{
@@ -518,4 +518,6 @@
         margin-left: 10px;
         font-family: 微软雅黑;
     }
+
+
 </style>

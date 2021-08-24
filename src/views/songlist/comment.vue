@@ -14,6 +14,12 @@
                     <div class="content">
                         <span class="username">{{comment.user.nickname}}:</span>
                         <span class="inner">{{comment.content}}</span>
+                        <div v-if="comment.beReplied.length > 0">
+                            <div class="reply">
+                                <span class="username">{{comment.beReplied[0].user.nickname}}:</span>
+                                <span class="inner">{{comment.beReplied[0].content}}</span>
+                            </div>
+                        </div>
                         <div class="time">{{formatDate(comment.time)}}</div>
                     </div>
                 </div>
@@ -30,6 +36,12 @@
                     <div class="content">
                         <span class="username">{{comment.user.nickname}}:</span>
                         <span class="inner">{{comment.content}}</span>
+                        <div v-if="comment.beReplied.length > 0">
+                            <div class="reply">
+                                <span class="username">{{comment.beReplied[0].user.nickname}}:</span>
+                                <span class="inner">{{comment.beReplied[0].content}}</span>
+                            </div>
+                        </div>
                         <div class="time">{{formatDate(comment.time)}}</div>
                     </div>
                 </div>
@@ -141,15 +153,19 @@
         font-weight: 800;
     }
 
+    .hotcomments,.newcomments{
+        font-family: 微软雅黑;
+    }
+
     .newcomments{
         margin-top: 20px;
     }
 
     .newcomments >>> .el-pagination{
         position: relative;
-        left: 30%;
+        left: 28%;
         right: 30%;
-        margin-top: 20px;
+        margin-top: 40px;
         margin-bottom: 40px;
     }
 
@@ -169,6 +185,7 @@
         width: 50px;
         height: 50px;
         border-radius: 24px;
+        cursor: pointer;
     }
 
     .username{
@@ -205,5 +222,13 @@
         margin-bottom: 14px;
         font-size: 12px;
         opacity: .7;
+    }
+
+    .reply{
+        padding: 10px 20px 10px 20px;
+        background-color: rgb(220,220,220,.4);
+        border-radius: 6px;
+        position: relative;
+        top: 5px;
     }
 </style>
