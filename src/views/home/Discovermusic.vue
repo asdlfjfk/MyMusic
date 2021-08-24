@@ -84,6 +84,11 @@
         padding: 0;
     }
 
+    #discovermusic{
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
     #discovermusichome{
         width: 100%;
         text-align: center;

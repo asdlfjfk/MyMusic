@@ -102,8 +102,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
 
@@ -158,6 +156,8 @@
 
     #personal{
         padding: 14px;
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
 
     .swiper{
@@ -447,12 +447,12 @@
         align-items: center;
         justify-content: space-evenly;
         position: relative;
-        bottom: 55px;
+        bottom: 60px;
     }
 
     .recommendMvitem{
         width: 370px;
-        height: 200px;
+        height: 280px;
     }
 
     .recommendMvimg{
@@ -468,7 +468,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-top: 4%;
+        margin-top: 5%;
         opacity: .8;
     }
 
@@ -479,7 +479,7 @@
         font-size: 13px;
         line-height: 100px;
         position: relative;
-        bottom: 15%;
+        bottom: 9%;
     }
 
     .mvname:hover{
@@ -518,6 +518,5 @@
         margin-left: 10px;
         font-family: 微软雅黑;
     }
-
 
 </style>

@@ -8,7 +8,7 @@
                 <!--主页面-->
                 <el-container>
                     <sidebar></sidebar>
-                    <el-main width="80%" style="height: 640px" id="main">
+                    <el-main style="height: 640px" id="main">
                         <keep-alive exclude="songlist"><router-view></router-view></keep-alive>
                     </el-main>
                 </el-container>
@@ -50,7 +50,7 @@ export default {
     }
 
     #main{
-        padding: 10px;
+        padding: 10px 0px 10px 17px;
         overflow-x: hidden;
         overflow-y: scroll;
         scroll-behavior: smooth;

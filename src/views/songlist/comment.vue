@@ -226,7 +226,7 @@
 
     .reply{
         padding: 10px 20px 10px 20px;
-        background-color: rgb(220,220,220,.4);
+        background-color: rgb(220,220,220,.3);
         border-radius: 6px;
         position: relative;
         top: 5px;

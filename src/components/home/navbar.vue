@@ -10,6 +10,9 @@
             <div id="back" @click="back">
                 <i class="el-icon-arrow-left" style="cursor: pointer;"></i>
             </div>
+            <div id="go" @click="go">
+                <i class="el-icon-arrow-right" style="cursor: pointer;"></i>
+            </div>
 
             <el-input class="el-input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini"></el-input>
 
@@ -29,6 +32,9 @@
         methods:{
             back(){
                 this.$router.go(-1)
+            },
+            go(){
+                this.$router.go(+1)
             }
         }
     }
@@ -88,7 +94,22 @@
         align-items: center;
         justify-content: space-evenly;
         position: absolute;
-        left: 220px;
+        left: 200px;
+    }
+
+    #go{
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        color: #fff;
+        background: rgba(77,71,71,.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        position: absolute;
+        left: 240px;
     }
 
     .el-icon-arrow-left{

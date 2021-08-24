@@ -170,6 +170,8 @@
     #songlist{
         overflow-y: scroll;
         overflow-x: hidden;
+        position: relative;
+        right: 6px;
     }
 
     .head{
@@ -411,12 +413,6 @@
 
     .listmain{
         margin-left: 34px;
-    }
-
-
-    ::-webkit-scrollbar
-    {
-        display: none;
     }
 
 </style>

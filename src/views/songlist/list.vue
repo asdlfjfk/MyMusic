@@ -114,7 +114,7 @@
         font-family: 微软雅黑;
         display: flex;
         color: #000;
-        opacity: .4;
+        opacity: .5;
     }
 
     .songtitle{
