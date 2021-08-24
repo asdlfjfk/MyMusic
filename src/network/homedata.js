@@ -68,6 +68,28 @@ export function getsongurl(id) {
     })
 }
 
+//获取歌单评论
+export function getplaylistcomment(id,limit,offset) {
+    return request({
+        url:'/comment/playlist',
+        params:{
+            id,
+            limit,
+            offset
+        }
+    })
+}
+//用于获取精彩评论
+export function gethotcomment(id,limit) {
+    return request({
+        url:'/comment/playlist',
+        params:{
+            id,
+            limit
+        }
+    })
+}
+
 
 
 

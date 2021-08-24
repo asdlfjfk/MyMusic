@@ -53,7 +53,7 @@
 
         <div class="listmain">
                 <list v-if="current === 1 && trackids.length > 0"></list>
-                <comment v-if="current === 2"></comment>
+                <comment v-if="current === 2" :comments="comments"></comment>
         </div>
     </div>
 </template>
@@ -79,7 +79,8 @@
                 trackids:[],
                 loading:true,
                 ids:[],
-                ids2:[]
+                ids2:[],
+                comments:[]
             }
         },
         components:{
@@ -102,6 +103,8 @@
                     resolve(res)
                 })
             }).then(() => {
+                this.comments.push(this.playlist.commentCount)
+                this.comments.push(this.playlist.id)
                 for (let trackid of this.trackids){
                     this.ids.push(trackid.id)
                 }
@@ -365,12 +368,13 @@
     }
 
     .desr:hover{
-        width: 700px;
+        width: 800px;
         position: absolute;
         left: 35.8px;
         font-size: 14px;
         cursor: pointer;
         white-space: normal;
+        background-color: #fff;
     }
 
     #main{
@@ -412,14 +416,7 @@
 
     ::-webkit-scrollbar
     {
-        width: 10px;
-        background-color: #fff;
-    }
-
-    ::-webkit-scrollbar-thumb
-    {
-        border-radius: 10px;
-        background-color: #e6e7ea;
+        display: none;
     }
 
 </style>

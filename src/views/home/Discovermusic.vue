@@ -6,7 +6,7 @@
                     <router-link to="personal" class="link" id="personal">
                         <div class="titleItem" :class="{active: current === 1}" @click="itemCurrent(1)">个性推荐</div>
                     </router-link>
-                    <router-link to="songlist" class="link" id="songlist">
+                    <router-link to="playlist" class="link" id="songlist">
                         <div class="titleItem" :class="{active: current === 2}" @click="itemCurrent(2)">歌单</div>
                     </router-link>
                     <router-link to="leader" class="link" id="leader">

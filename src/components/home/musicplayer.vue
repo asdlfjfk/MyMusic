@@ -2,7 +2,7 @@
     <div id="player">
         <div class="songinfo">
             <div class="imgbox"><img :src="songdetail.picUrl" alt=""></div>
-            <div class="info"><div class="songname">{{songname}}</div><div class="singlename">{{singledetail.name}}</div></div>
+            <div class="info"><div class="songname">{{songname}}<span  v-if="songalia" class="alia">({{songalia}})</span></div><div class="singlename">{{singledetail.name}}</div></div>
         </div>
 
         <div>
@@ -56,9 +56,10 @@
                 icon2:"&#xe60a;",
                 songname:"",
                 songdetail:{},
+                songalia:"",
                 singledetail:{},
                 currentTime:null,
-                alltime:"",
+                alltime:0,
                 isChange:false,
                 dt:0,
                 volume:50,
@@ -90,6 +91,7 @@
                     this.disab = false
                 }
                 getsongdetail(this.detail.id).then(res => {
+                    this.songalia = res.data.songs[0].alia[0]
                     this.songdetail = res.data.songs[0].al
                     this.songname = res.data.songs[0].name
                     this.singledetail = res.data.songs[0].ar[0]
@@ -394,7 +396,16 @@
         font-family: 微软雅黑;
     }
 
+    .alia{
+        position: relative;
+        left: 5px;
+    }
+
     .songname{
+        width: 300px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         font-size: 14px;
         position: relative;
         bottom: 5px;
@@ -412,6 +423,9 @@
         position: relative;
         top: 8px;
         color: rgb(0,0,0,.5);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .singlename:hover{
@@ -455,14 +469,13 @@
     .right{
         display: flex;
         position: absolute;
-        left: 80%;
+        left: 86.5%;
         align-items: center;
         top: 24px;
     }
 
     .volume{
         width: 100px;
-        margin-left: 8px;
     }
 
     .volume >>>  .el-slider__button {

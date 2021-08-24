@@ -8,11 +8,11 @@ const video = () => import('../views/home/Recommendvideo.vue')
 const disk = () => import('../views/home/MyCloudDisk.vue')
 
 const personality = () => import('../views/home/DiscoverChildview/personality.vue')
-const songlist = () => import('../views/home/DiscoverChildview/songlist.vue')
+const playlist = () => import('../views/home/DiscoverChildview/playlist.vue')
 const leader = () => import('../views/home/DiscoverChildview/leader.vue')
 const singer = () => import('../views/home/DiscoverChildview/singer.vue')
 const latestmusic = () => import('../views/home/DiscoverChildview/latestmusic.vue')
-const Songlist = () => import('../views/songlist/songlist.vue')
+const songlist = () => import('../views/songlist/songlist.vue')
 
 const routes = [
     {
@@ -32,8 +32,8 @@ const routes = [
                 component:personality
             },
             {
-                path:'songlist',
-                component:songlist
+                path:'playlist',
+                component:playlist
             },
             {
                 path:'leader',
@@ -59,7 +59,7 @@ const routes = [
     },
     {
         path:'/songlist/:id',
-        component:Songlist,
+        component:songlist,
     }
 ]
 
