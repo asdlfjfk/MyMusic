@@ -299,9 +299,14 @@
         height: auto;
         font-size: 14px;
         margin-top: 10%;
-        opacity: .8;
+        color: rgb(0,0,0,.7);
         display: flex;
         justify-content: center;
+        cursor: pointer;
+    }
+
+    .name:hover{
+        color: rgb(0,0,0,.9);
     }
 
     #player{

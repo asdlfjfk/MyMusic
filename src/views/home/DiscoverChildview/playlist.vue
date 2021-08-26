@@ -352,9 +352,14 @@
         font-size: 14px;
         margin-top: 18%;
         margin-left: 34px;
-        opacity: .8;
+        color: rgb(0,0,0,.7);
         display: flex;
         justify-content: center;
+        cursor: pointer;
+    }
+
+    .name:hover{
+        color: rgb(0,0,0,.9);
     }
 
     .creator{
@@ -366,6 +371,7 @@
         left: 14px;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         color: #fff;
+        cursor: pointer;
     }
 
     .creatorname{
