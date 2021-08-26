@@ -90,6 +90,36 @@ export function gethotcomment(id,limit) {
     })
 }
 
+//获取热门歌单分类
+export function gethotcategory() {
+    return request({
+        url:'/playlist/hot',
+    })
+}
+
+//获取全部歌单
+export function getlist(cat,limit,offset) {
+    return request({
+        url:'/top/playlist',
+        params:{
+            cat,
+            limit,
+            offset
+        }
+    })
+}
+
+//获取所有分类标签
+export function getalltag() {
+    return request({
+        url:'playlist/catlist',
+    })
+}
+
+
+
+
+
 
 
 

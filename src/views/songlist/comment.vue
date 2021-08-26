@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-loading="loading">
         <div class="comment">
             <el-input type="textarea" placeholder="请输入内容" :autosize="{ minRows: 4, maxRows: 6}" class="textarea"
                       maxlength="140" minlength="0" show-word-limit resize="none" v-model="input">
@@ -23,7 +23,13 @@
                         <div class="time">{{formatDate(comment.time)}}</div>
                     </div>
                 </div>
-
+                <div class="all">
+                    <div class="praise">
+                        <span class="icon iconfont">&#xe6c9;</span>
+                        <span>{{comment.likedCount}}</span>
+                    </div>
+                    <div class="icon iconfont2">&#xe603;</div>
+                </div>
             </div>
         </div>
 
@@ -33,6 +39,7 @@
             <div v-for="comment in res"  class="usercomment">
                 <div  class="usercommentcontent">
                     <img :src="comment.user.avatarUrl" alt="" class="avatar">
+
                     <div class="content">
                         <span class="username">{{comment.user.nickname}}:</span>
                         <span class="inner">{{comment.content}}</span>
@@ -45,10 +52,14 @@
                         <div class="time">{{formatDate(comment.time)}}</div>
                     </div>
                 </div>
-
+                <div class="all">
+                    <div class="praise">
+                        <span class="icon iconfont">&#xe6c9;</span>
+                        <span>{{comment.likedCount}}</span>
+                    </div>
+                    <div class="icon iconfont2">&#xe603;</div>
+                </div>
             </div>
-
-
             <el-pagination
                     background
                     layout="prev, pager, next"
@@ -78,6 +89,7 @@
                 count:0,
                 commentid:"",
                 res:"",
+                loading:true,
 
                 hot:[],
                 pagesize:20,//每页的数据条数
@@ -93,12 +105,12 @@
             //获取精彩评论
             gethotcomment(this.commentid,20).then(res => {
                 this.hot = res.data.hotComments
+                this.loading = false
             })
 
             //默认展示第一页评论
             getplaylistcomment(this.commentid,20,(this.currentPage-1)*20).then(res => {
                 this.res = res.data.comments
-                console.log(res);
             })
         },
         methods:{
@@ -123,6 +135,23 @@
 </script>
 
 <style scoped>
+
+    .icon{
+        font-family:"iconfont" !important;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .iconfont{
+        font-size:24px;font-style:normal;
+    }
+
+    .iconfont2{
+        font-size:24px;font-style:normal;
+        opacity: .8;
+    }
+
     .comment{
         font-family: 微软雅黑;
         margin-top: 14px;
@@ -191,11 +220,13 @@
     .username{
         color: #4D99DE;
         cursor: pointer;
+        font-size: 15px;
     }
 
 
     .inner{
         margin-left: 6px;
+        font-size: 15px;
     }
 
     .content{
@@ -207,7 +238,7 @@
     .usercomment{
         margin-top: 10px;
         width: 1050px;
-        padding: 10px 0px 18px 0px;
+        padding: 10px 0px 0px 0px;
         border-bottom: 1px solid gainsboro;
     }
 
@@ -218,17 +249,32 @@
 
     .time{
         position: relative;
-        margin-top: 10px;
-        margin-bottom: 14px;
+        margin-top: 14px;
         font-size: 12px;
         opacity: .7;
     }
 
     .reply{
-        padding: 10px 20px 10px 20px;
-        background-color: rgb(220,220,220,.3);
+        padding: 10px 15px 10px 15px;
+        background-color: rgb(220,220,220,.4);
         border-radius: 6px;
         position: relative;
-        top: 5px;
+        top: 8px;
     }
+
+
+    .all{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .praise{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 14px;
+        opacity: .8;
+    }
+
 </style>

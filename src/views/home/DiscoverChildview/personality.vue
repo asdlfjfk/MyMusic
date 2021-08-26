@@ -2,7 +2,7 @@
     <div id="personal">
 
         <!--轮播图-->
-        <div class="container">
+        <div class="container" v-loading="loadingcarousel">
                 <el-carousel type="card" class="swiper" height="244px">
                     <el-carousel-item v-for="item in banners" :key="item.id" class="swiperitem">
                         <div class="new" ><div>新歌首发</div></div>
@@ -18,8 +18,8 @@
             <span class="right"></span>
         </div>
 
-        <div class="recommonlist">
-            <div v-for="item in recommonlist" class="listdiv">
+        <div class="recommonlist" v-loading="loading">
+            <div v-for="item in recommonlist">
 
                 <div class="imgbox" @click="listdetail(item.id)">
                     <div class="imgboxcontent">
@@ -118,6 +118,8 @@
         name: "personality",
         data(){
             return {
+                loading:true,
+                loadingcarousel:true,
                 banners:[],
                 recommonlist:[],
                 privatecontent:[],
@@ -133,9 +135,11 @@
         created(){
             getbanner().then(res => {
                 this.banners = res.data.banners
+                this.loadingcarousel = false
             })
             getrecommonlist().then(res => {
                 this.recommonlist = res.data.result
+                this.loading = false
             })
             getprivatecontent().then(res => {
                 this.privatecontent = res.data.result

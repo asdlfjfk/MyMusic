@@ -5,7 +5,7 @@
             <div v-for="(item,index) in allsong" class="songs" id="song"
                  :class="{bgc: index%2 === 0,active: item.data.songs[0].id === playerbackid,
                  copyrights: item.data.songs[0].noCopyrightRcmd !== null}"
-                 @click="addsongtoplay(item)">
+                 @dblclick="addsongtoplay(item)">
 
                 <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
                 <div class="allicon">
@@ -27,6 +27,9 @@
     import {getsongurl} from '../../network/homedata'
     export default {
         name: "list",
+        created(){
+            console.log(this.$store.state.songset);
+        },
         methods:{
             format (data) {
                 var date = new Date(data)
