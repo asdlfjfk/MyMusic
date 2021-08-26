@@ -400,7 +400,7 @@
         left: 17px;
         top: 20px;
         border: 1px solid gainsboro;
-        width: 66%;
+        width: 55%;
         z-index: 20;
         background: #fff;
         padding-top: 20px;
@@ -452,7 +452,7 @@
     .catename{
         opacity: .5;
         white-space: nowrap;
-        margin-left: 10px;
+        /*margin-left: 10px;*/
     }
 
     .taginner{
@@ -469,9 +469,9 @@
         display: flex;
         opacity: .7;
         cursor: pointer;
-        width: 112px;
+        width: 100px;
         text-overflow: ellipsis;
-        margin-left: 15px;
+        margin-left: 10px;
         line-height: 44px;
     }
 
