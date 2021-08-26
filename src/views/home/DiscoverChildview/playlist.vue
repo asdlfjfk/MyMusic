@@ -400,7 +400,7 @@
         left: 17px;
         top: 20px;
         border: 1px solid gainsboro;
-        width: 55%;
+        width: 60%;
         z-index: 20;
         background: #fff;
         padding-top: 20px;
