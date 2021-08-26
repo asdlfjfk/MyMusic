@@ -6,7 +6,7 @@
                 <el-carousel type="card" class="swiper" height="244px">
                     <el-carousel-item v-for="item in banners" :key="item.id" class="swiperitem">
                         <div class="new" ><div>新歌首发</div></div>
-                        <img :src="item.imageUrl" alt="">
+                        <img :src="item.imageUrl" @click="swiperaddsongtoplay(item)">
                     </el-carousel-item>
                 </el-carousel>
         </div>
@@ -63,7 +63,7 @@
         </div>
 
         <div class="newsongs">
-            <div v-for="item in newsongs" class="newsongsitem">
+            <div v-for="item in newsongs" class="newsongsitem" @click="addsongtoplay(item)">
                 <img :src="item.picUrl" alt="" class="newsongimg">
 
                 <div id="button2">
@@ -112,8 +112,8 @@
         getprivatecontent,
         getnewsongs,
         getrecommendMV,
+        getsongurl
     } from "network/homedata";
-
     export default {
         name: "personality",
         data(){
@@ -130,7 +130,19 @@
         methods:{
             listdetail(id){
                 this.$router.push('/songlist/' + id)
-            }
+            },
+            swiperaddsongtoplay(item){
+                this.$store.commit('changebackid',item.targetId)  //用于歌单中存在该歌曲 显示为活跃播放状态
+                getsongurl(item.targetId).then(res => {
+                    this.$store.commit('changesong2',res)
+                },500)
+            },
+            addsongtoplay(item){
+                this.$store.commit('changebackid',item.song.id)
+                    getsongurl(item.song.id).then(res => {
+                        this.$store.commit('changesong2',res)
+                    },500)
+            },
         },
         created(){
             getbanner().then(res => {
