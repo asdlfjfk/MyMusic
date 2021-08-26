@@ -397,7 +397,7 @@
         font-size: 14px;
         overflow: hidden;
         position: absolute;
-        left: 17px;
+        left: 30px;
         top: 20px;
         border: 1px solid gainsboro;
         width: 60%;
