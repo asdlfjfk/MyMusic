@@ -182,7 +182,6 @@
         border-radius: 15px;
         padding: 0;
         vertical-align: center;
-        margin-top: -10px;
     }
     .swiperitem{
         border-radius: 10px;
@@ -468,7 +467,7 @@
         align-items: center;
         justify-content: space-evenly;
         position: relative;
-        bottom: 60px;
+        bottom: 55px;
     }
 
     .recommendMvitem{
