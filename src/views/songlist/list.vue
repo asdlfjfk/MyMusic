@@ -27,9 +27,6 @@
     import {getsongurl} from '../../network/homedata'
     export default {
         name: "list",
-        created(){
-            console.log(this.$store.state.songset);
-        },
         methods:{
             format (data) {
                 var date = new Date(data)

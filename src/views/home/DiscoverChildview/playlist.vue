@@ -29,8 +29,8 @@
                         <div v-for="item in sub" v-if="item.category === 1" class="tagname" @click="changeOtherlist(item.name)">
                             <div :class="{active3: item.name === tag}" class="inner">
                                 {{item.name}}
+                                <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                             </div>
-                            <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                         </div>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                         <div v-for="item in sub" v-if="item.category === 2" class="tagname" @click="changeOtherlist(item.name)">
                             <div :class="{active3: item.name === tag}" class="inner">
                                 {{item.name}}
+                                <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                             </div>
-                            <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                         </div>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                         <div v-for="item in sub" v-if="item.category === 3" class="tagname" @click="changeOtherlist(item.name)">
                             <div :class="{active3: item.name === tag}" class="inner">
                                 {{item.name}}
+                                <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                             </div>
-                            <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                         <div v-for="item in sub" v-if="item.category === 4" class="tagname" @click="changeOtherlist(item.name)">
                             <div :class="{active3: item.name === tag}" class="inner">
                                 {{item.name}}
+                                <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                             </div>
-                            <div v-if="item.hot === true" class="icon iconfont2">&#xe740;</div>
                         </div>
                     </div>
                 </div>
