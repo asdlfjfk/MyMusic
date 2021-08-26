@@ -4,8 +4,14 @@
 </template>
 
 <script>
+    import {gettoplist} from "network/homedata"
     export default {
-        name: "leader"
+        name: "leader",
+        created(){
+            gettoplist().then(res => {
+                console.log(res);
+            })
+        }
     }
 </script>
 

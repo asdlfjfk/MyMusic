@@ -116,6 +116,14 @@ export function getalltag() {
     })
 }
 
+//排行榜
+export function gettoplist() {
+    return request({
+        url: '/toplist',
+    })
+}
+
+
 
 
 

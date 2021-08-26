@@ -6,7 +6,7 @@
                     <router-link to="personal" class="link" id="personal">
                         <div class="titleItem" :class="{active: current === 1}" @click="itemCurrent(1)">个性推荐</div>
                     </router-link>
-                    <router-link to="playlist" class="link" id="songlist">
+                    <router-link to="playlist" class="link" id="playlist">
                         <div class="titleItem" :class="{active: current === 2}" @click="itemCurrent(2)">歌单</div>
                     </router-link>
                     <router-link to="leader" class="link" id="leader">
@@ -39,6 +39,18 @@
               current:1
           }
         },
+        created(){
+            //保存选中状态 防止页面刷新时跑动
+            window.addEventListener("pagehide",()=>{
+                sessionStorage.setItem("current",JSON.stringify(this.current))
+            })
+            window.addEventListener("pageshow",()=>{
+                if(sessionStorage.getItem('current') === null) {
+                    sessionStorage.setItem("current",JSON.stringify(this.current))
+                }
+               this.current = parseInt(sessionStorage.getItem("current"));
+            })
+        },
         methods:{
             itemCurrent(num){
                 switch (num) {
@@ -60,7 +72,7 @@
                 if (val.path.match(RegExp(/personal/))){
                     this.current = 1;
                 }
-                else if(val.path.match(RegExp(/songlist/))){
+                else if(val.path.match(RegExp(/playlist/))){
                     this.current = 2;
                 }
                 else if (val.path.match(RegExp(/leader/))){
@@ -69,7 +81,7 @@
                 else if (val.path.match(RegExp(/singer/))){
                     this.current = 4;
                 }
-                else if (val.path.match(RegExp(/lealatestmusicder/))){
+                else if (val.path.match(RegExp(/latestmusic/))){
                     this.current = 5;
                 }
             },
@@ -132,7 +144,7 @@
         text-decoration: none;
     }
 
-    #songlist,#leader,#singer,#latestmusic{
+    #playlist,#leader,#singer,#latestmusic{
         margin-left: 5px;
     }
 

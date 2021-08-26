@@ -80,9 +80,9 @@
                     </div>
                     <img :src="item.coverImgUrl">
                     <div class="creator">
-                        <div class="icon">&#xe635;</div>
+                        <div class="icon iconfont1">&#xe635;</div>
                         <div class="creatorname">
-                            {{item.creator.nickname}}
+                            <div class="nickname">{{item.creator.nickname}}</div>
                             <div class="level" v-if="item.creator.avatarDetail != null">
                                 <div v-if="item.creator.avatarDetail.userType === 10 || item.creator.avatarDetail.userType === 2" class="icon iconfont2">&#xe60d;</div>
                                 <div v-if="item.creator.avatarDetail.userType === 200" class="icon iconfont3">&#xe645;</div>
@@ -369,7 +369,6 @@
         position: relative;
         bottom: 34px;
         left: 14px;
-        text-shadow: rgb(0 0 0) 0px 0px 2px;
         color: #fff;
         cursor: pointer;
     }
@@ -384,6 +383,10 @@
         text-overflow: ellipsis;
         position: relative;
         bottom: 1.5px;
+    }
+
+    .iconfont1,.nickname{
+        text-shadow: rgb(0 0 0) 0 0 2px;
     }
 
     .level{
