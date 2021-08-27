@@ -154,15 +154,14 @@
                     },500)
             },
 
-
-
-        },getInfo(id){
-            return new Promise((resolve) => {
-                getsongdetail(id).then(res => {
-                    resolve(res)
+            getInfo(id){
+                return new Promise((resolve) => {
+                    getsongdetail(id).then(res => {
+                        resolve(res)
+                    })
                 })
-            })
-        },
+            },
+        }
     }
 </script>
 
