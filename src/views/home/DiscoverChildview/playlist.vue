@@ -318,7 +318,7 @@
 
     #button{
         background-color: #e2e2e2;
-        opacity: .8;
+        opacity: .9;
         border-radius: 20px;
         width: 14%;
         height: 14%;
@@ -331,10 +331,11 @@
     }
 
     #player{
+        font-size: 20px;
         color: #c62f2f;
         position: absolute;
-        left: 20%;
-        bottom: 20%;
+        left: 14%;
+        bottom: 14%;
     }
 
     .active{
@@ -354,7 +355,7 @@
         margin-left: 34px;
         color: rgb(0,0,0,.7);
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         cursor: pointer;
     }
 
@@ -426,7 +427,7 @@
 
     .all{
         padding: 10px 20px 10px 20px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         margin-left: 20px;
         width: 60px;
         cursor: pointer;

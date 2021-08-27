@@ -60,13 +60,14 @@
 
 <script>
 
-    import {formatDate} from '../../common/util'
+    import {formatDate} from "common/util"
     import {getplaylist,getsongdetail,getsongurl} from "network/homedata";
     const list = () => import('../../views/songlist/list.vue')
     const comment = () => import('../../views/songlist/comment.vue')
 
     export default {
         name: "songlist",
+        mixins:[formatDate],
         data(){
             return {
                 listid:0,
@@ -97,9 +98,9 @@
                 getplaylist(this.listid).then(res => {
                     this.playlist = res.data.playlist
                     this.creator = this.playlist.creator
-                    this.createTime = formatDate(res.data.playlist.createTime)
+                    this.createTime = this.formatDate(this.playlist.createTime)
                     this.tags = this.playlist.tags
-                    this.trackids = res.data.playlist.trackIds
+                    this.trackids = this.playlist.trackIds
                     resolve(res)
                 })
             }).then(() => {
@@ -154,13 +155,13 @@
             },
 
 
-            getInfo(id){
-                return new Promise((resolve) => {
-                    getsongdetail(id).then(res => {
-                        resolve(res)
-                    })
+
+        },getInfo(id){
+            return new Promise((resolve) => {
+                getsongdetail(id).then(res => {
+                    resolve(res)
                 })
-            },
+            })
         },
     }
 </script>

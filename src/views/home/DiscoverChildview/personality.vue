@@ -251,7 +251,6 @@
     }
 
     .imgbox{
-        display: block;
         z-index: 1;
         height: 200px;
         margin-top: 5%;
@@ -292,7 +291,7 @@
 
     #button{
         background-color: #e2e2e2;
-        opacity: .8;
+        opacity: .9;
         border-radius: 20px;
         width: 14%;
         height: 14%;
@@ -312,7 +311,7 @@
         margin-top: 10%;
         color: rgb(0,0,0,.7);
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         cursor: pointer;
     }
 
@@ -321,10 +320,11 @@
     }
 
     #player{
+        font-size: 20px;
         color: #c62f2f;
         position: absolute;
-        left: 20%;
-        bottom: 20%;
+        left: 14%;
+        bottom: 14%;
     }
 
     .privatecontent{

@@ -123,6 +123,14 @@ export function gettoplist() {
     })
 }
 
+//榜单内容摘要
+export function gettopdetail() {
+    return request({
+        url: '/toplist/detail',
+    })
+}
+
+
 
 
 
