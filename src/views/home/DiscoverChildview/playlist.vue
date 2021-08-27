@@ -94,7 +94,7 @@
                         <i class="el-icon-caret-right" id="player"></i>
                     </div>
                 </div>
-                <div class="name">{{item.name}}</div>
+                <div class="name" @click="listdetail(item.id)">{{item.name}}</div>
             </div>
         </div>
 
@@ -252,6 +252,7 @@
 
     span:hover{
         color: #d03535;
+        opacity: .8;
     }
 
     .page >>> .el-pagination{
@@ -339,6 +340,7 @@
     }
 
     .active{
+        opacity: .8;
         line-height: 30px;
         background-color: #fcf4f4;
         color: #d03535;

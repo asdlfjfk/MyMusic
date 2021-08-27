@@ -130,6 +130,20 @@ export function gettopdetail() {
     })
 }
 
+//获取歌手列表
+export function getsinglelist(initial,type,area,offset) {
+    return request({
+        url: '/artist/list',
+        params:{
+            initial,
+            type,
+            area,
+            offset
+        }
+    })
+}
+
+
 
 
 

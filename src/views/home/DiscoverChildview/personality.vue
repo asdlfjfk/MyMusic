@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="name">{{item.name}}</div>
+                <div class="name" @click="listdetail(item.id)">{{item.name}}</div>
             </div>
         </div>
 

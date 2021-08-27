@@ -40,9 +40,9 @@ export default {
 
     @font-face {
         font-family: 'iconfont';  /* Project id 2739601 */
-        src: url('//at.alicdn.com/t/font_2739601_yeir6at8ure.woff2?t=1629939853126') format('woff2'),
-        url('//at.alicdn.com/t/font_2739601_yeir6at8ure.woff?t=1629939853126') format('woff'),
-        url('//at.alicdn.com/t/font_2739601_yeir6at8ure.ttf?t=1629939853126') format('truetype');
+        src: url('//at.alicdn.com/t/font_2739601_0un2x7z829ye.woff2?t=1630052873293') format('woff2'),
+        url('//at.alicdn.com/t/font_2739601_0un2x7z829ye.woff?t=1630052873293') format('woff'),
+        url('//at.alicdn.com/t/font_2739601_0un2x7z829ye.ttf?t=1630052873293') format('truetype');
     }
 
     #app{

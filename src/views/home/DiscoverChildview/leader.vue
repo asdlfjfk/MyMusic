@@ -16,7 +16,7 @@
             <div class="list" v-loading="loading">
                 <!--飙升榜-->
                 <div v-for="item in list1" class="list1">
-                    <div v-for="(track,index) in item.tracks" class="line" :class="{bgc: index%2 === 0}">
+                    <div v-for="(track,index) in item.tracks" class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
                         <div class="singlename">{{track.second}}</div>
@@ -26,7 +26,7 @@
 
                 <!--新歌榜-->
                 <div v-for="item in list2"  class="list2">
-                    <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}">
+                    <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
                         <div class="singlename">{{track.second}}</div>
@@ -36,7 +36,7 @@
 
                 <!--原创榜-->
                 <div v-for="item in list3"  class="list3">
-                    <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}">
+                    <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
                         <div class="singlename">{{track.second}}</div>
@@ -46,7 +46,7 @@
 
                 <!--热歌榜-->
                 <div v-for="item in list4"  class="list4">
-                    <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}">
+                    <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
                         <div class="singlename">{{track.second}}</div>
@@ -70,7 +70,7 @@
                         <i class="el-icon-caret-right player"></i>
                     </div>
                 </div>
-                <div class="name">{{item.name}}</div>
+                <div class="name" @click="listdetail(item.id)">{{item.name}}</div>
             </div>
         </div>
     </div>
@@ -118,6 +118,9 @@
                 var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + '日'
                 return M + D
             },
+            toast(){
+                this.$message.warning("当前歌曲请进入对应歌单播放哦~")
+            }
         }
     }
 </script>
@@ -311,6 +314,7 @@
     .look{
         line-height: 44px;
         cursor: pointer;
+        font-size: 14px;
     }
 
     .look:hover{
@@ -323,6 +327,7 @@
         justify-content:flex-start;
         line-height: 44px;
         cursor: pointer;
+        font-size: 14px;
     }
 
     .line:hover{
