@@ -168,9 +168,7 @@
 <style scoped>
 
     #songlist{
-
-        position: relative;
-        right: 6px;
+        margin: 0px 35px 0px 10px;
     }
 
     .head{
@@ -412,7 +410,6 @@
 
     .listmain{
         margin-left: 34px;
-        margin-right: 34px;
     }
 
 </style>

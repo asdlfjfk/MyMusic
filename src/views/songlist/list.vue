@@ -128,12 +128,12 @@
 
     .albumtitle{
         position: relative;
-        left: 58%;
+        left: 57.7%;
     }
 
     .time{
         position: relative;
-        left: 76.5%;
+        left: 76%;
     }
 
     .songs{

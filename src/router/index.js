@@ -64,7 +64,7 @@ const routes = [
     },
     {
         path:'/singerlist/:id',
-        components:singerlist
+        component:singerlist
     }
 ]
 
