@@ -13,6 +13,7 @@ const leader = () => import('../views/home/DiscoverChildview/leader.vue')
 const singer = () => import('../views/home/DiscoverChildview/singer.vue')
 const latestmusic = () => import('../views/home/DiscoverChildview/latestmusic.vue')
 const songlist = () => import('../views/songlist/songlist.vue')
+const singerlist = () => import('../views/singerlist/singerlist.vue')
 
 const routes = [
     {
@@ -60,6 +61,10 @@ const routes = [
     {
         path:'/songlist/:id',
         component:songlist,
+    },
+    {
+        path:'/singerlist/:id',
+        components:singerlist
     }
 ]
 

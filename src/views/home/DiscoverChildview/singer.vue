@@ -1,5 +1,5 @@
 <template>
-    <div @scroll="scrollEvent" style="height: 1290px;">
+    <div ref="singer" id="singer">
         <div class="allsort">
             <div class="sort">
                 <div class="sortname">语种:</div>
@@ -24,11 +24,11 @@
         </div>
 
 
-        <div class="single">
-            <div class="singlelist" style="height: 1140px">
-                <div v-for="item in artists" class="singleitem">
-                    <img :src="item.img1v1Url" alt="">
-                    <div class="singlename"><div class="name">{{item.name}}</div> <div class="iconfont" v-if="item.accountId">&#xe663;</div></div>
+        <div class="singer">
+            <div class="singerlist" v-loading="loading">
+                <div v-for="item in artists" class="singeritem" @click="listdetail(item.id)">
+                    <img :src="item.img1v1Url">
+                    <div class="singername" @click="listdetail(item.id)"><div class="name">{{item.name}}</div> <div class="iconfont" v-if="item.accountId">&#xe663;</div></div>
                 </div>
             </div>
         </div>
@@ -36,11 +36,12 @@
 </template>
 
 <script>
-    import {getsinglelist} from "network/homedata"
+    import {getsingerlist} from "network/homedata"
     export default {
         name: "singer",
         data(){
             return {
+                loading:true,
                 area: [{name:"全部",number:-1},{name:"华语",number:7},
                     {name:"欧美",number:96},{name:"日本",number:8},
                     {name:"韩国",number:16},{name:"其他",number:0},],
@@ -64,10 +65,14 @@
             }
         },
         created(){
-            getsinglelist(this.letterparams,this.typeparams,this.areaparams,this.page*30).then(res => {
+            getsingerlist(this.letterparams,this.typeparams,this.areaparams,this.page*30).then(res => {
                 this.artists = res.data.artists
                 this.loading = false
             })
+        },
+        destroyed() {
+            // 离开该页面需要移除这个监听的事件，不然会报错  必须带第三个参数true，否则销毁不成功
+            window.removeEventListener('scroll', this.Scroll, true);
         },
         methods:{
             changearea(number){
@@ -79,31 +84,64 @@
             changeletter(number){
                 this.letterparams = number
             },
-            scrollEvent(e){
-                console.log(e);
-            }
+            Scroll(){
+                let box = this.$refs.singer
+                if (parseInt(box.getBoundingClientRect().bottom) === 646) {
+                    this.page += 1
+                }else if (parseInt(box.getBoundingClientRect().bottom) === 645) {
+                    this.page += 1
+                }
+            },
+            listdetail(id){
+                this.$router.push('/singerlist/' + id)
+            },
         },
         watch:{
             areaparams(val){
-                getsinglelist(this.letterparams,this.typeparams,val,this.page*30).then(res => {
+                this.page = 0
+                this.loading = true
+                getsingerlist(this.letterparams,this.typeparams,val,this.page*30).then(res => {
                     this.artists = res.data.artists
+                    this.loading = false
                 })
             },
             typeparams(val){
-                getsinglelist(this.letterparams,val,this.areaparams,this.page*30).then(res => {
+                this.page = 0
+                this.loading = true
+                getsingerlist(this.letterparams,val,this.areaparams,this.page*30).then(res => {
                     this.artists = res.data.artists
+                    this.loading = false
                 })
             },
             letterparams(val){
-                getsinglelist(val,this.typeparams,this.areaparams,this.page*30).then(res => {
+                this.page = 0
+                this.loading = true
+                getsingerlist(val,this.typeparams,this.areaparams,this.page*30).then(res => {
                     this.artists = res.data.artists
+                    this.loading = false
+                })
+            },
+            page(val){
+                this.loading = true
+                getsingerlist(this.letterparams,this.typeparams,this.areaparams,val*30).then(res => {
+                    for (let singer of res.data.artists) {
+                        this.artists.push(singer)
+                    }
+                    this.loading = false
                 })
             }
-        }
+        },
+        mounted(){
+            window.addEventListener('scroll',this.Scroll,true)
+        },
     }
 </script>
 
 <style scoped>
+
+    #singer{
+        margin: 0px 14px 0px 14px;
+    }
 
     .iconfont{
         font-family:"iconfont" !important;
@@ -174,18 +212,20 @@
         padding: 0px 10px 0px 10px;
     }
 
-    .single{
+    .singer{
         position: relative;
-        top: 30px;
+        top: 20px;
     }
 
-    .singlelist{
+    .singerlist{
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 44px;
     }
 
-    .singleitem{
+    .singeritem{
         margin-left: 15px;
+        margin-top: 15px;
     }
 
     img{
@@ -193,9 +233,10 @@
         height: 180px;
         border-radius: 5px;
         border: 1px solid rgb(220,220,220,.5);
+        cursor: pointer;
     }
 
-    .singlename{
+    .singername{
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -208,7 +249,7 @@
         white-space: nowrap;
     }
 
-    .singlename:hover{
+    .singername:hover{
         color: rgb(0,0,0,.8);
     }
 
@@ -219,4 +260,5 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
 </style>

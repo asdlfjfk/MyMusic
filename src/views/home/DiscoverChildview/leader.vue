@@ -19,7 +19,7 @@
                     <div v-for="(track,index) in item.tracks" class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
-                        <div class="singlename">{{track.second}}</div>
+                        <div class="singername">{{track.second}}</div>
                     </div>
                     <div class="look" @click="listdetail(item.id)">查看全部 ></div>
                 </div>
@@ -29,7 +29,7 @@
                     <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
-                        <div class="singlename">{{track.second}}</div>
+                        <div class="singername">{{track.second}}</div>
                     </div>
                     <div class="look" @click="listdetail(item.id)">查看全部 ></div>
                 </div>
@@ -39,7 +39,7 @@
                     <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
-                        <div class="singlename">{{track.second}}</div>
+                        <div class="singername">{{track.second}}</div>
                     </div>
                     <div class="look" @click="listdetail(item.id)">查看全部 ></div>
                 </div>
@@ -49,7 +49,7 @@
                     <div v-for="(track,index) in item.tracks"  class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
                         <div class="number">{{index + 1}}</div>
                         <div class="songname">{{track.first}}</div>
-                        <div class="singlename">{{track.second}}</div>
+                        <div class="singername">{{track.second}}</div>
                     </div>
                     <div class="look" @click="listdetail(item.id)">查看全部 ></div>
                 </div>
@@ -129,7 +129,7 @@
 
     #leaderboard{
         position: relative;
-        right: 24px;
+        right: 12px;
         height: 2420px;
     }
 
@@ -322,6 +322,7 @@
     }
 
     .line{
+        width: 850px;
         display: flex;
         align-items: center;
         justify-content:flex-start;
@@ -347,8 +348,8 @@
         padding-left: 200px;
     }
 
-    .singlename{
+    .singername{
         position: absolute;
-        right: 295px;
+        right: 385px;
     }
 </style>

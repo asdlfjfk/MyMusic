@@ -50,9 +50,9 @@ export default {
     }
 
     #main{
-        padding: 10px 0px 10px 17px;
+        padding: 10px 0px 10px 0px;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         scroll-behavior: smooth;
     }
 

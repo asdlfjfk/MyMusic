@@ -1,6 +1,6 @@
 <template>
     <div class="lists">
-        <div class="title"><span class="songtitle">音乐标题</span><span class="singletitle">歌手</span><span class="albumtitle">专辑</span><span class="time">时长</span></div>
+        <div class="title"><span class="songtitle">音乐标题</span><span class="singertitle">歌手</span><span class="albumtitle">专辑</span><span class="time">时长</span></div>
         <div class="allsong">
             <div v-for="(item,index) in allsong" class="songs" id="song"
                  :class="{bgc: index%2 === 0,active: item.data.songs[0].id === playerbackid,
@@ -14,7 +14,7 @@
                     <span class="icon iconfont2" v-if="item.data.songs[0].fee === 1">&#xe671;</span>
                 </div>
                 <div class="name"><span>{{item.data.songs[0].name}}</span><span v-if="item.data.songs[0].alia[0]" class="alia">({{item.data.songs[0].alia[0]}})</span></div>
-                <div class="single"><span>{{item.data.songs[0].ar[0].name}}</span></div>
+                <div class="singer"><span>{{item.data.songs[0].ar[0].name}}</span></div>
                 <div class="album"><span>{{item.data.songs[0].al.name}}</span></div>
                 <div class="length"><span>{{format(item.data.songs[0].dt)}}</span></div>
 
@@ -109,7 +109,6 @@
     }
 
     .title{
-        position: relative;
         width: 100%;
         font-family: 微软雅黑;
         display: flex;
@@ -119,22 +118,22 @@
 
     .songtitle{
         position: relative;
-        left: 15%;
+        left: 15.4%;
     }
 
-    .singletitle{
+    .singertitle{
         position: relative;
-        left: 39%;
+        left: 39.7%;
     }
 
     .albumtitle{
         position: relative;
-        left: 57%;
+        left: 58%;
     }
 
     .time{
         position: relative;
-        left: 75%;
+        left: 76.5%;
     }
 
     .songs{
@@ -173,7 +172,7 @@
         left: 5px;
     }
 
-    .single{
+    .singer{
         color: rgb(80, 125, 175);
         width: 160px;
         position: relative;

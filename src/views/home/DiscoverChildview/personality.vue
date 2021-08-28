@@ -172,8 +172,7 @@
 
     #personal{
         padding: 14px;
-        overflow-y: hidden;
-        overflow-x: hidden;
+        margin: 0px 10px 0px 10px;
     }
 
     .swiper{

@@ -184,6 +184,10 @@
 
 <style scoped>
 
+    #playlist{
+        margin: 0px 17px 0px 17px;
+    }
+
     .icon{
         font-family:"iconfont" !important;
         -webkit-font-smoothing: antialiased;

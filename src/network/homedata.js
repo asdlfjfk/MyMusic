@@ -131,7 +131,7 @@ export function gettopdetail() {
 }
 
 //获取歌手列表
-export function getsinglelist(initial,type,area,offset) {
+export function getsingerlist(initial,type,area,offset) {
     return request({
         url: '/artist/list',
         params:{
@@ -142,6 +142,17 @@ export function getsinglelist(initial,type,area,offset) {
         }
     })
 }
+
+//获取歌手详情以及单曲
+export function getsingerdetail(id) {
+    return request({
+        url:'/artists',
+        params:{
+            id
+        }
+    })
+}
+
 
 
 

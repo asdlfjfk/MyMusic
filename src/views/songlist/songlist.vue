@@ -168,8 +168,7 @@
 <style scoped>
 
     #songlist{
-        overflow-y: scroll;
-        overflow-x: hidden;
+
         position: relative;
         right: 6px;
     }
@@ -413,6 +412,7 @@
 
     .listmain{
         margin-left: 34px;
+        margin-right: 34px;
     }
 
 </style>
