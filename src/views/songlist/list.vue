@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import {getsongurl} from '../../network/homedata'
+    import {getsongurl} from 'network/homedata'
     export default {
         name: "list",
         methods:{

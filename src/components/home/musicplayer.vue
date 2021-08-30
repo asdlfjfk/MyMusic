@@ -73,15 +73,18 @@
             }
         },
         computed:{
-            song(){
+            song(){  //歌曲
                 return this.$store.getters.song
             },
-            songset(){
+            songset(){  //所有歌曲
                 return this.$store.getters.songset
             },
-            id(){
+            id(){ //用于在寻找上下首歌时重新赋值寻找基点 如若不重新赋值 上下首切换将局限于三首歌内 中间为基点
                 return this.$store.state.id
             },
+            flag(){ //用于判断是歌手页的歌曲还是歌单页的歌曲 他们俩取值不一致
+                return this.$store.state.flag
+            }
         },
         watch:{
             song(val){
@@ -193,56 +196,112 @@
 
             // 上一首
             up(id){
-                let index = null
-                for (let songindex in this.songset){
-                    if (this.songset[songindex].data.songs[0].id === id) {
-                        index = songindex*1 - 1
-                        if (index >= 0) {
-                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
-                                index = songindex*1 - 2
-                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                switch (this.flag) {
+                    case 1:
+                        let index = null
+                        for (let songindex in this.songset){
+                            if (this.songset[songindex].data.songs[0].id === id) {
+                                index = songindex*1 - 1
+                                if (index >= 0) {
+                                    if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                        index = songindex*1 - 2
+                                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                    }
+                                    this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                }
                             }
-                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                         }
-                    }
-                }
-                if (index != null && index >= 0){
-                    let id = this.songset[index].data.songs[0].id
-                    this.$store.commit('changeid',id)
-                    getsongurl(this.id).then(res => {
-                        this.$store.commit('changesong2',res)
-                    })
-                }else{
-                    this.$message.error('已经到顶了哦');
+                        if (index != null && index >= 0){
+                            let id = this.songset[index].data.songs[0].id
+                            this.$store.commit('changeid',id)
+                            getsongurl(this.id).then(res => {
+                                this.$store.commit('changesong2',res)
+                            })
+                        }else{
+                            this.$message.error('已经到顶了哦');
+                        }
+                        break;
+                    case 2:
+                        let index1 = null
+                        for (let songindex in this.songset[0]){
+                            if (this.songset[0][songindex].id === id) {
+                                index1 = songindex*1 - 1
+                                if (index1 >= 0) {
+                                    if (this.songset[0][index1].noCopyrightRcmd !== null){
+                                        index1 = songindex*1 - 2
+                                        this.$store.commit('changebackid',this.songset[0][index1].id)
+                                    }
+                                    this.$store.commit('changebackid',this.songset[0][index1].id)
+                                }
+                            }
+                        }
+                        if (index1 != null && index1 >= 0){
+                            let id = this.songset[0][index1].id
+                            this.$store.commit('changeid',id)
+                            getsongurl(this.id).then(res => {
+                                this.$store.commit('changesong2',res)
+                            })
+                        }else{
+                            this.$message.error('已经到顶了哦');
+                        }
+                        break;
                 }
             },
             // 下一首
             down(id){
-                let index = null
-                for (let songindex in this.songset){
-                    if (this.songset[songindex].data.songs[0].id === id) {
-                        index = songindex*1 + 1
-                        if (index + 1 <= this.songset.length) {
-                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
-                                index = songindex*1 + 2
-                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                switch (this.flag) {
+                    case 1:
+                        let index = null
+                        for (let songindex in this.songset){
+                            if (this.songset[songindex].data.songs[0].id === id) {
+                                index = songindex*1 + 1
+                                if (index + 1 <= this.songset.length) {
+                                    if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                        index = songindex*1 + 2
+                                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                    }
+                                    this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                }
                             }
-                            this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                         }
-                    }
+                        if (index != null && index >= 0 && index + 1 <= this.songset.length){
+                            let id = this.songset[index].data.songs[0].id
+                            this.$store.commit('changeid',id)
+                            getsongurl(this.id).then(res => {
+                                this.$store.commit('changesong2',res)
+                            })
+                        }else {
+                            this.$message.error('已经到底了哦');
+                        }
+                        break;
+
+                    case 2:
+                        let index1 = null
+                        for (let songindex in this.songset[0]){
+                            if (this.songset[0][songindex].id === id) {
+                                index1 = songindex*1 + 1
+                                if (index1 + 1 <= this.songset[0].length) {
+                                    if (this.songset[0][index1].noCopyrightRcmd !== null){
+                                        index1 = songindex*1 + 2
+                                        this.$store.commit('changebackid',this.songset[0][index1].id)
+                                    }
+                                    this.$store.commit('changebackid',this.songset[0][index1].id)
+                                }
+                            }
+                        }
+                        if (index1 != null && index1 >= 0 && index1 + 1 <= this.songset[0].length){
+                            let id = this.songset[0][index1].id
+                            this.$store.commit('changeid',id)
+                            getsongurl(this.id).then(res => {
+                                this.$store.commit('changesong2',res)
+                            })
+                        }else {
+                            this.$message.error('已经到底了哦');
+                        }
+                        break;
                 }
-                if (index != null && index >= 0 && index + 1 <= this.songset.length){
-                    let id = this.songset[index].data.songs[0].id
-                    this.$store.commit('changeid',id)
-                    getsongurl(this.id).then(res => {
-                        this.$store.commit('changesong2',res)
-                    })
-                }else {
-                    this.$message.error('已经到底了哦');
-                }
+
             },
-
-
 
             loop(id,model){
 
@@ -253,36 +312,66 @@
 
                     case 1: //列表循环    //原理与下一首一致 到底后自动回到第一首
                         if (model === 1) {
-                            let index = null
-                            for (let songindex in this.songset){
-                                if (this.songset[songindex].data.songs[0].id === id) {
-                                    index = songindex*1 + 1
-                                    if (index + 1 <= this.songset.length) {
-                                        if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
-                                            index = songindex*1 + 2
+                            if (this.flag === 1) {
+                                let index = null
+                                for (let songindex in this.songset){
+                                    if (this.songset[songindex].data.songs[0].id === id) {
+                                        index = songindex*1 + 1
+                                        if (index + 1 <= this.songset.length) {
+                                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                                index = songindex*1 + 2
+                                                this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
+                                            }
                                             this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                                         }
-                                        this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                                     }
                                 }
-                            }
-                            if (index != null && index >= 0 && index + 1 <= this.songset.length){
-                                let id = this.songset[index].data.songs[0].id
-                                this.$store.commit('changeid',id)
-                                getsongurl(this.id).then(res => {
-                                    this.$store.commit('changesong2',res)
-                                })
-                            }else {
-                                let item = this.$store.state.songset[0]
-                                this.$store.commit('changebackid',item.data.songs[0].id)
-                                getsongurl(item.data.songs[0].id).then(res => {
-                                    this.$store.commit('changesong',{res,item})
-                                },500)
+                                if (index != null && index >= 0 && index + 1 <= this.songset.length){
+                                    let id = this.songset[index].data.songs[0].id
+                                    this.$store.commit('changeid',id)
+                                    getsongurl(this.id).then(res => {
+                                        this.$store.commit('changesong2',res)
+                                    })
+                                }else {
+                                    let item = this.songset[0]
+                                    this.$store.commit('changebackid',item.data.songs[0].id)
+                                    getsongurl(item.data.songs[0].id).then(res => {
+                                        this.$store.commit('changesong',{res,item})
+                                    },500)
+                                }
+                            }else if (this.flag === 2) {
+                                let index = null
+                                for (let songindex in this.songset[0]){
+                                    if (this.songset[0][songindex].id === id) {
+                                        index = songindex*1 + 1
+                                        if (index + 1 <= this.songset[0].length) {
+                                            if (this.songset[0][index].noCopyrightRcmd !== null){
+                                                index = songindex*1 + 2
+                                                this.$store.commit('changebackid',this.songset[0][index].id)
+                                            }
+                                            this.$store.commit('changebackid',this.songset[0][index].id)
+                                        }
+                                    }
+                                }
+                                if (index != null && index >= 0 && index + 1 <= this.songset[0].length){
+                                    let id = this.songset[0][index].id
+                                    this.$store.commit('changeid',id)
+                                    getsongurl(this.id).then(res => {
+                                        this.$store.commit('changesong2',res)
+                                    })
+                                }else {
+                                    let item = this.songset[0][0]
+                                    this.$store.commit('changebackid',item.id)
+                                    getsongurl(item.id).then(res => {
+                                        this.$store.commit('workchangesong',{res,item})
+                                    },500)
+                                }
                             }
                         }
                         break;
                 }
             },
+
             changemodel(){
                 this.model += 1
                 if (this.model > 2){

@@ -135,9 +135,10 @@
 
     .active{
         font-size: 20px;
-        opacity: .8;
+        opacity: .9;
         border-bottom: 2px solid #c62f2f;
         padding: 10px;
+        font-weight: 800;
     }
 
     .link{

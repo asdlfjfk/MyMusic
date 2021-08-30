@@ -9,12 +9,17 @@ const store = new Vuex.Store({
         song:0,
         songset:[],
         id:0,
-        playerbackid:""
+        playerbackid:"",
+        flag:1
     },
     mutations:{
         changesong(state,payload) {
             state.song = payload.res
             state.id = payload.item.data.songs[0].id
+        },
+        workchangesong(state,payload){
+            state.song = payload.res
+            state.id = payload.item.id
         },
         changesong2(state,payload) {
             state.song = payload
@@ -30,6 +35,9 @@ const store = new Vuex.Store({
         },
         changebackid(state,payload){
             state.playerbackid = payload
+        },
+        changeflag(state,payload){
+            state.flag = payload
         }
     },
     actions:{},

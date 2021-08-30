@@ -9,7 +9,7 @@
                 <el-container>
                     <sidebar></sidebar>
                     <el-main style="height: 640px" id="main">
-                        <keep-alive exclude="songlist"><router-view></router-view></keep-alive>
+                        <keep-alive exclude="songlist,singerlist"><router-view></router-view></keep-alive>
                     </el-main>
                 </el-container>
 

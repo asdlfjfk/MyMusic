@@ -121,6 +121,7 @@
                         let count = 0
                         for (let song of res){
                             this.$store.commit('pushallsong',song)
+                            this.$store.commit('changeflag',1)
                             count += 1
                         }
                         if (count >= res.length){
@@ -303,7 +304,7 @@
     }
 
     .text{
-        padding: 3px 14px 3px 5px;
+        padding: 2px 14px 3px 4px;
         margin-left: 8px;
     }
 
@@ -312,6 +313,8 @@
         font-family: 微软雅黑;
         position: relative;
         bottom: 4px;
+        font-weight: 300;
+        font-size: 14px;
     }
 
     .tag{
@@ -331,6 +334,8 @@
         font-family: 微软雅黑;
         position: relative;
         top: 3px;
+        font-weight: 300;
+        font-size: 14px;
     }
 
     .count{
@@ -348,6 +353,8 @@
         font-family: 微软雅黑;
         display: flex;
         justify-content: flex-start;
+        font-weight: 300;
+        font-size: 14px;
     }
 
     .descrbox{
@@ -369,7 +376,7 @@
     .desr:hover{
         width: 800px;
         position: absolute;
-        left: 35.8px;
+        left: 30px;
         font-size: 14px;
         cursor: pointer;
         white-space: normal;
@@ -378,6 +385,7 @@
 
     #main{
         margin-top: 200px;
+        margin-left: 10px;
     }
 
     .maintitle{
@@ -403,9 +411,9 @@
     .active{
         font-size: 20px;
         color: rgba(0,0,0,.9);
-        opacity: .8;
         border-bottom: 2px solid #c62f2f;
         padding: 12px;
+        font-weight: 800;
     }
 
     .listmain{
