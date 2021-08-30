@@ -153,6 +153,43 @@ export function getsingerdetail(id) {
     })
 }
 
+//获取歌手专辑
+export function getsingeralbum(id,limit,offset) {
+    return request({
+        url:'/artist/album',
+        params:{
+            id,
+            limit,
+            offset
+        }
+    })
+}
+
+//专辑内容
+export function getalbum(id) {
+    return request({
+        url:'/album',
+        params:{
+            id
+        }
+    })
+}
+
+//歌手mv
+export function getsingermv(id,limit,offset) {
+    return request({
+        url:'/artist/mv',
+        params:{
+            id,
+            limit,
+            offset
+        }
+    })
+}
+
+
+
+
 
 
 

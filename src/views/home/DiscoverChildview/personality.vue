@@ -507,11 +507,15 @@
     }
     
     .mvplaycount{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         color: #fff;
         position: relative;
         top: 66px;
-        left: 300px;
+        right: 10px;
         font-family: 微软雅黑;
+        text-shadow: rgb(0 0 0) 0px 0px 2px;
     }
 
     .recommendMvitem:hover .hot{

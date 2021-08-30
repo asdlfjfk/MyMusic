@@ -136,13 +136,14 @@
     .active{
         font-size: 20px;
         opacity: .9;
-        border-bottom: 2px solid #c62f2f;
+        border-bottom: 4px solid #c62f2f;
         padding: 10px;
         font-weight: 800;
     }
 
     .link{
         text-decoration: none;
+        font-weight: 400;
     }
 
     #playlist,#leader,#singer,#latestmusic{

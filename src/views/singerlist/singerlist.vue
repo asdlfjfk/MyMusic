@@ -28,7 +28,7 @@
             <div class="maintitle">
                 <div class="g2" :class="{active: current === 1}" @click="itemCurrent(1)">作品</div>
                 <div class="g2" :class="{active: current === 2}" @click="itemCurrent(2)">专辑</div>
-                <div class="g2" :class="{active: current === 3}" @click="itemCurrent(3)">mv</div>
+                <div class="g2" :class="{active: current === 3}" @click="itemCurrent(3)">MV</div>
                 <div class="g2" :class="{active: current === 4}" @click="itemCurrent(4)">歌手详情</div>
                 <div class="g2" :class="{active: current === 5}" @click="itemCurrent(5)">相似歌手</div>
             </div>
@@ -119,7 +119,7 @@
     .active{
         font-size: 20px;
         color: rgba(0,0,0,.9);
-        border-bottom: 2px solid #c62f2f;
+        border-bottom: 4px solid #c62f2f;
         padding: 12px;
         font-weight: 800;
     }
@@ -173,6 +173,7 @@
 
     .line2{
         font-weight: 300;
+        opacity: .9;
     }
 
     .line3{
@@ -216,6 +217,8 @@
     .bt{
         white-space: nowrap;
         margin-left: 5px;
+        font-size: 14px;
+        font-weight: 300;
     }
 
     .size{

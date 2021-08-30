@@ -315,6 +315,8 @@
         line-height: 44px;
         cursor: pointer;
         font-size: 14px;
+        font-weight: 400;
+        color: rgb(0,0,0,.6);
     }
 
     .look:hover{
@@ -329,6 +331,8 @@
         line-height: 44px;
         cursor: pointer;
         font-size: 14px;
+        font-weight: 400;
+        color: rgb(0,0,0,.6);
     }
 
     .line:hover{

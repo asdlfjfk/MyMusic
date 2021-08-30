@@ -267,6 +267,8 @@
         margin-left: 22px;
         position: relative;
         bottom: 22px;
+        font-size: 14px;
+        font-weight: 300;
     }
 
     .playall{
@@ -304,7 +306,7 @@
     }
 
     .text{
-        padding: 2px 14px 3px 4px;
+        padding: 2px 18px 2px 4px;
         margin-left: 8px;
     }
 
@@ -411,7 +413,7 @@
     .active{
         font-size: 20px;
         color: rgba(0,0,0,.9);
-        border-bottom: 2px solid #c62f2f;
+        border-bottom: 4px solid #c62f2f;
         padding: 12px;
         font-weight: 800;
     }

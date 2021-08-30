@@ -131,5 +131,6 @@
     .link{
         text-decoration: none;
         color: #000;
+        font-weight: 400;
     }
 </style>

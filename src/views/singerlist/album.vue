@@ -1,15 +1,115 @@
 <template>
-    <div>
-        专辑
+    <div id="albums">
+        <div class="allalbums">
+            <div v-for="item in hotAlbums">
+                <div class="imgbox">
+                    <img :src="item.blurPicUrl" alt="">
+                </div>
+                <div class="name">{{item.name}}</div>
+            </div>
+        </div>
+        <el-pagination
+                background
+                layout="prev, pager, next"
+                :page-size="pagesize"
+                :total="count" @current-change="currentChange">
+        </el-pagination>
     </div>
 </template>
 
 <script>
+    import {getsingeralbum} from "network/homedata"
     export default {
-        name: "album"
+        name: "album",
+        data(){
+            return {
+                pagesize:20,
+                count:0,
+                page:1,
+                hotAlbums:[],
+            }
+        },
+        created(){
+            getsingeralbum(this.id,20,(this.page - 1) * 20).then(res => {
+                console.log(res);
+                this.count = res.data.artist.albumSize
+                this.hotAlbums = res.data.hotAlbums
+            })
+        },
+        computed:{
+            id(){
+                return this.$route.params.id
+            }
+        },
+        methods:{
+            currentChange(currentPage){
+                getsingeralbum(this.id,20,(currentPage - 1) * 20).then(res => {
+                    this.hotAlbums = res.data.hotAlbums
+                })
+            },
+        }
     }
 </script>
 
 <style scoped>
 
+    .allalbums{
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        bottom: 20px;
+    }
+
+    img{
+        width:180px;
+        height: 180px;
+        background-color: #29281f;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        z-index: 10;
+        filter:drop-shadow(0 0 3px gainsboro);
+    }
+
+    #albums >>> .el-pagination{
+        position: relative;
+        left: 28%;
+        right: 30%;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    #albums >>> .el-pagination.is-background .el-pager li:not(.disabled).active{
+        background-color: #c62f2f;
+    }
+
+    #albums >>> .el-pagination.is-background .el-pager li:not(.disabled).active:hover{
+        color: #fff;
+    }
+
+    #albums >>> .el-pagination.is-background .el-pager li:not(.disabled):hover{
+        color: #c62f2f;
+    }
+
+    .imgbox{
+        margin-left: 20px;
+        margin-top: 30px;
+        width:200px;
+        height: 180px;
+        background-color: #29281f;
+        border-radius: 400px;
+        z-index: 5;
+        cursor: pointer;
+    }
+
+    .name{
+        position: relative;
+        left: 20px;
+        top: 5px;
+        font-weight: 800;
+        width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 </style>
