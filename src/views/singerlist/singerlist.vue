@@ -108,11 +108,11 @@
     }
 
     .headimg{
-        width: 15%;
-        height: 15%;
+        width: 180px;
+        height: 180px;
         border-radius: 14px;
         position: relative;
-        left: 4%;
+        left: 44px;
         top: 28px;
     }
 

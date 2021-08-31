@@ -82,7 +82,7 @@
             id(){ //用于在寻找上下首歌时重新赋值寻找基点 如若不重新赋值 上下首切换将局限于三首歌内 中间为基点
                 return this.$store.state.id
             },
-            flag(){ //用于判断是歌手页的歌曲还是歌单页的歌曲 他们俩取值不一致
+            flag(){ //用于判断是歌手页,专辑页的歌曲  还是  歌单页的歌曲 他们俩取值不一致
                 return this.$store.state.flag
             }
         },
@@ -129,7 +129,7 @@
                         audio.removeAttribute("loop")
                     }
                 }
-            }
+            },
         },
         methods:{
             play(){
@@ -333,11 +333,17 @@
                                         this.$store.commit('changesong2',res)
                                     })
                                 }else {
-                                    let item = this.songset[0]
-                                    this.$store.commit('changebackid',item.data.songs[0].id)
-                                    getsongurl(item.data.songs[0].id).then(res => {
-                                        this.$store.commit('changesong',{res,item})
-                                    },500)
+                                    if (this.songset.length === 1){
+                                        let audio = document.getElementById('audio');
+                                        audio.currentTime = 0;
+                                        audio.play()
+                                    }else {
+                                        let item = this.songset[0]
+                                        this.$store.commit('changebackid',item.data.songs[0].id)
+                                        getsongurl(item.data.songs[0].id).then(res => {
+                                            this.$store.commit('changesong',{res,item})
+                                        },500)
+                                    }
                                 }
                             }else if (this.flag === 2) {
                                 let index = null
@@ -360,11 +366,18 @@
                                         this.$store.commit('changesong2',res)
                                     })
                                 }else {
-                                    let item = this.songset[0][0]
-                                    this.$store.commit('changebackid',item.id)
-                                    getsongurl(item.id).then(res => {
-                                        this.$store.commit('workchangesong',{res,item})
-                                    },500)
+                                    //判断歌单是否只有一首歌 防止列表循环模式 歌单只有一首歌导致watch没有监听到变化不会循环播放
+                                    if (this.songset[0].length === 1){
+                                        let audio = document.getElementById('audio');
+                                        audio.currentTime = 0;
+                                        audio.play()
+                                    }else {
+                                        let item = this.songset[0][0]
+                                        this.$store.commit('changebackid',item.id)
+                                        getsongurl(item.id).then(res => {
+                                            this.$store.commit('workchangesong',{res,item})
+                                        },500)
+                                    }
                                 }
                             }
                         }

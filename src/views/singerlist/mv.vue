@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="mv" v-loading="loading">
         <div class="allmv" ref="allmv">
             <div v-for="item in mvs" class="mvitem">
                 <img :src="item.imgurl16v9" alt="">
@@ -23,6 +23,7 @@
         name: "mv",
         data(){
             return{
+                loading:true,
                 mvs:[],
                 page:1
             }
@@ -31,6 +32,7 @@
             getsingermv(this.id,20,(this.page - 1) * 20).then(res => {
                 this.mvs = res.data.mvs
                 console.log(this.mvs);
+                this.loading = false
             })
         },
         methods:{
@@ -51,10 +53,12 @@
         },
         watch:{
           page(val){
+              this.loading = true
               getsingermv(this.id,20,(val - 1) * 20).then(res => {
                   for (let mv of res.data.mvs){
                       this.mvs.push(mv)
                   }
+                  this.loading = false
               })
           }
         },
@@ -73,6 +77,10 @@
 </script>
 
 <style scoped>
+
+    #mv{
+        overflow: hidden;
+    }
 
     .allmv{
         display: flex;

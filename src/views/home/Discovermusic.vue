@@ -106,7 +106,7 @@
         text-align: center;
         background-color: #fff;
         position: relative;
-        right: 10%;
+        right: 120px;
         top: 8px;
     }
 

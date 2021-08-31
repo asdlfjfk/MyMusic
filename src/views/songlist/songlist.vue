@@ -307,7 +307,7 @@
 
     .text{
         padding: 2px 18px 2px 4px;
-        margin-left: 8px;
+        margin-left: 10px;
     }
 
     .line4{

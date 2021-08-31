@@ -1,11 +1,12 @@
 <template>
-    <div id="albums">
+    <div id="albums" v-loading="loading">
         <div class="allalbums">
             <div v-for="item in hotAlbums">
-                <div class="imgbox">
+                <div class="imgbox" @click="listdetail(item.id)">
                     <img :src="item.blurPicUrl" alt="">
                 </div>
                 <div class="name">{{item.name}}</div>
+                <div class="publishtime">{{formatDate(item.publishTime)}}发布</div>
             </div>
         </div>
         <el-pagination
@@ -23,6 +24,7 @@
         name: "album",
         data(){
             return {
+                loading:true,
                 pagesize:20,
                 count:0,
                 page:1,
@@ -31,9 +33,9 @@
         },
         created(){
             getsingeralbum(this.id,20,(this.page - 1) * 20).then(res => {
-                console.log(res);
                 this.count = res.data.artist.albumSize
                 this.hotAlbums = res.data.hotAlbums
+                this.loading = false
             })
         },
         computed:{
@@ -43,10 +45,22 @@
         },
         methods:{
             currentChange(currentPage){
+                this.loading = true
                 getsingeralbum(this.id,20,(currentPage - 1) * 20).then(res => {
                     this.hotAlbums = res.data.hotAlbums
+                    this.loading = false
                 })
             },
+            listdetail(id){
+                this.$router.push('/albumlist/' + id)
+            },
+            formatDate (data) {
+                var date = new Date(data)
+                var Y = date.getFullYear() + '-'
+                var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+                var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+                return Y + M + D
+            }
         }
     }
 </script>
@@ -111,5 +125,13 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+    .publishtime{
+        margin-left: 20px;
+        font-size: 12px;
+        position: relative;
+        top: 8px;
+        opacity: .8;
     }
 </style>

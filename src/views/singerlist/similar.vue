@@ -5,8 +5,19 @@
 </template>
 
 <script>
+    import {getsimilarsinger} from "network/homedata"
     export default {
-        name: "similar"
+        name: "similar",
+        created(){
+            getsimilarsinger(this.id).then(res => {
+                console.log(res);
+            })
+        },
+        computed:{
+            id(){
+                return this.$route.params.id
+            }
+        }
     }
 </script>
 

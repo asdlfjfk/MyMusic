@@ -187,6 +187,40 @@ export function getsingermv(id,limit,offset) {
     })
 }
 
+//获取歌手详情背景
+export function getsingerdes(id) {
+    return request({
+        url:'/artist/desc',
+        params:{
+            id
+        }
+    })
+}
+
+//获取相似歌手
+export function getsimilarsinger(id) {
+    return request({
+        url:'/simi/artist',
+        params:{
+            id
+        }
+    })
+}
+
+//获取专辑评论
+export function getalbumcomment(id,limit,offset) {
+    return request({
+        url:'/comment/album',
+        params:{
+            id,
+            limit,
+            offset
+        }
+    })
+}
+
+
+
 
 
 

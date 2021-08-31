@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {getplaylistcomment,gethotcomment} from "network/homedata"
+    import {getalbumcomment,gethotcomment} from "network/homedata"
     import {formatDate} from "common/util"
     export default {
         name: "comment",
@@ -107,18 +107,17 @@
             gethotcomment(this.commentid,20).then(res => {
                 this.hot = res.data.hotComments
                 this.loading = false
-                console.log(res);
             })
 
             //默认展示第一页评论
-            getplaylistcomment(this.commentid,20,(this.currentPage-1)*20).then(res => {
+            getalbumcomment(this.commentid,20,(this.currentPage-1)*20).then(res => {
                 this.res = res.data.comments
             })
         },
         methods:{
             //根据页数展示评论
             currentChange(currentPage){
-                getplaylistcomment(this.commentid,20,(currentPage-1)*20).then(res => {
+                getalbumcomment(this.commentid,20,(currentPage-1)*20).then(res => {
                     this.res = res.data.comments
                 })
             },
@@ -127,7 +126,6 @@
 </script>
 
 <style scoped>
-
     .icon{
         font-family:"iconfont" !important;
         -webkit-font-smoothing: antialiased;
@@ -146,8 +144,8 @@
 
     .comment{
         font-family: 微软雅黑;
-        margin-top: 14px;
         width: 1120px;
+        margin: 14px 20px 0px 30px;
     }
 
     .comment >>> .el-textarea__inner{
@@ -176,6 +174,7 @@
 
     .hotcomments,.newcomments{
         font-family: 微软雅黑;
+        margin: 14px 20px 0px 30px;
     }
 
     .newcomments{
@@ -268,5 +267,4 @@
         margin-right: 14px;
         opacity: .8;
     }
-
 </style>
