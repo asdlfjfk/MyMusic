@@ -106,6 +106,7 @@
 
     .allsong{
         margin-top: 16px;
+        font-family: 微软雅黑;
     }
 
     .title{

@@ -8,6 +8,7 @@
                 <div class="line1">
                     <div class="box"><div>专辑</div></div>
                     <div class="name">{{detail.name}}</div>
+                    <div v-if="alias" class="alias">({{alias}})</div>
                 </div>
 
                 <div class="line2">
@@ -57,6 +58,7 @@
               detail:{},
               shareCount:0,
               name:"",
+              alias:"",
               commentCount:0,
               current:1,
               comments:[],
@@ -66,12 +68,12 @@
         created(){
             this.$store.commit('cleansongset')
             getalbum(this.id).then(res => {
-                console.log(res);
                 this.detail = res.data.album
                 this.shareCount = res.data.album.info.shareCount
                 this.name = res.data.album.artist.name
                 this.commentCount = res.data.album.info.commentCount
                 this.description = res.data.album.description
+                this.alias = res.data.album.alias[0]
                 this.$store.commit('pushallsong',res.data.songs)
                 this.$store.commit('changeflag',2)
                 this.comments.push(this.detail.info.commentCount)
@@ -86,10 +88,10 @@
         methods:{
             //播放全部
             pushallsong(){
-                let item = this.$store.state.songset[0]
+                let item = this.$store.state.songset[0][0]
                 this.$store.commit('changebackid',item.id)
                 getsongurl(item.id).then(res => {
-                    this.$store.commit('changesong',{res,item})
+                    this.$store.commit('workchangesong',{res,item})
                 },500)
             },
             formatDate (data) {
@@ -100,14 +102,7 @@
                 return Y + M + D
             },
             itemCurrent(num){
-                switch (num) {
-                    case 1:this.current = 1;
-                        break;
-                    case 2:this.current = 2;
-                        break;
-                    case 3:this.current = 3;
-                        break;
-                }
+                this.current = num
             },
         }
     }
@@ -168,6 +163,14 @@
         font-weight: 900;
         margin-left: 14px;
         margin-bottom: 4px;
+    }
+
+    .alias{
+        font-size: 24px;
+        font-weight: 900;
+        margin-left: 14px;
+        margin-bottom: 4px;
+        opacity: .4;
     }
 
     .line1{
@@ -246,7 +249,7 @@
     }
 
     .text{
-        padding: 2px 18px 2px 4px;
+        padding: 4px 18px 2px 4px;
         margin-left: 10px;
     }
 
@@ -301,5 +304,9 @@
     .g2:hover{
         color: rgba(0,0,0,.8);
         cursor: pointer;
+    }
+
+    .listmain{
+        margin-left: 34px;
     }
 </style>

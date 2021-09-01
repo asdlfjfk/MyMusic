@@ -291,7 +291,7 @@
     img{
         width: 100%;
         height: 100%;
-        border-radius: 20px;
+        border-radius: 5px;
         box-shadow: 5px 5px 5px 5px gainsboro;
         cursor: pointer;
     }

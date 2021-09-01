@@ -44,7 +44,7 @@
 </template>
 
 <script>
-    import {getsongdetail,getsongurl} from '../../network/homedata'
+    import {getsongdetail,getsongurl} from 'network/homedata'
     export default {
         name: "musicplayer",
         data(){
@@ -203,7 +203,7 @@
                             if (this.songset[songindex].data.songs[0].id === id) {
                                 index = songindex*1 - 1
                                 if (index >= 0) {
-                                    if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                    if (this.songset[index].data.songs[0].noCopyrightRcmd && this.songset[index].data.songs[0].noCopyrightRcmd !== null){
                                         index = songindex*1 - 2
                                         this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                                     }
@@ -227,7 +227,7 @@
                             if (this.songset[0][songindex].id === id) {
                                 index1 = songindex*1 - 1
                                 if (index1 >= 0) {
-                                    if (this.songset[0][index1].noCopyrightRcmd !== null){
+                                    if (this.songset[0][index1].noCopyrightRcmd && this.songset[0][index1].noCopyrightRcmd !== null){
                                         index1 = songindex*1 - 2
                                         this.$store.commit('changebackid',this.songset[0][index1].id)
                                     }
@@ -256,7 +256,7 @@
                             if (this.songset[songindex].data.songs[0].id === id) {
                                 index = songindex*1 + 1
                                 if (index + 1 <= this.songset.length) {
-                                    if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                    if (this.songset[index].data.songs[0].noCopyrightRcmd && this.songset[index].data.songs[0].noCopyrightRcmd !== null){
                                         index = songindex*1 + 2
                                         this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                                     }
@@ -281,7 +281,7 @@
                             if (this.songset[0][songindex].id === id) {
                                 index1 = songindex*1 + 1
                                 if (index1 + 1 <= this.songset[0].length) {
-                                    if (this.songset[0][index1].noCopyrightRcmd !== null){
+                                    if (this.songset[0][index1].noCopyrightRcmd && this.songset[0][index1].noCopyrightRcmd !== null){
                                         index1 = songindex*1 + 2
                                         this.$store.commit('changebackid',this.songset[0][index1].id)
                                     }
@@ -318,7 +318,7 @@
                                     if (this.songset[songindex].data.songs[0].id === id) {
                                         index = songindex*1 + 1
                                         if (index + 1 <= this.songset.length) {
-                                            if (this.songset[index].data.songs[0].noCopyrightRcmd !== null){
+                                            if (this.songset[index].data.songs[0].noCopyrightRcmd && this.songset[index].data.songs[0].noCopyrightRcmd !== null){
                                                 index = songindex*1 + 2
                                                 this.$store.commit('changebackid',this.songset[index].data.songs[0].id)
                                             }
@@ -351,7 +351,7 @@
                                     if (this.songset[0][songindex].id === id) {
                                         index = songindex*1 + 1
                                         if (index + 1 <= this.songset[0].length) {
-                                            if (this.songset[0][index].noCopyrightRcmd !== null){
+                                            if (this.songset[0][index].noCopyrightRcmd && this.songset[0][index].noCopyrightRcmd !== null){
                                                 index = songindex*1 + 2
                                                 this.$store.commit('changebackid',this.songset[0][index].id)
                                             }
@@ -548,6 +548,7 @@
         top: 47.5px;
         left: 23.4%;
         font-weight: 300;
+        font-family: 微软雅黑;
     }
 
     .size{
@@ -555,6 +556,7 @@
         left: 73.1%;
         top: 47.5px;
         font-weight: 300;
+        font-family: 微软雅黑;
     }
 
     .block >>>  .el-slider__button {

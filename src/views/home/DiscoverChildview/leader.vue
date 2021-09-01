@@ -1,5 +1,5 @@
 <template>
-    <div id="leaderboard">
+    <div id="leaderboard" v-loading="loading">
         <div class="title">官方榜</div>
         <div class="allline" v-loading="loadingimg">
             <div v-for="item in leaderlist[0]" class="leaderline">
@@ -13,7 +13,7 @@
             </div>
 
 
-            <div class="list" v-loading="loading">
+            <div class="list">
                 <!--飙升榜-->
                 <div v-for="item in list1" class="list1">
                     <div v-for="(track,index) in item.tracks" class="line" :class="{bgc: index%2 === 0}" @dblclick="toast">
@@ -288,6 +288,7 @@
         bottom: 500px;
         font-weight: 300;
         color: rgb(0,0,0,.7);
+        font-family: 微软雅黑;
     }
 
     .list1{

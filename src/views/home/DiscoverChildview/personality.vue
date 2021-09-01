@@ -13,9 +13,7 @@
 
         <!--推荐歌单-->
         <div class="recommend">
-            <span class="left"></span>
-            <p class="titleText">推荐歌单</p>
-            <span class="right"></span>
+            <p class="titleText" @click="linktoplaylist">推荐歌单 ></p>
         </div>
 
         <div class="recommonlist" v-loading="loading">
@@ -39,9 +37,7 @@
 
         <!--独家放送-->
         <div class="recommend">
-            <span class="left"></span>
-            <p class="titleText">独家放送</p>
-            <span class="right"></span>
+            <p class="titleText">独家放送 ></p>
         </div>
 
         <div class="privatecontent">
@@ -57,9 +53,7 @@
 
         <!--最新音乐-->
         <div class="recommend">
-            <span class="left"></span>
-            <p class="titleText">最新音乐</p>
-            <span class="right"></span>
+            <p class="titleText" @click="linktolatestmusic">最新音乐 ></p>
         </div>
 
         <div class="newsongs">
@@ -81,9 +75,7 @@
 
         <!--推荐MV-->
         <div class="recommendMV">
-            <span class="left"></span>
-            <p class="titleText">推荐MV</p>
-            <span class="right"></span>
+            <p class="titleText">推荐MV ></p>
         </div>
 
         <div class="recommendMVcontent">
@@ -143,6 +135,12 @@
                         this.$store.commit('changesong2',res)
                     },500)
             },
+            linktoplaylist(){
+                this.$router.push('playlist')
+            },
+            linktolatestmusic(){
+                this.$router.push('latestmusic')
+            }
         },
         created(){
             getbanner().then(res => {
@@ -213,28 +211,29 @@
         align-items: center;
         white-space: nowrap;
         line-height: 1%;
+        position: relative;
+        bottom: 20px;
     }
 
     .titleText{
         margin-top: 3%;
+        font-weight: 800;
+        color: rgb(0,0,0,.8);
+        cursor: pointer;
+        position: relative;
+        left: 34px;
+        top: 18px;
+        z-index: 15;
+    }
+
+    .titleText:hover{
+        color: rgb(0,0,0);
     }
 
     span{
         display: block;
         height: 1px;
         background: #e6e6e6;
-    }
-
-    .left{
-        width: 2%;
-        margin-right: 2%;
-        margin-top: 2%;
-    }
-
-    .right{
-        width: 87%;
-        margin-left: 2%;
-        margin-top: 2%;
     }
 
     p{
@@ -247,6 +246,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        position: relative;
     }
 
     .imgbox{
@@ -273,7 +273,7 @@
     .itemimg{
         width: 200px;
         height: 200px;
-        border-radius: 20px;
+        border-radius: 5px;
         box-shadow: 5px 5px 5px 5px gainsboro;
         cursor: pointer;
         z-index: 1;
@@ -540,6 +540,15 @@
         color: #fff;
         margin-left: 10px;
         font-family: 微软雅黑;
+    }
+
+    .container{
+        position: relative;
+        top: 14px;
+    }
+
+    .container >>> .el-carousel__indicators {
+        margin-top: 14px;
     }
 
 </style>

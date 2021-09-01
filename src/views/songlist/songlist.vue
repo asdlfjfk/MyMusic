@@ -138,12 +138,7 @@
         },
         methods:{
             itemCurrent(num){
-                switch (num) {
-                    case 1:this.current = 1;
-                        break;
-                    case 2:this.current = 2;
-                        break;
-                }
+                this.current = num
             },
 
             //播放全部
@@ -183,7 +178,7 @@
     .headimg{
         width: 20%;
         height: 20%;
-        border-radius: 14px;
+        border-radius: 5px;
         position: relative;
         left: 4%;
         top: 28px;

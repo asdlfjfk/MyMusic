@@ -219,6 +219,28 @@ export function getalbumcomment(id,limit,offset) {
     })
 }
 
+//新歌速递
+export function getnewsong(type) {
+    return request({
+        url:'/top/song',
+        params:{
+            type
+        }
+    })
+}
+
+//新碟上架
+export function getnewalbum(limit,offset,area,type) {
+    return request({
+        url:'/top/album',
+        params:{
+            limit,offset,area,type
+        }
+    })
+}
+
+
+
 
 
 

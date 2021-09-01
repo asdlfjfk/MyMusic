@@ -145,7 +145,8 @@
     .comment{
         font-family: 微软雅黑;
         width: 1120px;
-        margin: 14px 20px 0px 30px;
+        position: relative;
+        top: 20px;
     }
 
     .comment >>> .el-textarea__inner{
@@ -174,7 +175,6 @@
 
     .hotcomments,.newcomments{
         font-family: 微软雅黑;
-        margin: 14px 20px 0px 30px;
     }
 
     .newcomments{

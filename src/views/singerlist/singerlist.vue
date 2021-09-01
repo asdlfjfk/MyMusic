@@ -79,18 +79,7 @@
         },
         methods:{
                 itemCurrent(num){
-                    switch (num) {
-                        case 1:this.current = 1;
-                            break;
-                        case 2:this.current = 2;
-                            break;
-                        case 3:this.current = 3;
-                            break;
-                        case 4:this.current = 4;
-                            break;
-                        case 5:this.current = 5;
-                            break;
-                    }
+                    this.current = num
                 },
         },
         computed:{

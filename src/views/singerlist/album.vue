@@ -5,7 +5,7 @@
                 <div class="imgbox" @click="listdetail(item.id)">
                     <img :src="item.blurPicUrl" alt="">
                 </div>
-                <div class="name">{{item.name}}</div>
+                <div class="name" @click="listdetail(item.id)">{{item.name}}</div>
                 <div class="publishtime">{{formatDate(item.publishTime)}}发布</div>
             </div>
         </div>
@@ -125,6 +125,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        cursor: pointer;
     }
 
     .publishtime{
