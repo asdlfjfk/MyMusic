@@ -322,8 +322,8 @@
         font-size: 20px;
         color: #c62f2f;
         position: absolute;
-        left: 14%;
-        bottom: 14%;
+        left: 15%;
+        bottom: 15%;
     }
 
     .privatecontent{
@@ -341,9 +341,11 @@
 
     .privatename{
         opacity: .8;
-        font-size: 20px;
+        font-size: 16px;
         margin-left: 5%;
         margin-right: 2%;
+        font-weight: 400;
+        font-family: 微软雅黑;
     }
 
     .privatename:hover{
@@ -448,10 +450,11 @@
     }
     
     #player3{
+        font-size: 24px;
         color: #c62f2f;
         position: absolute;
-        left: 26%;
-        bottom: 24%;
+        left: 15%;
+        bottom: 15%;
     }
 
     .recommendMV{
