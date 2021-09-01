@@ -30,8 +30,8 @@
             return {
                 loading:true,
                 current:1,
-                type:[{name:'全部',number:0},{name:'华语',number:7},{name:'欧美',number:96},{name:'日本',number:8},{name:'韩国',number:16}],
-                typecurrent:0,
+                type:[{name:'全部',number:0,number2:'ALL'},{name:'华语',number:7,number2:'ZH'},{name:'欧美',number:96,number2:'EA'},{name:'日本',number:8,number2:'JP'},{name:'韩国',number:16,number2:'KR'}],
+                typecurrent:0
             }
         },
         methods:{
@@ -40,6 +40,7 @@
             },
             currenttype(index){
                this.typecurrent = index
+                this.$store.commit('changenewalbumcurrent',this.type[index].number2)
             }
         },
         created(){
@@ -54,7 +55,8 @@
             typecurrent(val){
                 this.loading = true
                 this.$store.commit('cleansongset')
-                getnewsong(this.type[val].number).then(res => {
+                this.typecurrent = val
+                getnewsong(this.type[this.typecurrent].number).then(res => {
                     this.$store.commit('pushallsong',res.data.data)
                     this.$store.commit('changeflag',2)
                     this.loading = false

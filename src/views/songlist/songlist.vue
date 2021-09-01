@@ -25,9 +25,9 @@
                         <div>标签:
                             <span class="g"></span>
                             <span class="tag">{{tags[0]}}</span>
-                            <span class="g">/</span>
+                            <span class="g" v-if="tags.length === 2">/</span>
                             <span class="tag">{{tags[1]}}</span>
-                            <span class="g">/</span>
+                            <span class="g" v-if="tags.length === 3">/</span>
                             <span class="tag">{{tags[2]}}</span>
                         </div>
                     </div>

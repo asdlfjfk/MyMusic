@@ -230,11 +230,11 @@ export function getnewsong(type) {
 }
 
 //新碟上架
-export function getnewalbum(limit,offset,area,type) {
+export function getnewalbum(area) {
     return request({
         url:'/top/album',
         params:{
-            limit,offset,area,type
+            area
         }
     })
 }

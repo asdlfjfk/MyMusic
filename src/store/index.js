@@ -10,7 +10,8 @@ const store = new Vuex.Store({
         songset:[],
         id:0,
         playerbackid:"",
-        flag:1
+        flag:1,
+        newalbumcurrent:0
     },
     mutations:{
         changesong(state,payload) {
@@ -38,6 +39,9 @@ const store = new Vuex.Store({
         },
         changeflag(state,payload){
             state.flag = payload
+        },
+        changenewalbumcurrent(state,payload){
+            state.newalbumcurrent = payload
         }
     },
     actions:{},
