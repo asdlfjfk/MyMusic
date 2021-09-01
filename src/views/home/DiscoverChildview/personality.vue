@@ -355,10 +355,10 @@
 
     .privateicon{
         color: #fff;
-        opacity: .8;
         width: 34px;
         height: 34px;
-        background-color: #e2e2e2;
+        background-color: rgb(226,226,226,.4);
+        border: 1px solid #fff;
         border-radius: 20px;
         z-index:20;
         position: relative;
@@ -368,6 +368,13 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+    }
+
+    .privateicon >>> .el-icon-caret-right{
+        position: relative;
+        top: .5px;
+        font-size: 24px;
+        color: #fff;
     }
 
     .innerprivate{
@@ -469,7 +476,7 @@
         align-items: center;
         justify-content: space-evenly;
         position: relative;
-        bottom: 55px;
+        bottom: 45px;
     }
 
     .recommendMvitem{
