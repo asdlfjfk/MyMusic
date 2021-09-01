@@ -45,6 +45,7 @@
         },
         created(){
             this.$store.commit('cleansongset')
+            this.$store.commit('changenewalbumcurrent',this.type[this.typecurrent].number2)
             getnewsong(this.type[this.typecurrent].number).then(res => {
                 this.$store.commit('pushallsong',res.data.data)
                 this.$store.commit('changeflag',2)
