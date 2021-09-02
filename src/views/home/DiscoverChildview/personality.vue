@@ -41,7 +41,7 @@
         </div>
 
         <div class="privatecontent">
-            <div v-for="item in privatecontent" class="innerprivate">
+            <div v-for="item in privatecontent" class="innerprivate" @click="mvdetail(item.id)">
                 <div class="privateicon">
                     <i class="el-icon-caret-right"></i>
                 </div>
@@ -86,7 +86,7 @@
                     {{item.playCount}}
                 </div>
 
-                <div class="recommendMvitem">
+                <div class="recommendMvitem" @click="mvdetail(item.id)">
                     <div class="hot"><div class="hotname">最新热门MV推荐</div></div>
                     <img :src="item.picUrl" alt="" class="recommendMvimg">
                     <div class="mvtitle">{{item.name}}</div>
@@ -122,6 +122,9 @@
         methods:{
             listdetail(id){
                 this.$router.push('/songlist/' + id)
+            },
+            mvdetail(id){
+              this.$router.push('/mvpage/' +  id)
             },
             swiperaddsongtoplay(item){
                 this.$store.commit('changebackid',item.targetId)  //用于歌单中存在该歌曲 显示为活跃播放状态

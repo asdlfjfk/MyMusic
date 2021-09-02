@@ -15,6 +15,8 @@ const latestmusic = () => import('../views/home/DiscoverChildview/latestmusic.vu
 const songlist = () => import('../views/songlist/songlist.vue')
 const singerlist = () => import('../views/singerlist/singerlist.vue')
 const albumlist = () => import('../views/albumlist/albumlist.vue')
+const videopage = () => import('../views/videopage/videopage.vue')
+const mvpage = () => import('../views/videopage/mvpage.vue')
 
 const routes = [
     {
@@ -70,6 +72,14 @@ const routes = [
     {
         path:'/albumlist/:id',
         component:albumlist
+    },
+    {
+        path:'/videopage/:id',
+        component:videopage
+    },
+    {
+        path:'/mvpage/:id',
+        component:mvpage
     }
 ]
 

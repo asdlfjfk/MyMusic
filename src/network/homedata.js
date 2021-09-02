@@ -239,6 +239,83 @@ export function getnewalbum(area) {
     })
 }
 
+//获取mv内容
+export function getmvdetail(mvid) {
+    return request({
+        url:'/mv/detail',
+        params:{
+            mvid
+        }
+    })
+}
+
+//获取视频内容
+export function getvideodetail(id) {
+    return request({
+        url:'/video/detail',
+        params:{
+            id
+        }
+    })
+}
+
+//获取mv评论
+export function getmvcomment(id,limit,offset) {
+    return request({
+        url:'/comment/mv',
+        params:{
+            id,
+            limit,
+            offset
+        }
+    })
+}
+
+//获取视频评论
+export function getvideocomment(id,limit,offset) {
+    return request({
+        url:'/comment/video',
+        params:{
+            id,
+            limit,
+            offset
+        }
+    })
+}
+
+//获取mv视频地址
+export function getmvurl(id) {
+    return request({
+        url:'/mv/url',
+        params:{
+            id
+        }
+    })
+}
+
+//获取视频播放地址
+export function getvideourl(id) {
+    return request({
+        url:'/video/url',
+        params:{
+            id
+        }
+    })
+}
+
+//获取相关视频
+export function getrelatedvideo(id) {
+    return request({
+        url:'/related/allvideo',
+        params:{
+            id
+        }
+    })
+}
+
+
+
+
 
 
 

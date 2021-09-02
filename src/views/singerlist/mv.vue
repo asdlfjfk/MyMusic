@@ -1,7 +1,7 @@
 <template>
     <div id="mv" v-loading="loading">
         <div class="allmv" ref="allmv">
-            <div v-for="item in mvs" class="mvitem">
+            <div v-for="item in mvs" class="mvitem" @click="mvdetail(item.id)">
                 <img :src="item.imgurl16v9" alt="">
                 <div class="name">{{item.name}}</div>
 
@@ -50,6 +50,9 @@
                 let s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
             },
+            mvdetail(id){
+                this.$router.push('/mvpage/' +  id)
+            }
         },
         watch:{
           page(val){
