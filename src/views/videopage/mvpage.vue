@@ -138,7 +138,6 @@
         },
         created(){
             getmvdetail(this.id).then(res => {
-                console.log(res);
                 let data = res.data.data
                 this.artists = data.artistName
                 this.name = data.name
