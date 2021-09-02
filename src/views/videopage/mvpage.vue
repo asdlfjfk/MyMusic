@@ -9,7 +9,7 @@
             <div class="video">
                 <video :src="url" controls="controls" autoplay></video>
                 <div class="name">{{name}}</div>
-                <div class="artists">{{artists}}</div>
+                <div class="artists"><img :src="avatarUrl" alt="" class="avatar"><div class="creatname">{{artists}}</div></div>
                 <div class="time"><div>发布: {{publishTime}}</div><div class="play">播放: {{parseInt(playCount / 10000)}}万次</div></div>
                 <div class="descrbox"><div class="desr">{{desc}}</div></div>
                 <div class="line3">
@@ -132,11 +132,13 @@
                 playCount:"",
                 desc:"",
                 shareCount:0,
-                subCount:0
+                subCount:0,
+                avatarUrl:""
             }
         },
         created(){
             getmvdetail(this.id).then(res => {
+                console.log(res);
                 let data = res.data.data
                 this.artists = data.artistName
                 this.name = data.name
@@ -145,6 +147,7 @@
                 this.desc = data.desc
                 this.shareCount = data.shareCount
                 this.subCount = data.subCount
+                this.avatarUrl = data.cover
             })
             getmvcomment(this.id,20,(this.currentPage - 1) * 20).then(res => {
                 this.res = res.data.comments
@@ -372,12 +375,14 @@
     }
 
     .artists{
+        display: flex;
+        align-items: center;
         font-size: 14px;
         font-weight: 400;
         font-family: 微软雅黑;
         opacity: .7;
         position: relative;
-        left: 80px;
+        left: 60px;
         margin: 15px 0px 15px 0px;
     }
 
@@ -518,7 +523,7 @@
         justify-content: flex-start;
         position: relative;
         left: 48px;
-        top: 24px;
+        top: 16px;
         font-size: 14px;
         font-weight: 300;
     }
@@ -541,5 +546,10 @@
 
     .button:hover{
         background-color: rgba(229, 229, 229, 0.2);
+    }
+
+    .creatname{
+        margin-left: 10px;
+        cursor: pointer;
     }
 </style>

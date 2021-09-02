@@ -473,12 +473,6 @@
         color: rgb(0,0,0,.8);
     }
 
-    .avatar{
-        width: 40px;
-        height: 40px;
-        border-radius: 40px;
-    }
-
     .creatname{
         margin-left: 10px;
         cursor: pointer;
