@@ -196,6 +196,36 @@
                 let s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
             }
+        },
+        //同一路由下不同id跳转 重新读取数据刷新页面
+        watch:{
+            '$route' () {
+                getvideodetail(this.id).then(res => {
+                    let data = res.data.data
+                    this.artists = data.creator.nickname
+                    this.name = data.title
+                    this.publishTime = data.publishTime
+                    this.playCount = data.playTime
+                    this.desc = data.description
+                    this.avatarUrl = data.creator.avatarUrl
+                    this.videoGroup = data.videoGroup
+                    this.praisedCount = data.praisedCount
+                    this.shareCount = data.shareCount
+                    this.subscribeCount = data.subscribeCount
+                })
+                getvideocomment(this.id,20,(this.currentPage - 1) * 20).then(res => {
+                    this.res = res.data.comments
+                    this.hot = res.data.hotComments
+                    this.count = res.data.total
+                    this.loading = false
+                })
+                getvideourl(this.id).then(res => {
+                    this.url = res.data.urls[0].url
+                })
+                getrelatedvideo(this.id).then(res => {
+                    this.relatedvideo = res.data.data
+                })
+            }
         }
     }
 </script>

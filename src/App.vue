@@ -9,7 +9,7 @@
                 <el-container>
                     <sidebar></sidebar>
                     <el-main style="height: 640px" id="main">
-                        <keep-alive exclude="songlist,singerlist,albumlist,videopage,mvpage"><router-view :key="randomId"></router-view></keep-alive>
+                        <keep-alive exclude="songlist,singerlist,albumlist,videopage,mvpage"><router-view></router-view></keep-alive>
                     </el-main>
                 </el-container>
 
@@ -33,11 +33,6 @@ export default {
           sidebar,
           musicplayer,
       },
-    computed: {
-        randomId () {  //动态添加一个参数 防止同一路由下跳转不刷新的问题
-            return this.$route.fullPath + new Date()
-        }
-    }
 }
 </script>
 
