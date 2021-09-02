@@ -470,6 +470,7 @@
         height:112px;
         border-radius: 5px;
         cursor: pointer;
+        border: 1px solid gainsboro;
     }
 
     .relateditem{
