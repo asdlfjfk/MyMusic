@@ -25,6 +25,7 @@
             <div class="relatedvideo">
                 <div v-for="item in relatedvideo" class="relateditem">
                     <img :src="item.coverUrl" alt="" @click="videodetail(item.vid)">
+                    <div class="duration">{{format(item.durationms)}}</div>
                     <div class="text">
                         <div class="relatedtitle" @click="videodetail(item.vid)">{{item.title}}</div>
                         <div class="relatedtitle creatorname">by {{item.creator[0].userName}}</div>
@@ -33,7 +34,6 @@
                         <i class="el-icon-caret-right"></i>
                         {{item.playTime}}
                     </div>
-                    <div class="duration">{{format(item.durationms)}}</div>
                 </div>
             </div>
         </div>
@@ -536,19 +536,16 @@
         align-items: center;
         color: #fff;
         position: relative;
-        right: 354px;
+        right: 384px;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         font-size: 12px;
     }
 
     .duration{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
         position: relative;
         top: 93px;
-        right: 254px;
+        right: 35px;
         font-size: 12px;
         font-weight: 400;
         color: #fff;
