@@ -227,6 +227,7 @@
         left: 34px;
         top: 18px;
         z-index: 15;
+        font-family: 微软雅黑;
     }
 
     .titleText:hover{
@@ -312,6 +313,7 @@
         display: flex;
         justify-content: flex-start;
         cursor: pointer;
+        font-family: 微软雅黑;
     }
 
     .name:hover{

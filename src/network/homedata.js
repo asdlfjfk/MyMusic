@@ -376,13 +376,15 @@ export function getallvideo(offset) {
 }
 
 //获取全部mv
-export function getallmv(area,type,order,limit) {
+export function getallmv(area,type,order,limit,offset) {
     return request({
         url:'/mv/all',
         params:{
             area,
+            type,
             order,
-            limit
+            limit,
+            offset
         }
     })
 }

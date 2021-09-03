@@ -1,7 +1,7 @@
 <template>
     <div id="recomv">
         <div class="line line1">
-            <div class="title">最新MV ></div>
+            <div class="title" @click="newmvtoallmv">最新MV ></div>
             <div class="category">
                 <div v-for="(item,index) in area" class="areaitem" :class="{active: index === areacurrent}" @click="changearea(index)">{{item}}</div>
             </div>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="line line2">
-            <div  class="title">热播MV ></div>
+            <div  class="title" @click="hotmvtoallmv">热播MV ></div>
         </div>
         <div class="newmv">
             <div v-for="item in hotmv">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="line line3">
-            <div  class="title">网易出品 ></div>
+            <div  class="title" @click="wangyimvtoallmv">网易出品 ></div>
         </div>
         <div class="newmv">
             <div v-for="item in wangyimv">
@@ -41,7 +41,7 @@
                     {{parseInt(item.playCount / 10000)}}万
                 </div>
                 <img :src="item.cover" alt="" @click="mvdetail(item.id)">
-                <div class="mvname" @click="mvdetail(item.id)">{{item.name}}</div>
+                <div class="mvname2" @click="mvdetail(item.id)">{{item.name}}</div>
             </div>
         </div>
         <div class="line line4">
@@ -116,6 +116,18 @@
             },
             mvdetail(id){
                 this.$router.push('/mvpage/' +  id)
+            },
+            newmvtoallmv(){
+                this.$store.commit('changeallmvcategory',{area:1,type:0,order:2})
+                this.$router.push('/allmv')
+            },
+            hotmvtoallmv(){
+                this.$store.commit('changeallmvcategory',{area:0,type:0,order:1})
+                this.$router.push('/allmv')
+            },
+            wangyimvtoallmv(){
+                this.$store.commit('changeallmvcategory',{area:0,type:4,order:2})
+                this.$router.push('/allmv')
             }
         },
         watch:{
@@ -150,6 +162,8 @@
     .category{
         display: flex;
         align-items: center;
+        color: rgb(0,0,0,.6);
+        z-index: 10;
     }
 
     .areaitem{
@@ -161,6 +175,7 @@
     .title{
         font-weight: 800;
         cursor: pointer;
+        z-index: 10;
     }
 
     .active{
@@ -185,6 +200,8 @@
         flex-wrap: wrap;
         justify-content: space-between;
         margin: 0px 90px 0px 130px;
+        position: relative;
+        right: 40px;
     }
 
     .leaderitem{
@@ -209,6 +226,7 @@
         position: relative;
         right: 15px;
         cursor: pointer;
+        border: 1px solid gainsboro;
     }
 
     .artistname{
@@ -222,7 +240,7 @@
         color: rgb(0,0,0);
     }
 
-    .mvname{
+    .mvname2{
         width: 240px;
         font-size: 14px;
         font-weight: 400;
@@ -231,11 +249,24 @@
         margin-top: 5px;
     }
 
+    .mvname{
+        width: 240px;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(0,0,0,.7);
+        cursor: pointer;
+        margin-top: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .mvname:hover{
         color: rgb(0,0,0);
     }
 
     .leadermvname{
+        width: 161px;
         position: relative;
         bottom: 10px;
         font-size: 13px;
@@ -252,11 +283,11 @@
         align-items: center;
         color: #fff;
         position: relative;
-        top: 46px;
+        top: 42px;
         right: 24px;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         z-index: 10;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 400;
     }
 </style>

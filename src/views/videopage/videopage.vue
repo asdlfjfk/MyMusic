@@ -521,6 +521,7 @@
         justify-content: flex-start;
         position: relative;
         left: 20px;
+        flex-wrap: wrap;
     }
 
     .tagitem{
@@ -606,13 +607,13 @@
         border: 1px solid rgba(0,0,0,.2);
         background-color: #fff;
         color: #000;
-        font-family: 微软雅黑;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         margin-left: 12px;
         cursor: pointer;
         padding: 3px 10px 3px 10px;
+        white-space: nowrap;
     }
 
     .button:hover{

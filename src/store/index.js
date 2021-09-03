@@ -11,7 +11,9 @@ const store = new Vuex.Store({
         id:0,
         playerbackid:"",
         flag:1,
-        newalbumcurrent:0
+        newalbumcurrent:0,
+
+        allmvcategory:{}
     },
     mutations:{
         changesong(state,payload) {
@@ -42,6 +44,9 @@ const store = new Vuex.Store({
         },
         changenewalbumcurrent(state,payload){
             state.newalbumcurrent = payload
+        },
+        changeallmvcategory(state,payload){
+            state.allmvcategory = payload
         }
     },
     actions:{},

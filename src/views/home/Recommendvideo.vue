@@ -24,13 +24,13 @@
         created(){
             //保存选中状态 防止页面刷新时跑动
             window.addEventListener("pagehide",()=>{
-                sessionStorage.setItem("current",JSON.stringify(this.current))
+                sessionStorage.setItem("recommendcurrent",JSON.stringify(this.current))
             })
             window.addEventListener("pageshow",()=>{
-                if(sessionStorage.getItem('current') === null) {
-                    sessionStorage.setItem("current",JSON.stringify(this.current))
+                if(sessionStorage.getItem('recommendcurrent') === null) {
+                    sessionStorage.setItem("recommendcurrent",JSON.stringify(this.current))
                 }
-                this.current = parseInt(sessionStorage.getItem("current"));
+                this.current = parseInt(sessionStorage.getItem("recommendcurrent"));
             })
         },
         data(){

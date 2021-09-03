@@ -41,6 +41,17 @@
                 current:1,
             }
         },
+        created(){
+            window.addEventListener("pagehide",()=>{
+                sessionStorage.setItem("sidecurrent",JSON.stringify(this.current))
+            })
+            window.addEventListener("pageshow",()=>{
+                if(sessionStorage.getItem('sidecurrent') === null) {
+                    sessionStorage.setItem("sidecurrent",JSON.stringify(this.current))
+                }
+                this.current = parseInt(sessionStorage.getItem("sidecurrent"));
+            })
+        },
         methods:{
             currentitem(num){
                 switch (num) {
