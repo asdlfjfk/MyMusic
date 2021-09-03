@@ -20,6 +20,7 @@ const mvpage = () => import('../views/videopage/mvpage.vue')
 const recovideo = () => import('../views/home/RecommendvideoChildview/recovideo.vue')
 const recomv = () => import('../views/home/RecommendvideoChildview/recomv.vue')
 const allmv = () => import('../views/home/RecommendvideoChildview/allmv.vue')
+const mvleader = () => import('../views/home/RecommendvideoChildview/mvleader.vue')
 
 const routes = [
     {
@@ -101,6 +102,10 @@ const routes = [
     {
         path:'/allmv',
         component:allmv
+    },
+    {
+        path:'/mvleader',
+        component:mvleader
     }
 ]
 

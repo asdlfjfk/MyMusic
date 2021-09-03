@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="line line4">
-            <div  class="title">MV排行榜 ></div>
+            <div  class="title" @click="linktomvleader">MV排行榜 ></div>
             <div class="category">
                 <div v-for="(item,index) in area" class="areaitem" :class="{active: index === areacurrent2}" @click="changearea2(index)">{{item}}</div>
             </div>
@@ -128,6 +128,9 @@
             wangyimvtoallmv(){
                 this.$store.commit('changeallmvcategory',{area:0,type:4,order:2})
                 this.$router.push('/allmv')
+            },
+            linktomvleader(){
+                this.$router.push('/mvleader')
             }
         },
         watch:{
