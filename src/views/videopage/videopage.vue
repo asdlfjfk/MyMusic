@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="name">{{name}}</div>
-                <div class="time"><div>发布: {{publishTime}}</div><div class="play">播放: {{parseInt(playCount)}}次</div></div>
+                <div class="time"><div>发布: {{formatDate(publishTime)}}</div><div class="play">播放: {{parseInt(playCount)}}次</div></div>
                 <div class="descrbox"><div class="desr">{{desc}}</div></div>
                 <div class="line3">
                     <div class="button"><div class="icon">&#xe6c9;赞({{praisedCount}})</div></div>
@@ -24,10 +24,10 @@
             </div>
             <div class="relatedvideo">
                 <div v-for="item in relatedvideo" class="relateditem">
-                    <img :src="item.coverUrl" alt="" @click="videodetail(item.vid)">
+                    <img :src="item.coverUrl" alt="" @click="videodetail(item)">
                     <div class="duration">{{format(item.durationms)}}</div>
                     <div class="text">
-                        <div class="relatedtitle" @click="videodetail(item.vid)">{{item.title}}</div>
+                        <div class="relatedtitle" @click="videodetail(item)">{{item.title}}</div>
                         <div class="relatedtitle creatorname">by {{item.creator[0].userName}}</div>
                     </div>
                     <div class="videoplaycount">
@@ -187,8 +187,13 @@
                     this.loading = false
                 })
             },
-            videodetail(id){
-                this.$router.push('/videopage/' +  id)
+            videodetail(item){
+                if (item.alg === 'alsmv') {
+                    this.$router.push('/mvpage/' +  item.vid)
+                }
+                else {
+                    this.$router.push('/videopage/' +  item.vid)
+                }
             },
             format (data) {
                 let date = new Date(data)
@@ -483,7 +488,8 @@
     .text{
         height: 112px;
         width: 140px;
-        margin-left: 15px;
+        position: relative;
+        right: 20px;
     }
 
     .relatedtitle{
@@ -521,7 +527,6 @@
         margin-left: 5px;
         font-size: 12px;
         font-weight: 400;
-        font-family: 微软雅黑;
         background-color: rgb(220,220,220,.7);
         padding: 2px 8px 2px 8px;
         border-radius: 10px;
@@ -537,8 +542,8 @@
         align-items: center;
         color: #fff;
         position: relative;
-        right: 384px;
-        font-family: 微软雅黑;
+        top: 2px;
+        right: 370px;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         font-size: 12px;
     }

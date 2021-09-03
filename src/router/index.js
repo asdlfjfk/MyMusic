@@ -17,6 +17,9 @@ const singerlist = () => import('../views/singerlist/singerlist.vue')
 const albumlist = () => import('../views/albumlist/albumlist.vue')
 const videopage = () => import('../views/videopage/videopage.vue')
 const mvpage = () => import('../views/videopage/mvpage.vue')
+const recovideo = () => import('../views/home/RecommendvideoChildview/recovideo.vue')
+const recomv = () => import('../views/home/RecommendvideoChildview/recomv.vue')
+const allmv = () => import('../views/home/RecommendvideoChildview/allmv.vue')
 
 const routes = [
     {
@@ -55,7 +58,21 @@ const routes = [
     },
     {
         path:'/video',
-        component:video
+        component:video,
+        children:[
+            {
+                path:'',
+                redirect: 'recomv'
+            },
+            {
+                path:'recovideo',
+                component:recovideo
+            },
+            {
+                path:'recomv',
+                component:recomv
+            }
+        ]
     },
     {
         path:'/disk',
@@ -80,6 +97,10 @@ const routes = [
     {
         path:'/mvpage/:id',
         component:mvpage
+    },
+    {
+        path:'/allmv',
+        component:allmv
     }
 ]
 

@@ -5,7 +5,6 @@ export function request(config) {
         const instance = axios.create({
             //创建实例
             baseURL:'https://nicemusic-api.lxhcool.cn/',
-            // baseURL:'https://api.imjad.cn/cloudmusic/,
             timeout:100000
         })
         //请求拦截

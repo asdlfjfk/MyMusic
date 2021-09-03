@@ -240,7 +240,6 @@
     }
 
     p{
-        font-family: 微软雅黑;
         font-size: 20px;
         display: block;
     }
@@ -269,7 +268,6 @@
         align-items: center;
         justify-content: flex-end;
         color: #fff;
-        font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
     }
 
@@ -306,7 +304,6 @@
     }
 
     .name {
-        font-family: 微软雅黑;
         width: 200px;
         height: auto;
         font-size: 14px;
@@ -348,7 +345,6 @@
         margin-left: 5%;
         margin-right: 2%;
         font-weight: 400;
-        font-family: 微软雅黑;
     }
 
     .privatename:hover{

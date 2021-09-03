@@ -20,9 +20,9 @@
             <div class="relatedvideo">
                 <div v-for="item in relatedvideo" class="relateditem">
                     <div class="duration">{{format(item.durationms)}}</div>
-                    <img :src="item.coverUrl" alt="" @click="videodetail(item.vid)">
+                    <img :src="item.coverUrl" alt="" @click="videodetail(item)">
                     <div class="text">
-                        <div class="relatedtitle" @click="videodetail(item.vid)">{{item.title}}</div>
+                        <div class="relatedtitle" @click="videodetail(item)">{{item.title}}</div>
                         <div class="relatedtitle creatorname">by {{item.creator[0].userName}}</div>
                     </div>
                     <div class="videoplaycount">
@@ -178,14 +178,46 @@
                     this.loading = false
                 })
             },
-            videodetail(id){
-                this.$router.push('/videopage/' +  id)
+            videodetail(item){
+                if (item.alg === 'alsmv') {
+                    this.$router.push('/mvpage/' +  item.vid)
+                }
+                else {
+                    this.$router.push('/videopage/' +  item.vid)
+                }
             },
             format (data) {
                 let date = new Date(data)
                 let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
                 let s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
+            }
+        },
+        watch:{
+            '$route' () {
+                getmvdetail(this.id).then(res => {
+                    let data = res.data.data
+                    this.artists = data.artistName
+                    this.name = data.name
+                    this.publishTime = data.publishTime
+                    this.playCount = data.playCount
+                    this.desc = data.desc
+                    this.shareCount = data.shareCount
+                    this.subCount = data.subCount
+                    this.avatarUrl = data.cover
+                })
+                getmvcomment(this.id,20,(this.currentPage - 1) * 20).then(res => {
+                    this.res = res.data.comments
+                    this.hot = res.data.hotComments
+                    this.count = res.data.total
+                    this.loading = false
+                })
+                getmvurl(this.id).then(res => {
+                    this.url = res.data.data.url
+                })
+                getrelatedvideo(this.id).then(res => {
+                    this.relatedvideo = res.data.data
+                })
             }
         }
     }
@@ -474,7 +506,8 @@
         align-items: center;
         color: #fff;
         position: relative;
-        right: 352px;
+        right: 355px;
+        top: 2px;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         font-size: 12px;
@@ -532,6 +565,7 @@
     }
 
     .button{
+        white-space: nowrap;
         width: 80px;
         height: 20px;
         border-radius: 40px;
@@ -544,7 +578,7 @@
         justify-content: space-evenly;
         margin-left: 12px;
         cursor: pointer;
-        padding: 3px 10px 3px 10px;
+        padding: 3px 15px 3px 15px;
     }
 
     .button:hover{

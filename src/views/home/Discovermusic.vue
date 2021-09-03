@@ -74,7 +74,7 @@
                     this.current = 5;
                 }
             },
-        },
+        }
     }
 </script>
 
@@ -132,7 +132,6 @@
 
     .link{
         text-decoration: none;
-        font-weight: 400;
     }
 
     #playlist,#leader,#singer,#latestmusic{

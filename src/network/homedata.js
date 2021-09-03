@@ -313,6 +313,116 @@ export function getrelatedvideo(id) {
     })
 }
 
+//生成二维码key
+export function getloginkey() {
+    return request({
+        url:'/login/qr/key',
+    })
+}
+
+//生成二维码
+export function getloginqrcode(key) {
+    return request({
+        url:'/login/qr/create',
+        params:{
+            key
+        }
+    })
+}
+
+//二维码接口状态
+export function getqrcodestate(key) {
+    return request({
+        url:'/login/qr/check',
+        params:{
+            key
+        }
+    })
+}
+
+//获取视频标签列表
+export function getvideolist() {
+    return request({
+        url:'/video/group/list',
+    })
+}
+
+//获取视频分类列表
+export function getvideocategorylist() {
+    return request({
+        url:'/video/category/list',
+    })
+}
+
+//获取视频标签/分类下的视频
+export function getvideogroup(id,offset) {
+    return request({
+        url:'/video/group',
+        params:{
+            id,
+            offset
+        }
+    })
+}
+
+//获取全部视频
+export function getallvideo(offset) {
+    return request({
+        url:'/video/timeline/all',
+        params:{
+            offset
+        }
+    })
+}
+
+//获取全部mv
+export function getallmv(area,type,order,limit) {
+    return request({
+        url:'/mv/all',
+        params:{
+            area,
+            order,
+            limit
+        }
+    })
+}
+
+//获取最新mv
+export function getnewmv(area,limit) {
+    return request({
+        url:'/mv/first',
+        params:{
+            area,
+            limit
+        }
+    })
+}
+
+//网易出品mv
+export function getwangyimv(limit) {
+    return request({
+        url:'/mv/exclusive/rcmd',
+        params:{
+            limit
+        }
+    })
+}
+
+//mv排行榜
+export function getmvleader(limit,area) {
+    return request({
+        url:'/top/mv',
+        params:{
+            limit,
+            area
+        }
+    })
+}
+
+
+
+
+
 
 
 
