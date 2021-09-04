@@ -11,7 +11,7 @@
                     <div class="name">
                         <div class="name2">{{item.name}}</div><div v-if="item.alias.length > 0" class="alia">({{item.alias[0]}})</div>
                         <div class="allicon">
-                            <span class="icon iconfont1" v-if="item.mvid">&#xe62c;</span>
+                            <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe62c;</span>
                             <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                             <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
                         </div>
@@ -69,6 +69,9 @@
                 var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
                 var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
+            },
+            mvdetail(id){
+                this.$router.push('/mvpage/' +  id)
             }
         },
         created(){
