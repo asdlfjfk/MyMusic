@@ -15,7 +15,7 @@
                 <div class="name">
                     <div class="name2">{{item.name}}</div><div v-if="item.alias.length > 0" class="alia">({{item.alias[0]}})</div>
                     <div class="allicon">
-                        <span class="icon iconfont1" v-if="item.mvid">&#xe62c;</span>
+                        <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe62c;</span>
                         <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                         <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
                     </div>
@@ -63,6 +63,9 @@
                     this.$store.commit('workchangesong',{res,item})
                 },500)
             },
+            mvdetail(id){
+                this.$router.push('/mvpage/' +  id)
+            }
         },
         computed:{
             allsong(){

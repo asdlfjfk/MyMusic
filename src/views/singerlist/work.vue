@@ -9,7 +9,7 @@
 
                 <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
                 <div class="allicon">
-                    <span class="icon iconfont1" v-if="item.mv !== 0">&#xe62c;</span>
+                    <span class="icon iconfont1" v-if="item.mv !== 0" @click="mvdetail(item.mv)">&#xe62c;</span>
                     <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                     <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
                 </div>
@@ -51,6 +51,9 @@
                     },500)
                 }
             },
+            mvdetail(id){
+                this.$router.push('/mvpage/' +  id)
+            }
         },
         computed:{
             allsong(){

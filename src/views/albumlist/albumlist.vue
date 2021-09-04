@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-loading="loading">
         <div class="head">
             <div class="imgbox">
                 <img :src="detail.blurPicUrl" alt="">
@@ -55,6 +55,7 @@
         components: {detail,comment,list},
         data(){
           return {
+              loading:true,
               detail:{},
               shareCount:0,
               name:"",
@@ -78,6 +79,7 @@
                 this.$store.commit('changeflag',2)
                 this.comments.push(this.detail.info.commentCount)
                 this.comments.push(this.detail.id)
+                this.loading = false
             })
         },
         computed:{
