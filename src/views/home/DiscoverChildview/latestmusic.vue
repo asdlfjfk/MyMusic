@@ -63,6 +63,16 @@
                     this.loading = false
                 })
             }
+        },
+        activated(){
+            //防止和搜索页歌曲混乱
+            this.loading = true
+            this.$store.commit('cleansongset')
+            getnewsong(this.type[this.typecurrent].number).then(res => {
+                this.$store.commit('pushallsong',res.data.data)
+                this.$store.commit('changeflag',2)
+                this.loading = false
+            })
         }
     }
 </script>

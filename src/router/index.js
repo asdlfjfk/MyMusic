@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 const home = () => import('../views/home/Discovermusic.vue')
 const video = () => import('../views/home/Recommendvideo.vue')
 const disk = () => import('../views/home/MyCloudDisk.vue')
+const searchpage = () => import('../views/home/Searchpage.vue')
 
 const personality = () => import('../views/home/DiscoverChildview/personality.vue')
 const playlist = () => import('../views/home/DiscoverChildview/playlist.vue')
@@ -19,8 +20,14 @@ const videopage = () => import('../views/videopage/videopage.vue')
 const mvpage = () => import('../views/videopage/mvpage.vue')
 const recovideo = () => import('../views/home/RecommendvideoChildview/recovideo.vue')
 const recomv = () => import('../views/home/RecommendvideoChildview/recomv.vue')
-const allmv = () => import('../views/home/RecommendvideoChildview/allmv.vue')
+const allmv = () => import('../components/home/allmv.vue')
 const mvleader = () => import('../views/home/RecommendvideoChildview/mvleader.vue')
+const privatelist = () => import('../components/home/privatelist.vue')
+const songs = () => import('../views/home/SearchpageChildview/songs.vue')
+const singers = () => import('../views/home/SearchpageChildview/singers.vue')
+const albums = () => import('../views/home/SearchpageChildview/albums.vue')
+const videos = () => import('../views/home/SearchpageChildview/videos.vue')
+const songlists = () => import('../views/home/SearchpageChildview/songlists.vue')
 
 const routes = [
     {
@@ -80,6 +87,36 @@ const routes = [
         component:disk
     },
     {
+       path:'/searchpage',
+       component:searchpage,
+        children:[
+            {
+                path:'',
+                redirect: 'songs'
+            },
+            {
+                path:'songs',
+                component:songs
+            },
+            {
+                path:'singers',
+                component:singers
+            },
+            {
+                path:'albums',
+                component:albums
+            },
+            {
+                path:'videos',
+                component:videos
+            },
+            {
+                path:'songlists',
+                component:songlists
+            },
+        ]
+    },
+    {
         path:'/songlist/:id',
         component:songlist,
     },
@@ -106,6 +143,10 @@ const routes = [
     {
         path:'/mvleader',
         component:mvleader
+    },
+    {
+        path:'/privatelist',
+        component:privatelist
     }
 ]
 

@@ -13,7 +13,8 @@ const store = new Vuex.Store({
         flag:1,
         newalbumcurrent:0,
 
-        allmvcategory:{}
+        allmvcategory:{},
+        searchkeywords:""
     },
     mutations:{
         changesong(state,payload) {
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
         },
         changeallmvcategory(state,payload){
             state.allmvcategory = payload
+        },
+        changesearchkeyword(state,payload){
+            state.searchkeywords = payload
         }
     },
     actions:{},

@@ -114,14 +114,6 @@
         z-index: 1;
     }
 
-    .title{
-        width: 100%;
-        font-family: 微软雅黑;
-        display: flex;
-        color: #000;
-        opacity: .5;
-    }
-
     .songs{
         display: flex;
         align-items: center;
@@ -211,6 +203,7 @@
         position: relative;
         top:10px;
         right: 15px;
+        border: 1px solid gainsboro;
     }
 
     .name2{

@@ -9,9 +9,9 @@
     export default {
         name: "recovideo",
         created(){
-            getallvideo(0).then(res => {
-                console.log(res);
-            })
+            // getallvideo(0).then(res => {
+            //     console.log(res);
+            // })
         }
     }
 </script>

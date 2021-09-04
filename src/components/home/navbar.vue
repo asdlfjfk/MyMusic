@@ -14,8 +14,24 @@
                 <i class="el-icon-arrow-right" style="cursor: pointer;"></i>
             </div>
 
-            <el-input class="el-input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini" @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
-            <div class="hotsearch" v-if="hotsearch"></div>
+            <el-input class="el-input" @keyup.enter.native="linktosearchpage(input)" v-model="input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini" @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
+            <div class="hotsearch" v-if="hotsearch">
+                <div class="box">
+                    <div class="leadertext">热搜榜</div>
+                    <div v-for="(item,index) in hotsearchlist" class="item" v-loading="loading" @mousedown="linktosearchpage(item.searchWord)">
+                        <div class="number" :class="{active: index + 1 === 1 || index + 1 === 2 || index + 1 === 3}">{{index + 1}}</div>
+                        <div>
+                            <div class="hotsearchname">
+                                <div class="searchname">{{item.searchWord}}</div>
+                                <div class="score">{{item.score}}</div>
+                                <div class="icon iconfont2" v-if="item.iconType === 1 || index + 1 === 1 || index + 1 === 2 || index + 1 === 3">&#xe740;</div>
+                                <div class="icon iconfont3" v-if="item.iconType === 2">&#xe741;</div>
+                            </div>
+                            <div class="content">{{item.content}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="userlogin" @click="show">
                 <el-avatar icon="el-icon-user-solid" :size="34"></el-avatar>
@@ -24,7 +40,7 @@
         </div>
 
         <div class="login" v-if="loginshow" @mousedown="move">
-            <div class="iconfont" ><div class="icon" @click="close">&#xe605;</div></div>
+            <div class="icon iconfont" ><div class="icon" @click="close">&#xe605;</div></div>
             <div class="title"><div class="titletext">扫码登录</div></div>
         </div>
     </el-header>
@@ -33,13 +49,16 @@
 
 
 <script>
-    import {getloginkey} from "network/homedata"
+    import {gethotsearch} from "network/homedata"
     export default {
         name: "navbar",
         data(){
           return {
+              loading:true,
               loginshow:false,
-              hotsearch:false
+              hotsearch:false,
+              hotsearchlist:[],
+              input:""
           }
         },
         methods:{
@@ -85,14 +104,27 @@
             },
             hotsearchclose(){
                 this.hotsearch = false
+            },
+            linktosearchpage(input){
+                //避免多次导航到相同页
+                if (this.$route.path.match(RegExp(/searchpage/))){
+                    this.$store.commit('changesearchkeyword',input)
+                }
+                else {
+                    this.$store.commit('changesearchkeyword',input)
+                    this.$router.push('/searchpage')
+                }
             }
         },
         watch:{
             loginshow(val){
+
+            },
+            hotsearch(val){
                 if (val){
-                    console.log(111);
-                    getloginkey().then(res => {
-                        console.log(res);
+                    gethotsearch().then(res => {
+                        this.hotsearchlist = res.data.data
+                        this.loading = false
                     })
                 }
             }
@@ -102,24 +134,35 @@
 
 <style scoped>
 
-    .iconfont{
+    .icon{
         font-family:"iconfont" !important;
-        font-size:16px;font-style:normal;
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
+        font-style:normal;
+    }
+
+    .iconfont{
         font-size: 24px;
         display: flex;
         color: rgb(0,0,0,.4);
         justify-content: flex-end;
     }
 
-    .icon{
-        cursor: pointer;
+    .iconfont2{
+        font-size:20px;
+        color: red;
+        margin-left: 10px;
     }
 
-    .icon:hover{
-        color: #000;
+    .iconfont3{
+        font-size:20px;
+        color: limegreen;
+        margin-left: 10px;
+    }
+
+    .icon{
+        cursor: pointer;
     }
 
     #header{
@@ -249,13 +292,83 @@
 
     .hotsearch{
         position: absolute;
+        top:50px;
         left: 240px;
-        top: 50px;
         width: 300px;
-        height: 400px;
+        height: 430px;
         background-color: #fff;
         z-index: 50;
         border-radius: 14px;
         box-shadow: rgb(0,0,0,.2) 0px 0px 4px;
+    }
+
+    .box{
+        position: relative;
+        left: 10px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin: 10px 0px 0px 10px;
+        width: 265px;
+        height: 400px;
+    }
+
+    .hotsearchname{
+        display: flex;
+        align-items: center;
+        width: auto;
+        font-size: 14px;
+        font-family: 微软雅黑;
+    }
+
+    .content{
+        font-size: 12px;
+        width: auto;
+        font-family: 微软雅黑;
+        font-weight: 400;
+        opacity: .6;
+        display: flex;
+        justify-content: flex-start;
+        margin-right: 20px;
+        text-align: left;
+    }
+
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .leadertext{
+        font-family: 微软雅黑;
+        margin: 20px 210px 20px 0px;
+        white-space: nowrap;
+        font-size: 13px;
+        opacity: .7;
+    }
+
+    .number{
+        font-family: 微软雅黑;
+        font-weight: 400;
+        margin-right:15px;
+        opacity: .7;
+    }
+
+    .searchname{
+        font-family: 微软雅黑;
+        font-size: 13px;
+        font-weight: 600;
+        opacity: .8;
+    }
+
+    .score{
+        font-size: 12px;
+        opacity: .4;
+        margin-left: 14px;
+    }
+
+    .active{
+        color: red;
     }
 </style>

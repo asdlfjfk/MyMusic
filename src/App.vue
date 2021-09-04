@@ -9,7 +9,9 @@
                 <el-container>
                     <sidebar></sidebar>
                     <el-main style="height: 640px" id="main">
-                        <keep-alive exclude="songlist,singerlist,albumlist,videopage,mvpage,allmv"><router-view></router-view></keep-alive>
+                        <keep-alive exclude="songlist,singerlist,albumlist,videopage,mvpage,allmv">
+                            <router-view></router-view>
+                        </keep-alive>
                     </el-main>
                 </el-container>
 
@@ -40,9 +42,9 @@ export default {
 
     @font-face {
         font-family: 'iconfont';  /* Project id 2739601 */
-        src: url('//at.alicdn.com/t/font_2739601_lro3n4ow9qe.woff2?t=1630561476104') format('woff2'),
-        url('//at.alicdn.com/t/font_2739601_lro3n4ow9qe.woff?t=1630561476104') format('woff'),
-        url('//at.alicdn.com/t/font_2739601_lro3n4ow9qe.ttf?t=1630561476104') format('truetype');
+        src: url('//at.alicdn.com/t/font_2739601_1pdec75qljmi.woff2?t=1630719121602') format('woff2'),
+        url('//at.alicdn.com/t/font_2739601_1pdec75qljmi.woff?t=1630719121602') format('woff'),
+        url('//at.alicdn.com/t/font_2739601_1pdec75qljmi.ttf?t=1630719121602') format('truetype');
     }
 
     #app{
@@ -69,7 +71,7 @@ export default {
 
     ::-webkit-scrollbar
     {
-        width: 10px;
+        width: 5px;
         background-color: #fff;
     }
 

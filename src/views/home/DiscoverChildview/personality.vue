@@ -37,7 +37,7 @@
 
         <!--独家放送-->
         <div class="recommend">
-            <p class="titleText">独家放送 ></p>
+            <p class="titleText" @click="linktoalllist">独家放送 ></p>
         </div>
 
         <div class="privatecontent">
@@ -66,7 +66,7 @@
 
                 <div class="newsongname">
                     <div class="songname">{{item.name}}</div>
-                    <div class="singername"><img src="~assets/sq.png">{{item.song.artists[0].name}}</div>
+                    <div class="singername"><img src="~assets/sq.png" class="sq">{{item.song.artists[0].name}}</div>
                 </div>
             </div>
         </div>
@@ -143,6 +143,9 @@
             },
             linktolatestmusic(){
                 this.$router.push('latestmusic')
+            },
+            linktoalllist(){
+                this.$router.push('/privatelist')
             }
         },
         created(){
@@ -309,11 +312,12 @@
         height: auto;
         font-size: 14px;
         margin-top: 10%;
-        color: rgb(0,0,0,.7);
+        color: rgb(0,0,0,.6);
         display: flex;
         justify-content: flex-start;
         cursor: pointer;
         font-family: 微软雅黑;
+        font-weight: 400;
     }
 
     .name:hover{
@@ -432,6 +436,8 @@
     .songname{
         position: relative;
         top: 34px;
+        font-size: 14px;
+        font-weight: 400;
     }
 
     .singername{
@@ -439,6 +445,14 @@
         align-items: center;
         position: relative;
         top: 40px;
+        font-size: 12px;
+        font-family: 微软雅黑;
+        font-weight: 400;
+    }
+
+    .sq{
+        width: 24px;
+        height: 24px;
     }
 
     #button2{

@@ -21,6 +21,17 @@ export function getprivatecontent() {
     })
 }
 
+//获取独家放送列表
+export function getprivatelist(limit,offset) {
+    return request({
+        url: '/personalized/privatecontent/list',
+        params:{
+            limit,offset
+        }
+    })
+}
+
+
 //获取最新音乐数据
 export function getnewsongs(limit) {
     return request({
@@ -420,6 +431,28 @@ export function getmvleader(limit,area) {
         }
     })
 }
+
+//热搜列表
+export function gethotsearch() {
+    return request({
+        url:'/search/hot/detail'
+    })
+}
+
+//搜索
+export function tosearch(keywords,limit,offset,type) {
+    return request({
+        url:'/search',
+        params:{
+            keywords,
+            limit,
+            offset,
+            type
+        }
+    })
+}
+
+
 
 
 
