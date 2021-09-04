@@ -39,7 +39,6 @@
             //下拉加载更多
             Scroll(){
                 let box = this.$refs.allmv
-                console.log(box.getBoundingClientRect().bottom);
                 if (parseInt(box.getBoundingClientRect().bottom) === 670) {
                     this.page += 1
                 }
@@ -130,9 +129,10 @@
         align-items: center;
         position: relative;
         bottom: 160px;
-        right: 5px;
+        right: 8px;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
+        font-size: 13px;
     }
 
     .time{

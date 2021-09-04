@@ -564,7 +564,6 @@
         white-space: nowrap;
         width: 780px;
         position: relative;
-        top: 5px;
         align-items: center;
         cursor: pointer;
     }
