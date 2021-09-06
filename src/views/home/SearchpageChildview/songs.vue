@@ -75,24 +75,25 @@
             }
         },
         created(){
-            this.$store.commit('cleansongset')
-            tosearch(this.keywords,100,this.page * 100,1).then(res => {
-                  this.count = res.data.result.songCount
-                  this.$store.commit('pushallsong',res.data.result.songs)
-                  this.$store.commit('changeflag',2)
-                this.loading = false
-            })
 
             //防止页面刷新后搜索关键字丢失
             window.addEventListener("pagehide",()=>{
-                sessionStorage.setItem("keywords",JSON.stringify(this.keywords))
+                sessionStorage.setItem("keywords",this.keywords)
             })
             window.addEventListener("pageshow",()=>{
                 if(sessionStorage.getItem('keywords') === null) {
-                    sessionStorage.setItem("keywords",JSON.stringify(this.keywords))
+                    sessionStorage.setItem("keywords",this.keywords)
                 }
                 this.$store.commit('changesearchkeyword',sessionStorage.getItem("keywords"));
             })
+
+            this.$store.commit('cleansongset')
+                tosearch(this.keywords,100,this.page * 100,1).then(res => {
+                    this.count = res.data.result.songCount
+                    this.$store.commit('pushallsong',res.data.result.songs)
+                    this.$store.commit('changeflag',2)
+                    this.loading = false
+                })
         },
         computed:{
             keywords(){
@@ -108,12 +109,12 @@
         watch:{
             keywords(val){
                 this.loading = true
-                tosearch(val,100,this.page * 100,1).then(res => {
-                    this.$store.commit('cleansongset')
-                    this.count = res.data.result.songCount
-                    this.$store.commit('pushallsong',res.data.result.songs)
-                    this.loading = false
-                })
+                    tosearch(val,100,this.page * 100,1).then(res => {
+                        this.$store.commit('cleansongset')
+                        this.count = res.data.result.songCount
+                        this.$store.commit('pushallsong',res.data.result.songs)
+                        this.loading = false
+                    })
             }
         },
         activated(){
@@ -138,6 +139,7 @@
         display: flex;
         color: #000;
         opacity: .5;
+        font-size: 14px;
     }
 
     .songtitle{
@@ -147,17 +149,17 @@
 
     .singertitle{
         position: relative;
-        left: 41.5%;
+        left: 42%;
     }
 
     .albumtitle{
         position: relative;
-        left: 57.5%;
+        left: 58.5%;
     }
 
     .time{
         position: relative;
-        left: 77.5%;
+        left: 78.5%;
     }
 
     .searchtitle{
@@ -227,6 +229,7 @@
         overflow: hidden;
         position: relative;
         right: 20px;
+        font-size: 13px;
     }
 
     .name{
@@ -239,6 +242,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        font-size: 13px;
     }
 
     .alia{
@@ -254,6 +258,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        font-size: 13px;
     }
 
     .album{
@@ -263,6 +268,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        font-size: 13px;
     }
     .length{
         width: 40px;
@@ -271,6 +277,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        font-size: 13px;
     }
 
     .bgc{

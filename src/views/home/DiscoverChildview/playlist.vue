@@ -74,9 +74,13 @@
             </div>
             <div v-for="item in playlist">
                 <div class="imgbox" @click="listdetail(item.id)">
-                    <div class="imgboxcontent">
+                    <div class="imgboxcontent" v-if="item.playCount >= 10000">
                         <i class="el-icon-caret-right"></i>
                         {{parseInt(item.playCount/10000)}}万
+                    </div>
+                    <div class="imgboxcontent" v-if="item.playCount < 10000">
+                        <i class="el-icon-caret-right"></i>
+                        {{item.playCount}}
                     </div>
                     <img :src="item.coverImgUrl">
                     <div class="creator">
@@ -307,7 +311,7 @@
         white-space: nowrap;
         z-index: 5;
         position: relative;
-        top: 28px;
+        top: 24px;
         left: 110px;
         display: flex;
         align-items: center;
@@ -315,6 +319,7 @@
         color: #fff;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
+        font-size: 13px;
     }
 
     .imgbox:hover #button{
@@ -389,7 +394,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
         position: relative;
-        bottom: 1.5px;
+        bottom: 1px;
+        font-size: 14px;
     }
 
     .iconfont1,.nickname{

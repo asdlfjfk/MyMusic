@@ -5,7 +5,11 @@
                 <img :src="item.imgurl16v9" alt="">
                 <div class="name">{{item.name}}</div>
 
-                <div class="mvplaycount">
+                <div class="mvplaycount" v-if="item.playCount >= 10000">
+                    <i class="el-icon-caret-right"></i>
+                    {{parseInt(item.playCount/10000)}}万
+                </div>
+                <div class="mvplaycount" v-if="item.playCount < 10000">
                     <i class="el-icon-caret-right"></i>
                     {{item.playCount}}
                 </div>
@@ -140,8 +144,8 @@
         justify-content: flex-end;
         align-items: center;
         position: relative;
-        bottom: 70px;
-        right: 8px;
+        bottom: 65px;
+        right: 6px;
         font-size: 12px;
         font-weight: 400;
         color: #fff;

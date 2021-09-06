@@ -61,9 +61,13 @@
         <div class="worldlist" v-loading="loadingimg">
             <div v-for="item in otherlist[0]" class="listitem">
                 <div class="imgbox" @click="listdetail(item.id)">
-                    <div class="imgboxcontent">
+                    <div class="imgboxcontent" v-if="item.playCount >= 10000">
                         <i class="el-icon-caret-right"></i>
                         {{parseInt(item.playCount/10000)}}万
+                    </div>
+                    <div class="imgboxcontent" v-if="item.playCount < 10000">
+                        <i class="el-icon-caret-right"></i>
+                        {{item.playCount}}
                     </div>
                     <img :src="item.coverImgUrl" alt="">
                     <div class="button">
@@ -220,6 +224,7 @@
         color: #fff;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
+        font-size: 13px;
     }
 
     .imgbox:hover .button{
@@ -347,14 +352,17 @@
     .number{
         color: #ff2b1f;
         padding: 0px 20px 0px 20px;
+        font-size: 13px;
     }
 
     .songname{
         padding-left: 200px;
+        font-size: 13px;
     }
 
     .singername{
         position: absolute;
         right: 385px;
+        font-size: 13px;
     }
 </style>

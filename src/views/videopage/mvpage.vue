@@ -25,7 +25,11 @@
                         <div class="relatedtitle" @click="videodetail(item)">{{item.title}}</div>
                         <div class="relatedtitle creatorname">by {{item.creator[0].userName}}</div>
                     </div>
-                    <div class="videoplaycount">
+                    <div class="videoplaycount" v-if="item.playTime >= 10000">
+                        <i class="el-icon-caret-right"></i>
+                        {{parseInt(item.playTime / 10000)}}万
+                    </div>
+                    <div class="videoplaycount" v-if="item.playTime < 10000">
                         <i class="el-icon-caret-right"></i>
                         {{item.playTime}}
                     </div>
@@ -335,13 +339,13 @@
     .username{
         color: #4D99DE;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 13px;
     }
 
 
     .inner{
         margin-left: 6px;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .content{

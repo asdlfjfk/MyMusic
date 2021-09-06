@@ -12,6 +12,9 @@
                     <span class="icon iconfont1" v-if="item.mv !== 0" @click="mvdetail(item.mv)">&#xe62c;</span>
                     <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                     <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
+                    <span v-if="item.privilege.downloadMaxbr === 999000">
+                        <img src="~assets/sq.png" alt="" class="sqicon">
+                    </span>
                 </div>
                 <div class="name"><span>{{item.name}}</span><span v-if="item.alia[0]" class="alia">({{item.alia[0]}})</span></div>
                 <div class="singer"><span>{{item.ar[0].name}}</span></div>
@@ -86,6 +89,14 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .sqicon{
+        width: 24px;
+        height: 24px;
+        position: relative;
+        top: 6.5px;
+        margin-left: 5px;
+    }
+
     .iconfont{
         font-size:22px;font-style:normal;
         color: red;margin-left: 4px;
@@ -115,26 +126,27 @@
         display: flex;
         color: #000;
         opacity: .5;
+        font-size: 14px;
     }
 
     .songtitle{
         position: relative;
-        left: 17%;
+        left: 17.5%;
     }
 
     .singertitle{
         position: relative;
-        left: 39.7%;
+        left: 41.2%;
     }
 
     .albumtitle{
         position: relative;
-        left: 56.8%;
+        left: 59%;
     }
 
     .time{
         position: relative;
-        left: 74%;
+        left: 77%;
     }
 
     .songs{
@@ -146,7 +158,7 @@
         width: 100%;
         font-weight: 300;
         mso-bidi-font-weight:200;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .number{

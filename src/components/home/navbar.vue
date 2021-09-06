@@ -106,6 +106,7 @@
                 this.hotsearch = false
             },
             linktosearchpage(input){
+                this.hotsearch = false
                 //避免多次导航到相同页
                 if (this.$route.path.match(RegExp(/searchpage/))){
                     this.$store.commit('changesearchkeyword',input)

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="singerwork">
         <div class="title"><span class="songtitle">音乐标题</span><span class="singertitle">歌手</span><span class="albumtitle">专辑</span><span class="time">时长</span></div>
         <div class="allsong">
             <div v-for="(item,index) in allsong[0]" class="songs" id="song"
@@ -12,6 +12,9 @@
                     <span class="icon iconfont1" v-if="item.mv !== 0" @click="mvdetail(item.mv)">&#xe62c;</span>
                     <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                     <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
+                    <span v-if="item.privilege.downloadMaxbr === 999000">
+                        <img src="~assets/sq.png" alt="" class="sqicon">
+                    </span>
                 </div>
                 <div class="name"><span>{{item.name}}</span><span v-if="item.alia[0]" class="alia">({{item.alia[0]}})</span></div>
                 <div class="singer"><span>{{item.ar[0].name}}</span></div>
@@ -62,7 +65,7 @@
             playerbackid(){
                 return this.$store.state.playerbackid
             },
-        },
+        }
     }
 </script>
 
@@ -85,6 +88,14 @@
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .sqicon{
+        width: 24px;
+        height: 24px;
+        position: relative;
+        top: 6.5px;
+        margin-left: 5px;
     }
 
     .iconfont{
@@ -117,26 +128,27 @@
         display: flex;
         color: #000;
         opacity: .5;
+        font-size: 14px;
     }
 
     .songtitle{
         position: relative;
-        left: 15.4%;
+        left: 15%;
     }
 
     .singertitle{
         position: relative;
-        left: 39.7%;
+        left: 40%;
     }
 
     .albumtitle{
         position: relative;
-        left: 57.7%;
+        left: 58.5%;
     }
 
     .time{
         position: relative;
-        left: 76%;
+        left: 77%;
     }
 
     .songs{
@@ -148,7 +160,7 @@
         width: 100%;
         font-weight: 300;
         mso-bidi-font-weight:200;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .number{

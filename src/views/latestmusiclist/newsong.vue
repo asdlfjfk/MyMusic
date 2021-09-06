@@ -18,6 +18,9 @@
                         <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe62c;</span>
                         <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                         <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
+                        <span v-if="item.privilege.maxbr === 999000">
+                            <img src="~assets/sq.png" alt="" class="sqicon">
+                        </span>
                     </div>
                 </div>
 
@@ -95,6 +98,14 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .sqicon{
+        width: 24px;
+        height: 24px;
+        margin-left: 20px;
+        border: none;
+        margin-bottom: 4px;
+    }
+
     .iconfont{
         font-size:22px;font-style:normal;
         color: red;margin-left: 4px;
@@ -106,7 +117,7 @@
     }
 
     .iconfont2{
-        font-size:26px;font-style:normal;
+        font-size:24px;font-style:normal;
         color: red;margin-left: 4px;
     }
 
@@ -127,7 +138,7 @@
         width: 100%;
         font-weight: 300;
         mso-bidi-font-weight:200;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .number{

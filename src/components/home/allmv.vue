@@ -24,9 +24,13 @@
         <div class="main">
             <div class="allmv" ref="allmv" v-loading="loading">
                 <div v-for="item in mvs" class="mvitem">
-                    <div class="mvplaycount">
+                    <div class="mvplaycount" v-if="item.playCount >= 10000">
                         <i class="el-icon-caret-right"></i>
-                        {{parseInt(item.playCount)}}
+                        {{parseInt(item.playCount / 10000)}}万
+                    </div>
+                    <div class="mvplaycount" v-if="item.playCount < 10000">
+                        <i class="el-icon-caret-right"></i>
+                        {{item.playCount}}
                     </div>
                     <img :src="item.cover" alt="" @click="mvdetail(item.id)">
                     <div class="mvname" @click="mvdetail(item.id)">{{item.name}}</div>

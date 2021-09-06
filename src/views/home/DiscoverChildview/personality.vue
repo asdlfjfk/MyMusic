@@ -20,9 +20,13 @@
             <div v-for="item in recommonlist">
 
                 <div class="imgbox" @click="listdetail(item.id)">
-                    <div class="imgboxcontent">
+                    <div class="imgboxcontent" v-if="item.playCount >= 10000">
                         <i class="el-icon-caret-right"></i>
                         {{parseInt(item.playCount/10000)}}万
+                    </div>
+                    <div class="imgboxcontent" v-if="item.playCount < 10000">
+                        <i class="el-icon-caret-right"></i>
+                        {{item.playCount}}
                     </div>
                     <img :src="item.picUrl" class="itemimg">
                     <div id="button">
@@ -75,13 +79,17 @@
 
         <!--推荐MV-->
         <div class="recommendMV">
-            <p class="titleText">推荐MV ></p>
+            <p class="titleText" @click="linktomv">推荐MV ></p>
         </div>
 
         <div class="recommendMVcontent">
             <div v-for="item in recommendMV">
 
-                <div class="mvplaycount">
+                <div class="mvplaycount" v-if="item.playCount >= 10000">
+                    <i class="el-icon-caret-right"></i>
+                    {{parseInt(item.playCount/10000)}}万
+                </div>
+                <div class="mvplaycount" v-if="item.playCount < 10000">
                     <i class="el-icon-caret-right"></i>
                     {{item.playCount}}
                 </div>
@@ -146,6 +154,9 @@
             },
             linktoalllist(){
                 this.$router.push('/privatelist')
+            },
+            linktomv(){
+                this.$router.push('/video/recomv')
             }
         },
         created(){
@@ -167,6 +178,7 @@
                 this.recommendMV.push(res.data.result[0])
                 this.recommendMV.push(res.data.result[1])
                 this.recommendMV.push(res.data.result[2])
+                this.recommendMV.push(res.data.result[3])
             })
         }
     }
@@ -266,13 +278,14 @@
         white-space: nowrap;
         z-index: 5;
         position: relative;
-        top: 8px;
+        top: 4px;
         left: 110px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         color: #fff;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
+        font-size: 13px;
     }
 
     .itemimg{
@@ -347,7 +360,7 @@
 
     .privatename{
         opacity: .8;
-        font-size: 16px;
+        font-size: 15px;
         margin-left: 5%;
         margin-right: 2%;
         font-weight: 400;
@@ -360,15 +373,15 @@
 
     .privateicon{
         color: #fff;
-        width: 34px;
-        height: 34px;
+        width: 24px;
+        height: 24px;
         background-color: rgb(226,226,226,.4);
         border: 1px solid #fff;
         border-radius: 20px;
         z-index:20;
         position: relative;
-        left: 7%;
-        top: 42px;
+        left: 8%;
+        top: 36px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -378,7 +391,7 @@
     .privateicon >>> .el-icon-caret-right{
         position: relative;
         top: .5px;
-        font-size: 24px;
+        font-size: 16px;
         color: #fff;
     }
 
@@ -491,17 +504,17 @@
         align-items: center;
         justify-content: space-evenly;
         position: relative;
-        bottom: 45px;
+        bottom: 30px;
     }
 
     .recommendMvitem{
-        width: 370px;
-        height: 280px;
+        width: 280px;
+        height: 260px;
     }
 
     .recommendMvimg{
-        width: 370px;
-        height: 200px;
+        width: 280px;
+        height: 158px;
         border-radius: 10px;
         cursor: pointer;
     }
@@ -523,7 +536,7 @@
         font-size: 13px;
         line-height: 100px;
         position: relative;
-        bottom: 9%;
+        bottom: 12%;
     }
 
     .mvname:hover{
@@ -537,28 +550,30 @@
         align-items: center;
         color: #fff;
         position: relative;
-        top: 66px;
+        top: 50px;
         right: 10px;
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
+        font-size: 13px;
     }
 
     .recommendMvitem:hover .hot{
         transform: translateY(14%);
         transition: transform 0.8s;
-        width: 370px;
+        width: 280px;
         background-color: rgba(0,0,0,.5);
         opacity: 1;
         border-radius: 10px;
         z-index:5;
     }
     .hot{
-        line-height: 40px;
+        line-height: 30px;
         position: relative;
-        top: 195px;
+        top: 154px;
         opacity: 0;
         z-index: -5;
         overflow: hidden;
+        font-size: 13px;
     }
 
     .recommendMvitem:hover .hotname{

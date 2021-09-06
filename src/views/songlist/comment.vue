@@ -212,13 +212,13 @@
     .username{
         color: #4D99DE;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 13px;
     }
 
 
     .inner{
         margin-left: 6px;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .content{
