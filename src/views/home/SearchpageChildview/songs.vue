@@ -14,6 +14,9 @@
                             <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe62c;</span>
                             <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                             <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
+                            <span>
+                                <img src="~assets/sq.png" alt="" class="sqicon">
+                            </span>
                         </div>
                     </div>
                     <div class="singer"><span>{{item.artists[0].name}}</span></div>
@@ -76,6 +79,8 @@
         },
         created(){
 
+            console.log(this.allsong);
+
             //防止页面刷新后搜索关键字丢失
             window.addEventListener("pagehide",()=>{
                 sessionStorage.setItem("keywords",this.keywords)
@@ -114,6 +119,7 @@
                         this.count = res.data.result.songCount
                         this.$store.commit('pushallsong',res.data.result.songs)
                         this.loading = false
+                        console.log(this.allsong);
                     })
             }
         },
@@ -183,6 +189,14 @@
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .sqicon{
+        width: 24px;
+        height: 24px;
+        position: relative;
+        top: 6.5px;
+        margin-left: 5px;
     }
 
     .iconfont{

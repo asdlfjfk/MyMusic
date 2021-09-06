@@ -61,7 +61,7 @@
         </div>
 
         <div class="newsongs">
-            <div v-for="item in newsongs" class="newsongsitem" @click="addsongtoplay(item)">
+            <div v-for="item in newsongs" class="newsongsitem" @dblclick="addsongtoplay(item)">
                 <img :src="item.picUrl" alt="" class="newsongimg">
 
                 <div id="button2">
@@ -70,7 +70,11 @@
 
                 <div class="newsongname">
                     <div class="songname">{{item.name}}</div>
-                    <div class="singername"><img src="~assets/sq.png" class="sq">{{item.song.artists[0].name}}</div>
+                    <div class="singername">
+                        <span class="iconfont" v-if="item.song.mvid" @click="mvdetail(item.song.mvid)">&#xe62c;</span>
+                        <img src="~assets/sq.png" class="sq" v-if="item.song.privilege.maxbr === 999000">
+                        {{item.song.artists[0].name}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,6 +150,9 @@
                         this.$store.commit('changesong2',res)
                     },500)
             },
+            mvdetail(id){
+                this.$router.push('/mvpage/' +  id)
+            },
             linktoplaylist(){
                 this.$router.push('playlist')
             },
@@ -172,6 +179,7 @@
                 this.privatecontent = res.data.result
             })
             getnewsongs(12).then(res => {
+                console.log(res);
                 this.newsongs = res.data.result
             })
             getrecommendMV().then(res => {
@@ -185,6 +193,18 @@
 </script>
 
 <style scoped>
+
+    .iconfont{
+        font-family:"iconfont" !important;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+        font-size:18px;font-style:normal;
+        color: red;margin-left: 4px;
+        position: relative;
+        bottom: 8px;
+        right: 4px;
+    }
 
     #personal{
         padding: 14px;
@@ -417,9 +437,10 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        width: 33%;
+        width: 338px;
+        height: 111px;
         margin-top: 3%;
-        margin-left: .3%;
+        margin-left: 30px;
     }
 
     .newsongsitem:hover{
@@ -466,6 +487,7 @@
     .sq{
         width: 24px;
         height: 24px;
+        margin-right: 3px;
     }
 
     #button2{
