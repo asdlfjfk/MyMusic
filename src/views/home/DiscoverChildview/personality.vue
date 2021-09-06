@@ -179,7 +179,6 @@
                 this.privatecontent = res.data.result
             })
             getnewsongs(12).then(res => {
-                console.log(res);
                 this.newsongs = res.data.result
             })
             getrecommendMV().then(res => {

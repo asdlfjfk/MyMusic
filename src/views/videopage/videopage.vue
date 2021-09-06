@@ -551,6 +551,7 @@
         right: 370px;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         font-size: 12px;
+        white-space: nowrap;
     }
 
     .duration{

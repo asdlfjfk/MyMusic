@@ -515,6 +515,7 @@
         font-family: 微软雅黑;
         text-shadow: rgb(0 0 0) 0px 0px 2px;
         font-size: 12px;
+        white-space: nowrap;
     }
 
     .duration{
