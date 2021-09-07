@@ -50,6 +50,21 @@
                 }
                this.current = parseInt(sessionStorage.getItem("current"));
             })
+
+            if (this.routepath.match(RegExp(/personal/))) {
+                this.current = 1;
+            }else if(this.routepath.match(RegExp(/playlist/))){
+                this.current = 2;
+            }
+            else if (this.routepath.match(RegExp(/leader/))){
+                this.current = 3;
+            }
+            else if (this.routepath.match(RegExp(/singer/))){
+                this.current = 4;
+            }
+            else if (this.routepath.match(RegExp(/latestmusic/))){
+                this.current = 5;
+            }
         },
         methods:{
             itemCurrent(num){

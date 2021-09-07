@@ -141,6 +141,17 @@
             }
         },
         created(){
+            //防止页面刷新后搜索关键字丢失
+            window.addEventListener("pagehide",()=>{
+                sessionStorage.setItem("keywords",this.keywords)
+            })
+            window.addEventListener("pageshow",()=>{
+                if(sessionStorage.getItem('keywords') === null) {
+                    sessionStorage.setItem("keywords",this.keywords)
+                }
+                this.$store.commit('changesearchkeyword',sessionStorage.getItem("keywords"));
+            })
+
             getmvdetail(this.id).then(res => {
                 let data = res.data.data
                 this.artists = data.artistName
@@ -168,6 +179,9 @@
         computed:{
             id(){
                 return this.$route.params.id
+            },
+            keywords(){
+                return this.$store.state.searchkeywords
             }
         },
         methods:{

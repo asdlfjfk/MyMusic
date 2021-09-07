@@ -49,11 +49,31 @@
                 }
                 this.current = parseInt(sessionStorage.getItem("searchcurrent"));
             })
+
+            if (this.routepath.match(RegExp(/songs/))) {
+                this.current = 1;
+            }else if(this.routepath.match(RegExp(/singers/))){
+                this.current = 2;
+            }
+            else if (this.routepath.match(RegExp(/albums/))){
+                this.current = 3;
+            }
+            else if (this.routepath.match(RegExp(/searchmv/))){
+                this.current = 4;
+            }
+            else if (this.routepath.match(RegExp(/songlists/))){
+                this.current = 5;
+            }
         },
         methods:{
             itemCurrent(num){
                 this.current = num
             }
+        },
+        computed:{
+          routepath(){
+              return this.$route.path
+          }
         },
         watch:{
             $route(val){
@@ -66,13 +86,13 @@
                 else if (val.path.match(RegExp(/albums/))){
                     this.current = 3;
                 }
-                else if (val.path.match(RegExp(/videos/))){
+                else if (val.path.match(RegExp(/searchmv/))){
                     this.current = 4;
                 }
                 else if (val.path.match(RegExp(/songlists/))){
                     this.current = 5;
                 }
-            },
+            }
         }
     }
 </script>

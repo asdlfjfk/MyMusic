@@ -35,7 +35,6 @@
         created(){
             getsingermv(this.id,20,(this.page - 1) * 20).then(res => {
                 this.mvs = res.data.mvs
-                console.log(this.mvs);
                 this.loading = false
             })
         },

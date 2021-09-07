@@ -1,6 +1,9 @@
 <template>
     <div id="detail" v-loading="loading">
-        <div class="txt">{{briefDesc}}</div>
+        <div>
+            <div class="title">个人简介</div>
+            <div class="txt">{{briefDesc}}</div>
+        </div>
         <div>
             <div class="title">{{famous.ti}}</div>
             <div class="txt">{{famous.txt}}</div>
@@ -32,10 +35,13 @@
 
         created(){
             getsingerdes(this.id).then(res => {
+                console.log(res);
                 this.briefDesc = res.data.briefDesc
-                this.famous = res.data.introduction[0];
-                this.success = res.data.introduction[1];
-                this.exper = res.data.introduction[2];
+                if (res.data.introduction.length > 0){
+                    this.famous = res.data.introduction[0];
+                    this.success = res.data.introduction[1];
+                    this.exper = res.data.introduction[2];
+                }
                 this.loading = false
             })
         },
