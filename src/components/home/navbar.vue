@@ -40,8 +40,8 @@
         </div>
 
         <div class="login" v-if="loginshow" @mousedown="move">
-            <div class="icon iconfont" ><div class="icon" @click="close">&#xe605;</div></div>
-            <div class="title"><div class="titletext">扫码登录</div></div>
+            <div class="icon iconfont" ><div class="icon2" @click="close">&#xe605;</div></div>
+            <div class="title"><div class="titletext">登录</div></div>
         </div>
     </el-header>
 
@@ -141,6 +141,7 @@
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
         font-style:normal;
+        z-index: 10;
     }
 
     .iconfont{
@@ -162,8 +163,12 @@
         margin-left: 10px;
     }
 
-    .icon{
+    .icon2{
         cursor: pointer;
+    }
+
+    .icon2:hover{
+        color: rgb(0,0,0,.8);
     }
 
     #header{

@@ -13,12 +13,11 @@ module.exports = {
     devServer: {
         proxy: {
             "/api": {
-                target: 'https://nicemusic-api.lxhcool.cn',
+                target: 'http://localhost:8080',
                 pathRewrite: {'^/api' : ''},
                 changeOrigin: true,
                 secure: false
             }
         },
-
     }
 }
