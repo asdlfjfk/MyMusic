@@ -71,6 +71,11 @@
                 this.current = num
             }
         },
+        computed:{
+            routepath(){
+                return this.$route.path
+            }
+        },
         watch:{
             $route(val){
                 if (val.path.match(RegExp(/personal/))){
