@@ -139,10 +139,15 @@
               this.$router.push('/mvpage/' +  id)
             },
             swiperaddsongtoplay(item){
-                this.$store.commit('changebackid',item.targetId)  //用于歌单中存在该歌曲 显示为活跃播放状态
-                getsongurl(item.targetId).then(res => {
-                    this.$store.commit('changesong2',res)
-                },500)
+                console.log(item);
+                if (item.targetType === 1){
+                    this.$store.commit('changebackid',item.targetId)  //用于歌单中存在该歌曲 显示为活跃播放状态
+                    getsongurl(item.targetId).then(res => {
+                        this.$store.commit('changesong2',res)
+                    },500)
+                }else {
+                    this.$message.error('暂无权限播放此歌曲')
+                }
             },
             addsongtoplay(item){
                 this.$store.commit('changebackid',item.song.id)
@@ -283,7 +288,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        position: relative;
+        margin-bottom: 24px;
     }
 
     .imgbox{

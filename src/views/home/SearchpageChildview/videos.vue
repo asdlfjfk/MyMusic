@@ -58,7 +58,6 @@
             tosearch(this.keywords,24,this.page * 24,1014).then(res => {
                 this.count = res.data.result.videoCount
                 this.videos = res.data.result.videos
-                console.log(this.videos);
             })
         },
         computed:{
@@ -92,7 +91,6 @@
                     tosearch(val,24,this.page * 24,1014).then(res => {
                         this.count = res.data.result.videoCount
                         this.videos = res.data.result.videos
-                        console.log(res);
                     })
             }
         },

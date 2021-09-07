@@ -79,8 +79,6 @@
         },
         created(){
 
-            console.log(this.allsong);
-
             //防止页面刷新后搜索关键字丢失
             window.addEventListener("pagehide",()=>{
                 sessionStorage.setItem("keywords",this.keywords)
@@ -119,7 +117,6 @@
                         this.count = res.data.result.songCount
                         this.$store.commit('pushallsong',res.data.result.songs)
                         this.loading = false
-                        console.log(this.allsong);
                     })
             }
         },

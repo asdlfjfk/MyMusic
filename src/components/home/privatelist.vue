@@ -35,7 +35,6 @@
             window.addEventListener('scroll',this.Scroll,true)
         },
         destroyed() {
-            console.log(111);
             window.removeEventListener('scroll', this.Scroll, true);
         },
         methods:{

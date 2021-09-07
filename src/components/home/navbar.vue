@@ -16,7 +16,7 @@
 
             <el-input class="el-input" @keyup.enter.native="linktosearchpage(input)" v-model="input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini" @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
             <div class="hotsearch" v-if="hotsearch">
-                <div class="box">
+                <div class="box" v-loading="loading">
                     <div class="leadertext">热搜榜</div>
                     <div v-for="(item,index) in hotsearchlist" class="item" v-loading="loading" @mousedown="linktosearchpage(item.searchWord)">
                         <div class="number" :class="{active: index + 1 === 1 || index + 1 === 2 || index + 1 === 3}">{{index + 1}}</div>
