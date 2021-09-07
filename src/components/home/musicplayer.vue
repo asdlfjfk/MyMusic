@@ -14,7 +14,7 @@
                     &#xe602;
                 </div>
                 <div class="icon iconfont2" @click="play" v-html="icon">
-                    &#xe618;
+                    &#xe664;
                 </div>
                 <div class="icon iconfont" @click="down(id)">
                     &#xe61b;
@@ -52,7 +52,7 @@
                 detail:{},
                 url:"",
                 playpause:false,
-                icon:"&#xe618;",
+                icon:"&#xe664;",
                 icon2:"&#xe60a;",
                 songname:"",
                 songdetail:{},
@@ -107,7 +107,7 @@
                     }
                 })
 
-                this.icon = "&#xe710;"
+                this.icon = "&#xe606;"
                 this.playpause = true
             },
             volume(val){
@@ -137,15 +137,15 @@
                     this.playpause = !this.playpause
                     if (this.playpause === true){
                         this.$refs.audio.play()
-                        this.icon = "&#xe710;"
+                        this.icon = "&#xe606;"
 
                     }else {
                         this.$refs.audio.pause()
-                        this.icon = "&#xe618;"
+                        this.icon = "&#xe664;"
                     }
                 } else {
                     this.$message.error('当前没有可播放的歌曲哦');
-                    this.icon = "&#xe618;"
+                    this.icon = "&#xe664;"
                 }
             },
             format (data) {

@@ -9,7 +9,7 @@
 
                 <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
                 <div class="allicon">
-                    <span class="icon iconfont1" v-if="item.data.songs[0].mv !== 0" @click="mvdetail(item.data.songs[0].mv)">&#xe62c;</span>
+                    <span class="icon iconfont1" v-if="item.data.songs[0].mv !== 0" @click="mvdetail(item.data.songs[0].mv)">&#xe674;</span>
                     <span class="icon iconfont" v-if="item.data.songs[0].fee === 1">&#xe7d4;</span>
                     <span class="icon iconfont2" v-if="item.data.songs[0].fee === 1">&#xe671;</span>
                     <span v-if="item.data.privileges[0].downloadMaxbr === 999000">
@@ -86,9 +86,9 @@
 
     .sqicon{
         width: 24px;
-        height: 24px;
+        height: 26.4px;
         position: relative;
-        top: 6.5px;
+        top: 8.2px;
         margin-left: 5px;
     }
 
@@ -105,8 +105,9 @@
     }
 
     .iconfont1{
-        font-size:18px;font-style:normal;
+        font-size:22px;font-style:normal;
         color: red;margin-left: 4px;
+        position: relative;
     }
 
     .iconfont2{

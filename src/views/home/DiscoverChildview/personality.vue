@@ -71,7 +71,7 @@
                 <div class="newsongname">
                     <div class="songname">{{item.name}}</div>
                     <div class="singername">
-                        <span class="iconfont" v-if="item.song.mvid" @click="mvdetail(item.song.mvid)">&#xe62c;</span>
+                        <span class="iconfont" v-if="item.song.mvid" @click="mvdetail(item.song.mvid)">&#xe674;</span>
                         <img src="~assets/sq.png" class="sq" v-if="item.song.privilege.maxbr === 999000">
                         {{item.song.artists[0].name}}
                     </div>
@@ -203,10 +203,9 @@
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
-        font-size:18px;font-style:normal;
+        font-size:22px;font-style:normal;
         color: red;margin-left: 4px;
         position: relative;
-        bottom: 8px;
         right: 4px;
     }
 
@@ -271,12 +270,6 @@
 
     .titleText:hover{
         color: rgb(0,0,0);
-    }
-
-    span{
-        display: block;
-        height: 1px;
-        background: #e6e6e6;
     }
 
     p{
@@ -490,8 +483,9 @@
 
     .sq{
         width: 24px;
-        height: 24px;
-        margin-right: 3px;
+        height: 26.4px;
+        position: relative;
+        margin-right: 4px;
     }
 
     #button2{

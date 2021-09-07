@@ -11,7 +11,7 @@
                     <div class="name">
                         <div class="name2">{{item.name}}</div><div v-if="item.alias.length > 0" class="alia">({{item.alias[0]}})</div>
                         <div class="allicon">
-                            <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe62c;</span>
+                            <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe674;</span>
                             <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                             <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
                             <span>
@@ -190,9 +190,9 @@
 
     .sqicon{
         width: 24px;
-        height: 24px;
+        height: 26.4px;
         position: relative;
-        top: 6.5px;
+        top: 8.2px;
         margin-left: 5px;
     }
 
@@ -202,8 +202,9 @@
     }
 
     .iconfont1{
-        font-size:18px;font-style:normal;
+        font-size:22px;font-style:normal;
         color: red;margin-left: 4px;
+        position: relative;
     }
 
     .iconfont2{

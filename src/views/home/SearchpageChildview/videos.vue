@@ -15,7 +15,7 @@
                 <div class="time">{{format(item.durationms)}}</div>
                 <div class="videoinfo">
                     <div class="titleline">
-                        <div class="iconfont" v-if="item.type === 0">&#xe62c;</div>
+                        <div class="iconfont" v-if="item.type === 0">&#xe674;</div>
                         <div class="title" @click="videodetail(item)">{{item.title}}</div>
                     </div>
                     <div class="name">{{item.creator[0].userName}}</div>
