@@ -9,5 +9,16 @@ module.exports = {
                 'views':'@/views',
             }
         }
+    },
+    devServer: {
+        proxy: {
+            "/api": {
+                target: 'https://nicemusic-api.lxhcool.cn',
+                pathRewrite: {'^/api' : ''},
+                changeOrigin: true,
+                secure: false
+            }
+        },
+
     }
 }

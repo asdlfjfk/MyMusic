@@ -131,7 +131,6 @@
                     Promise.all(promise).then(res => {  //遍历所有请求的数据
                         let count = 0
                         for (let song of res){
-                            console.log(res);
                             this.$store.commit('pushallsong',song)
                             this.$store.commit('changeflag',1)
                             count += 1
