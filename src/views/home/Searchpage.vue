@@ -12,7 +12,7 @@
                     <router-link to="albums" class="link" id="albums">
                         <div class="titleItem" :class="{active: current === 3}" @click="itemCurrent(3)">专辑</div>
                     </router-link>
-                    <router-link to="videos" class="link" id="videos">
+                    <router-link to="searchmv" class="link" id="videos">
                         <div class="titleItem" :class="{active: current === 4}" @click="itemCurrent(4)">视频</div>
                     </router-link>
                     <router-link to="songlists" class="link" id="songlists">

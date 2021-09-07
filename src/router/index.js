@@ -107,7 +107,7 @@ const routes = [
                 component:albums
             },
             {
-                path:'videos',
+                path:'searchmv',
                 component:videos
             },
             {
