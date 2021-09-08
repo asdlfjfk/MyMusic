@@ -2,7 +2,7 @@
     <div id="player">
         <div class="songinfo">
             <div class="imgbox"><img :src="songdetail.picUrl" alt=""></div>
-            <div class="info"><div class="songname">{{songname}}<span  v-if="songalia" class="alia">({{songalia}})</span></div><div class="singlename">{{singledetail.name}}</div></div>
+            <div class="info"><div class="songname">{{songname}}<span  v-if="songalia" class="alia">({{songalia}})</span></div><div class="singlename" @click="listdetail(singledetail.id)">{{singledetail.name}}</div></div>
         </div>
 
         <div>
@@ -404,6 +404,9 @@
                         this.$message.success("已切换为单曲循环播放")
                         break;
                 }
+            },
+            listdetail(id){
+                this.$router.push('/singerlist/' + id)
             }
         },
     }

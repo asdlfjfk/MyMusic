@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const home = () => import('../views/home/Discovermusic.vue')
 const video = () => import('../views/home/Recommendvideo.vue')
-const disk = () => import('../views/home/MyCloudDisk.vue')
+const myplaylist = () => import('../views/home/MyCloudDisk.vue')
 const searchpage = () => import('../views/home/Searchpage.vue')
 
 const personality = () => import('../views/home/DiscoverChildview/personality.vue')
@@ -83,8 +83,8 @@ const routes = [
         ]
     },
     {
-        path:'/disk',
-        component:disk
+        path:'/myplaylist',
+        component:myplaylist
     },
     {
        path:'/searchpage',

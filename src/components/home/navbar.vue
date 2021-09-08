@@ -14,7 +14,7 @@
                 <i class="el-icon-arrow-right" style="cursor: pointer;"></i>
             </div>
 
-            <el-input class="el-input" @keyup.enter.native="linktosearchpage(input)" v-model="input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini" @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
+            <el-input class="el-input2" @keyup.enter.native="linktosearchpage(input)" v-model="input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini" @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
             <div class="hotsearch" v-if="hotsearch">
                 <div class="box" v-loading="loading">
                     <div class="leadertext">热搜榜</div>
@@ -33,15 +33,21 @@
                 </div>
             </div>
 
-            <div class="userlogin" @click="show">
-                <el-avatar icon="el-icon-user-solid" :size="34"></el-avatar>
-                <span>登录</span>
+            <div class="userlogin">
+                <el-avatar icon="el-icon-user-solid" :size="34" v-if="avatar.length < 1"></el-avatar>
+                <el-avatar :size="34" v-if="avatar.length > 0" :src="avatar"></el-avatar>
+                <span style="font-size: 12px;font-family: 微软雅黑;" v-if="logintf === false" @click="show">登录</span>
+                <span style="font-size: 13px;font-family: 微软雅黑;" v-if="logintf === true">{{username}}</span>
+                <span style="font-size: 12px;font-family: 微软雅黑;" v-if="logintf === true" @click="exitlogin">退出</span>
             </div>
         </div>
 
-        <div class="login" v-if="loginshow" @mousedown="move">
-            <div class="icon iconfont" ><div class="icon2" @click="close">&#xe605;</div></div>
+        <div class="login" v-if="loginshow">
+            <div class="icon iconfont"><div class="icon2" @click="close">&#xe605;</div></div>
             <div class="title"><div class="titletext">登录</div></div>
+            <el-input placeholder="请输入手机号" class="number" @blur="checkphone(phone)" v-model="phone"></el-input>
+            <el-input placeholder="请输入密码" show-password class="password" v-model="password"  @blur="checkpassword(password)" @keyup.enter.native="login(phone,password)"></el-input>
+            <el-button @click="login(phone,password)">登录</el-button>
         </div>
     </el-header>
 
@@ -49,7 +55,7 @@
 
 
 <script>
-    import {gethotsearch} from "network/homedata"
+    import {gethotsearch,login} from "network/homedata"
     export default {
         name: "navbar",
         data(){
@@ -58,8 +64,24 @@
               loginshow:false,
               hotsearch:false,
               hotsearchlist:[],
-              input:""
+              logintf:false,
+              input:"",
+              phone:"",
+              password:"",
+              avatar:"",
+              username:"",
+              logintoastflag:0
           }
+        },
+        created(){
+            let logincookie = sessionStorage.getItem("logincookie")
+            let phone = sessionStorage.getItem("phone")
+            let password = sessionStorage.getItem("password")
+            let flag = sessionStorage.getItem("toastflag")
+            if (logincookie) {
+                this.logintoastflag = flag
+                this.login(phone,password)
+            }
         },
         methods:{
             back(){
@@ -74,36 +96,71 @@
             close(){
                 this.loginshow = false
             },
-            move(e){
-                //拖拽效果
-                let odiv = e.target;        //获取目标元素
-
-                //算出鼠标相对元素的位置
-                let disX = e.clientX - odiv.offsetLeft;
-                let disY = e.clientY - odiv.offsetTop;
-                document.onmousemove = (e)=>{       //鼠标按下并移动的事件
-                    //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-                    let left = e.clientX - disX;
-                    let top = e.clientY - disY;
-
-                    //绑定元素位置到positionX和positionY上面
-                    this.positionX = top;
-                    this.positionY = left;
-
-                    //移动当前元素
-                    odiv.style.left = left + 'px';
-                    odiv.style.top = top + 'px';
-                };
-                document.onmouseup = (e) => {
-                    document.onmousemove = null;
-                    document.onmouseup = null;
-                };
-            },
             hotsearchshow(){
                 this.hotsearch = true
             },
             hotsearchclose(){
                 this.hotsearch = false
+            },
+            testPhone(str) {
+                const reg = /^1[3|4|5|7|8|6|9][0-9]\d{8}$/;
+                return reg.test(str);
+            },
+            checkphone(str){
+                if (!str){
+                    this.$message.error("手机号不能为空")
+                }
+                else if (!this.testPhone(str)) {
+                    this.$message.error("手机号格式不正确")
+                    this.phone = ""
+                }
+            },
+            checkpassword(str){
+              if (!str){
+                  this.$message.error("密码不能为空")
+              }
+            },
+            login(phone,password){
+                if (phone && password){
+
+                            login(phone,password).then(res => {
+                                if (res.data.code === 502) {
+                                    this.$message.error(res.data.message);
+                                }
+                                else {
+                                    let id = res.data.profile.userId
+                                    sessionStorage.setItem("logincookie",res.data.cookie)
+                                    sessionStorage.setItem("phone",phone)
+                                    sessionStorage.setItem("password",password)
+                                    sessionStorage.setItem("userid",id)
+                                    this.loginshow = false
+                                    this.logintf = true
+                                    this.avatar = res.data.profile.avatarUrl
+                                    this.username = res.data.profile.nickname
+                                    console.log(res);
+                                    if (this.logintoastflag === 0){
+                                        this.$message.success("登陆成功")
+                                        sessionStorage.setItem("toastflag",1)
+                                        this.$router.go(0)
+                                    }
+                                }
+                            }).catch(() => {
+                                this.$message.error("该账户不存在或密码错误超过次数限制")
+                            })
+
+                } else {
+                    this.$message.error("手机号/密码不能为空")
+                }
+            },
+            exitlogin(){
+                this.logintf = false
+                this.avatar = ""
+                sessionStorage.removeItem("logincookie");
+                sessionStorage.removeItem("phone");
+                sessionStorage.removeItem("password");
+                sessionStorage.removeItem("userid");
+                this.$message.success("退出登录成功")
+                this.$router.go(0)
             },
             linktosearchpage(input){
                 this.hotsearch = false
@@ -247,9 +304,8 @@
         position: absolute;
     }
 
-    .el-input{
+    .el-input2{
         width: 200px;
-        margin-right: 200px;
         position: absolute;
         left: 290px;
         opacity: .5;
@@ -376,5 +432,36 @@
 
     .active{
         color: red;
+    }
+
+    .login >>> .number{
+        margin-top: 100px;
+        margin-left: 15px;
+        width: 260px;
+        font-size: 13px;
+    }
+
+    .login >>> .password{
+        margin-top: 20px;
+        width: 260px;
+        font-size: 13px;
+    }
+
+    .el-button{
+        margin-top: 20px;
+        width: 260px;
+        background-color: #e40000;
+        color: #fff;
+        font-family: 微软雅黑;
+    }
+
+    .el-button:hover{
+        background-color: #c40000;
+        color: #fff;
+    }
+
+    .el-button:focus{
+        background-color: #e40000;
+        color: #fff;
     }
 </style>

@@ -77,6 +77,20 @@
                 this.$store.commit('changesearchkeyword',sessionStorage.getItem("keywords"));
             })
 
+
+            //保存选中状态 防止页面刷新时跑动
+            window.addEventListener("pagehide",()=>{
+                sessionStorage.setItem("singerlistcurrent",JSON.stringify(this.current))
+            })
+            window.addEventListener("pageshow",()=>{
+                if(sessionStorage.getItem('singerlistcurrent') === null) {
+                    sessionStorage.setItem("singerlistcurrent",JSON.stringify(this.current))
+                }
+                this.current = parseInt(sessionStorage.getItem("singerlistcurrent"));
+            })
+
+
+
             let id = this.routeid
             this.$store.commit('cleansongset')
 
@@ -91,7 +105,7 @@
         methods:{
                 itemCurrent(num){
                     this.current = num
-                },
+                }
         },
         computed:{
             routeid(){
@@ -99,6 +113,20 @@
             },
             keywords(){
                 return this.$store.state.searchkeywords
+            }
+        },
+        watch:{
+            '$route'(){
+                let id = this.routeid
+                this.$store.commit('cleansongset')
+
+                getsingerdetail(id).then(res => {
+                    this.singer = res.data.artist
+                    this.alias = this.singer.alias[0]
+                    this.$store.commit('pushallsong',res.data.hotSongs)
+                    this.$store.commit('changeflag',2)
+                    this.loading = false
+                })
             }
         }
     }

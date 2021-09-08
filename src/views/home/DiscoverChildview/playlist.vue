@@ -251,11 +251,12 @@
     }
 
     span{
-        margin-left: 36px;
+        margin-left: 20px;
         font-size: 13px;
         color: rgb(0,0,0,.4);
         font-family: 微软雅黑;
         cursor: pointer;
+        padding: 0px 10px 0px 10px;
     }
 
     span:hover{
@@ -354,7 +355,6 @@
         background-color: #fcf4f4;
         color: #d03535;
         border-radius: 20px;
-        padding: 0px 10px 0px 10px;
     }
 
     .name {

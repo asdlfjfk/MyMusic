@@ -12,11 +12,3 @@ export const formatDate = {
         }
     },
 }
-
-// export const listdetail = {
-//     methods: {
-//         listdetail(id){
-//             this.$router.push('/songlist/' + id)
-//         },
-//     }
-// }

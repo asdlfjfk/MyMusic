@@ -6,14 +6,14 @@
                 <div>
                     <router-link to="/home" class="link">
                         <li class="item" :class="{active: current === 1}" @click="currentitem(1)">
-                            <span class="iconfont icon-music">&#xe600</span>
+                            <span class="iconfont">&#xe600</span>
                             <span>发现音乐</span>
                         </li>
                     </router-link>
 
                     <router-link to="/video" class="link">
                         <li class="item" :class="{active: current === 2}" @click="currentitem(2)">
-                            <span class="iconfont icon-video">&#xe620</span>
+                            <span class="iconfont">&#xe620</span>
                             <span>推荐视频</span>
                         </li>
                     </router-link>
@@ -21,10 +21,10 @@
                 </div>
                 <p>我的音乐</p>
                 <div>
-                    <router-link to="/disk" class="link">
+                    <router-link to="/myplaylist" class="link">
                         <li class="item" :class="{active: current === 3}" @click="currentitem(3)">
-                            <span class="iconfont icon-cloud">&#xe62b</span>
-                            我的音乐云盘
+                            <span class="iconfont icon">&#xe636;</span>
+                            我创建的歌单
                         </li>
                     </router-link>
                 </div>
@@ -108,6 +108,12 @@
         -webkit-font-smoothing: antialiased;
         -webkit-text-stroke-width: 0.2px;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon{
+        font-size: 20px;
+        position: relative;
+        top: 2.5px;
     }
 
     span{

@@ -104,9 +104,9 @@
             this.listid = id
 
             this.$store.commit('cleansongset')
-
+            let logincookie = sessionStorage.getItem("logincookie")
             new Promise((resolve) => {
-                getplaylist(this.listid).then(res => {
+                getplaylist(this.listid,logincookie).then(res => {
                     this.playlist = res.data.playlist
                     this.creator = this.playlist.creator
                     this.createTime = this.formatDate(this.playlist.createTime)
