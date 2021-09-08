@@ -137,7 +137,6 @@
                                     this.logintf = true
                                     this.avatar = res.data.profile.avatarUrl
                                     this.username = res.data.profile.nickname
-                                    console.log(res);
                                     if (this.logintoastflag === 0){
                                         this.$message.success("登陆成功")
                                         sessionStorage.setItem("toastflag",1)
