@@ -89,22 +89,25 @@
                 this.current = parseInt(sessionStorage.getItem("singerlistcurrent"));
             })
 
-
-
-            let id = this.routeid
-            this.$store.commit('cleansongset')
-
-            getsingerdetail(id).then(res => {
-                this.singer = res.data.artist
-                this.alias = this.singer.alias[0]
-                this.$store.commit('pushallsong',res.data.hotSongs)
-                this.$store.commit('changeflag',2)
-                this.loading = false
-            })
+            this.init()
+        },
+        activated(){
+            this.init()
         },
         methods:{
                 itemCurrent(num){
                     this.current = num
+                },
+                init(){
+                    let id = this.routeid
+                    getsingerdetail(id).then(res => {
+                        this.singer = res.data.artist
+                        this.alias = this.singer.alias[0]
+                        this.$store.commit('cleansongset')
+                        this.$store.commit('pushallsong',res.data.hotSongs)
+                        this.$store.commit('changeflag',2)
+                        this.loading = false
+                    })
                 }
         },
         computed:{

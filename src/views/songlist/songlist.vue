@@ -100,47 +100,10 @@
                 this.$store.commit('changesearchkeyword',sessionStorage.getItem("keywords"));
             })
 
-            let id = this.routeid;
-            this.listid = id
-
-            this.$store.commit('cleansongset')
-            let logincookie = sessionStorage.getItem("logincookie")
-            new Promise((resolve) => {
-                getplaylist(this.listid,logincookie).then(res => {
-                    this.playlist = res.data.playlist
-                    this.creator = this.playlist.creator
-                    this.createTime = this.formatDate(this.playlist.createTime)
-                    this.tags = this.playlist.tags
-                    this.trackids = this.playlist.trackIds
-                    resolve(res)
-                })
-            }).then(() => {
-                this.comments.push(this.playlist.commentCount)
-                this.comments.push(this.playlist.id)
-                for (let trackid of this.trackids){
-                    this.ids.push(trackid.id)
-                }
-
-                //保证请求按id顺序执行
-                let promise = null
-                if (this.ids.length >= this.trackids.length){
-                    promise = this.ids.map(item => {
-                        return this.getInfo(item)  //将每个请求封装为promise
-                    })
-
-                    Promise.all(promise).then(res => {  //遍历所有请求的数据
-                        let count = 0
-                        for (let song of res){
-                            this.$store.commit('pushallsong',song)
-                            this.$store.commit('changeflag',1)
-                            count += 1
-                        }
-                        if (count >= res.length){
-                            this.loading = false
-                        }
-                    })
-                }
-            })
+            this.init()
+        },
+        activated(){
+            this.init()
         },
         computed:{
             routeid(){
@@ -153,6 +116,49 @@
         methods:{
             itemCurrent(num){
                 this.current = num
+            },
+
+            init(){
+                let id = this.routeid;
+                this.listid = id
+                let logincookie = sessionStorage.getItem("logincookie")
+                new Promise((resolve) => {
+                    getplaylist(this.listid,logincookie).then(res => {
+                        this.playlist = res.data.playlist
+                        this.creator = this.playlist.creator
+                        this.createTime = this.formatDate(this.playlist.createTime)
+                        this.tags = this.playlist.tags
+                        this.trackids = this.playlist.trackIds
+                        resolve(res)
+                    })
+                }).then(() => {
+                    this.comments.push(this.playlist.commentCount)
+                    this.comments.push(this.playlist.id)
+                    for (let trackid of this.trackids){
+                        this.ids.push(trackid.id)
+                    }
+
+                    //保证请求按id顺序执行
+                    let promise = null
+                    if (this.ids.length >= this.trackids.length){
+                        promise = this.ids.map(item => {
+                            return this.getInfo(item)  //将每个请求封装为promise
+                        })
+
+                        Promise.all(promise).then(res => {  //遍历所有请求的数据
+                            let count = 0
+                            this.$store.commit('cleansongset')
+                            for (let song of res){
+                                this.$store.commit('pushallsong',song)
+                                this.$store.commit('changeflag',1)
+                                count += 1
+                            }
+                            if (count >= res.length){
+                                this.loading = false
+                            }
+                        })
+                    }
+                })
             },
 
             //播放全部

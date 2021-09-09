@@ -78,20 +78,10 @@
                 this.$store.commit('changesearchkeyword',sessionStorage.getItem("keywords"));
             })
 
-            this.$store.commit('cleansongset')
-            getalbum(this.id).then(res => {
-                this.detail = res.data.album
-                this.shareCount = res.data.album.info.shareCount
-                this.name = res.data.album.artist.name
-                this.commentCount = res.data.album.info.commentCount
-                this.description = res.data.album.description
-                this.alias = res.data.album.alias[0]
-                this.$store.commit('pushallsong',res.data.songs)
-                this.$store.commit('changeflag',2)
-                this.comments.push(this.detail.info.commentCount)
-                this.comments.push(this.detail.id)
-                this.loading = false
-            })
+            this.init()
+        },
+        activated(){
+            this.init()
         },
         computed:{
             id(){
@@ -102,6 +92,22 @@
             }
         },
         methods:{
+            init(){
+                getalbum(this.id).then(res => {
+                    this.detail = res.data.album
+                    this.shareCount = res.data.album.info.shareCount
+                    this.name = res.data.album.artist.name
+                    this.commentCount = res.data.album.info.commentCount
+                    this.description = res.data.album.description
+                    this.alias = res.data.album.alias[0]
+                    this.$store.commit('cleansongset')
+                    this.$store.commit('pushallsong',res.data.songs)
+                    this.$store.commit('changeflag',2)
+                    this.comments.push(this.detail.info.commentCount)
+                    this.comments.push(this.detail.id)
+                    this.loading = false
+                })
+            },
             //播放全部
             pushallsong(){
                 let item = this.$store.state.songset[0][0]
