@@ -2,7 +2,7 @@
     <div class="lists">
         <div class="title"><span class="songtitle">音乐标题</span><span class="singertitle">歌手</span><span class="albumtitle">专辑</span><span class="time">时长</span></div>
         <div class="allsong">
-            <div v-for="(item,index) in allsong[0]" class="songs" id="song"
+            <div v-for="(item,index) in allsong" class="songs" id="song"
                  :class="{bgc: index%2 === 0,active: item.id === playerbackid,
                  copyrights: item.noCopyrightRcmd !== null}"
                  @dblclick="addsongtoplay(item)">
@@ -12,12 +12,12 @@
                     <span class="icon iconfont1" v-if="item.mv !== 0" @click="mvdetail(item.mv)">&#xe674;</span>
                     <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                     <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
-                    <span v-if="item.privilege.downloadMaxbr === 999000">
+                    <span v-if="item.privilege && item.privilege.downloadMaxbr === 999000">
                         <img src="~assets/sq.png" alt="" class="sqicon">
                     </span>
                 </div>
-                <div class="name"><span>{{item.name}}</span><span v-if="item.alia[0]" class="alia">({{item.alia[0]}})</span></div>
-                <div class="singer"><span  @click="singerdetail(item.ar[0].id)">{{item.ar[0].name}}</span></div>
+                <div class="name"><span>{{item.name}}</span><span v-if="item.alia && item.alia.length > 0" class="alia">({{item.alia[0]}})</span></div>
+                <div class="singer"><span @click="singerdetail(item.ar[0].id)" v-if="item.ar && item.ar.length > 0 && item.ar[0].name">{{item.ar[0].name}}</span></div>
                 <div class="album"><span>{{item.al.name}}</span></div>
                 <div class="length"><span>{{format(item.dt)}}</span></div>
             </div>
@@ -63,12 +63,12 @@
         },
         computed:{
             allsong(){
-                return this.$store.state.songset
+                return this.$store.state.songset[0]
             },
             playerbackid(){
                 return this.$store.state.playerbackid
             },
-        },
+        }
     }
 </script>
 

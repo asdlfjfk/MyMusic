@@ -116,7 +116,8 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        color: rgba(103, 109, 217, 0.6);
+        color: #507DAF;
+        opacity: .7;
         font-size: 13px;
         font-family: 微软雅黑;
         font-weight: 400;

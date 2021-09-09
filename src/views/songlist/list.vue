@@ -3,6 +3,7 @@
         <div class="title"><span class="songtitle">音乐标题</span><span class="singertitle">歌手</span><span class="albumtitle">专辑</span><span class="time">时长</span></div>
         <div class="allsong">
             <div v-for="(item,index) in allsong" class="songs" id="song"
+                 v-if="item.data && item.data.songs"
                  :class="{bgc: index%2 === 0,active: item.data.songs[0].id === playerbackid,
                  copyrights: item.data.songs[0].noCopyrightRcmd !== null}"
                  @dblclick="addsongtoplay(item)">

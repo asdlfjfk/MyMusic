@@ -35,7 +35,6 @@
 
         created(){
             getsingerdes(this.id).then(res => {
-                console.log(res);
                 this.briefDesc = res.data.briefDesc
                 if (res.data.introduction.length > 0){
                     this.famous = res.data.introduction[0];

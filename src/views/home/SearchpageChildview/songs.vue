@@ -9,7 +9,7 @@
 
                     <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
                     <div class="name">
-                        <div class="name2">{{item.name}}</div><div v-if="item.alias.length > 0" class="alia">({{item.alias[0]}})</div>
+                        <div class="name2">{{item.name}}</div><div v-if="item.alias && item.alias[0]" class="alia">({{item.alias[0]}})</div>
                         <div class="allicon">
                             <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe674;</span>
                             <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
@@ -19,8 +19,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="singer"><span @click="singerdetail(item.artists[0].id)">{{item.artists[0].name}}</span></div>
-                    <div class="album"><span @click="albumdetail(item.album.id)">{{item.album.name}}</span></div>
+                    <div class="singer"><span @click="singerdetail(item.artists[0].id)" v-if="item.artists && item.artists[0]">{{item.artists[0].name}}</span></div>
+                    <div class="album"><span @click="albumdetail(item.album.id)" v-if="item.album && item.album.name">{{item.album.name}}</span></div>
                     <div class="length"><span>{{format(item.duration)}}</span></div>
                 </div>
         </div>

@@ -12,13 +12,13 @@
                     <span class="icon iconfont1" v-if="item.mv !== 0" @click="mvdetail(item.mv)">&#xe674;</span>
                     <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                     <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
-                    <span v-if="item.privilege.downloadMaxbr === 999000">
+                    <span v-if="item.privilege && item.privilege.downloadMaxbr === 999000">
                         <img src="~assets/sq.png" alt="" class="sqicon">
                     </span>
                 </div>
-                <div class="name"><span>{{item.name}}</span><span v-if="item.alia[0]" class="alia">({{item.alia[0]}})</span></div>
-                <div class="singer"><span @click="singerdetail(item.ar[0].id)">{{item.ar[0].name}}</span></div>
-                <div class="album"><span @click="albumdetail(item.al.id)">{{item.al.name}}</span></div>
+                <div class="name"><span>{{item.name}}</span><span v-if="item.alia && item.alia.length > 0" class="alia">({{item.alia[0]}})</span></div>
+                <div class="singer"><span @click="singerdetail(item.ar[0].id)" v-if="item.ar && item.ar.length > 0 && item.ar[0].name">{{item.ar[0].name}}</span></div>
+                <div class="album"><span @click="albumdetail(item.al.id)" v-if="item.al && item.al.name">{{item.al.name}}</span></div>
                 <div class="length"><span>{{format(item.dt)}}</span></div>
             </div>
         </div>
