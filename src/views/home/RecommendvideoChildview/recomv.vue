@@ -6,7 +6,7 @@
                 <div v-for="(item,index) in area" class="areaitem" :class="{active: index === areacurrent}" @click="changearea(index)">{{item}}</div>
             </div>
         </div>
-        <div class="newmv">
+        <div class="newmv" v-loading="loadingnewmv">
             <div v-for="item in newmv">
                 <div class="mvplaycount" v-if="item.playCount >= 10000">
                     <i class="el-icon-caret-right"></i>
@@ -24,7 +24,7 @@
         <div class="line line2">
             <div  class="title" @click="hotmvtoallmv">热播MV ></div>
         </div>
-        <div class="newmv">
+        <div class="newmv" v-loading="loadinghotmv">
             <div v-for="item in hotmv">
                 <div class="mvplaycount" v-if="item.playCount >= 10000">
                     <i class="el-icon-caret-right"></i>
@@ -42,7 +42,7 @@
         <div class="line line3">
             <div  class="title" @click="wangyimvtoallmv">网易出品 ></div>
         </div>
-        <div class="newmv">
+        <div class="newmv" v-loading="loadingwangyimv">
             <div v-for="item in wangyimv">
                 <div class="mvplaycount" v-if="item.playCount >= 10000">
                     <i class="el-icon-caret-right"></i>
@@ -62,7 +62,7 @@
                 <div v-for="(item,index) in area" class="areaitem" :class="{active: index === areacurrent2}" @click="changearea2(index)">{{item}}</div>
             </div>
         </div>
-        <div class="mvleader">
+        <div class="mvleader" v-loading="loadingmvleader">
             <div v-for="(item,index) in mvleader" class="leaderitem">
                 <div class="number">{{PrefixZero(index + 1)}}</div>
                 <div>
@@ -91,6 +91,10 @@
         name: "recomv",
         data(){
           return {
+              loadingnewmv:true,
+              loadingwangyimv:true,
+              loadinghotmv:true,
+              loadingmvleader:true,
               area:['内地','港台','欧美','日本','韩国'],
               areacurrent:0,
               areacurrent2:0,
@@ -103,16 +107,20 @@
         created(){
             getnewmv(this.area[this.areacurrent],8).then(res => {
                 this.newmv = res.data.data
+                this.loadingnewmv = false
             })
             getwangyimv(8).then(res => {
                 this.wangyimv = res.data.data
+                this.loadingwangyimv = false
             })
             getallmv('全部','全部','最热',8).then(res => {
                 this.hotmv = res.data.data
+                this.loadinghotmv = false
             })
 
             getmvleader(10,this.area[this.areacurrent2]).then(res => {
                 this.mvleader = res.data.data
+                this.loadingmvleader = false
             })
         },
         methods:{
@@ -151,13 +159,17 @@
         },
         watch:{
             areacurrent(val){
+                this.loadingnewmv = true
                 getnewmv(this.area[val],8).then(res => {
                     this.newmv = res.data.data
+                    this.loadingnewmv = false
                 })
             },
             areacurrent2(val){
+                this.loadingmvleader = true
                 getmvleader(10,this.area[val]).then(res => {
                     this.mvleader = res.data.data
+                    this.loadingmvleader = false
                 })
             },
         }
