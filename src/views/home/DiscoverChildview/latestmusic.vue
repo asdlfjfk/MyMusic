@@ -41,21 +41,8 @@
             currenttype(index){
                 this.typecurrent = index
                 this.$store.commit('changenewalbumcurrent',this.type[index].number2)
-            }
-        },
-        created(){
-            this.$store.commit('changenewalbumcurrent',this.type[this.typecurrent].number2)
-            getnewsong(this.type[this.typecurrent].number).then(res => {
-                this.$store.commit('cleansongset')
-                this.$store.commit('pushallsong',res.data.data)
-                this.$store.commit('changeflag',2)
-                this.loading = false
-            })
-        },
-        watch:{
-            typecurrent(val){
-                this.loading = true
-                this.typecurrent = val
+            },
+            init(){
                 getnewsong(this.type[this.typecurrent].number).then(res => {
                     this.$store.commit('cleansongset')
                     this.$store.commit('pushallsong',res.data.data)
@@ -64,15 +51,21 @@
                 })
             }
         },
+        created(){
+            this.$store.commit('changenewalbumcurrent',this.type[this.typecurrent].number2)
+            this.init()
+        },
+        watch:{
+            typecurrent(val){
+                this.loading = true
+                this.typecurrent = val
+                this.init()
+            }
+        },
         activated(){
             //防止和搜索页歌曲混乱
             this.loading = true
-            getnewsong(this.type[this.typecurrent].number).then(res => {
-                this.$store.commit('cleansongset')
-                this.$store.commit('pushallsong',res.data.data)
-                this.$store.commit('changeflag',2)
-                this.loading = false
-            })
+            this.init()
         }
     }
 </script>

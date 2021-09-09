@@ -47,6 +47,15 @@
           }
         },
         methods:{
+            init(){
+                tosearch(this.keywords,100,this.page * 100,1).then(res => {
+                    this.count = res.data.result.songCount
+                    this.$store.commit('cleansongset')
+                    this.$store.commit('pushallsong',res.data.result.songs)
+                    this.$store.commit('changeflag',2)
+                    this.loading = false
+                })
+            },
             currentChange(currentPage){
                 tosearch(this.keywords,100,(currentPage-1) * 100,1).then(res => {
                     this.$store.commit('cleansongset')
@@ -84,13 +93,7 @@
             }
         },
         created(){
-            tosearch(this.keywords,100,this.page * 100,1).then(res => {
-                this.count = res.data.result.songCount
-                this.$store.commit('cleansongset')
-                this.$store.commit('pushallsong',res.data.result.songs)
-                this.$store.commit('changeflag',2)
-                this.loading = false
-            })
+            this.init()
             //防止页面刷新后搜索关键字丢失
             window.addEventListener("pagehide",()=>{
                 sessionStorage.setItem("keywords",this.keywords)
@@ -127,13 +130,7 @@
         activated(){
             //防止与最新音乐页面歌曲混乱
             this.loading = true
-            tosearch(this.keywords,100,this.page * 100,1).then(res => {
-                this.count = res.data.result.songCount
-                this.$store.commit('cleansongset')
-                this.$store.commit('pushallsong',res.data.result.songs)
-                this.$store.commit('changeflag',2)
-                this.loading = false
-            })
+            this.init()
         }
     }
 </script>
