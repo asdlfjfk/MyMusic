@@ -107,7 +107,6 @@
             gethotcomment(this.commentid,20).then(res => {
                 this.hot = res.data.hotComments
                 this.loading = false
-                console.log(res);
             })
 
             //默认展示第一页评论
