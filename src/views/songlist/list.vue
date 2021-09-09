@@ -17,8 +17,8 @@
                     </span>
                 </div>
                 <div class="name"><span>{{item.data.songs[0].name}}</span><span v-if="item.data.songs[0].alia[0]" class="alia">({{item.data.songs[0].alia[0]}})</span></div>
-                <div class="singer"><span>{{item.data.songs[0].ar[0].name}}</span></div>
-                <div class="album"><span>{{item.data.songs[0].al.name}}</span></div>
+                <div class="singer"><span @click="singerdetail(item.data.songs[0].ar[0].id)">{{item.data.songs[0].ar[0].name}}</span></div>
+                <div class="album"><span @click="albumdetail(item.data.songs[0].al.id)">{{item.data.songs[0].al.name}}</span></div>
                 <div class="length"><span>{{format(item.data.songs[0].dt)}}</span></div>
 
             </div>
@@ -57,6 +57,12 @@
             },
             mvdetail(id){
                 this.$router.push('/mvpage/' +  id)
+            },
+            singerdetail(id){
+                this.$router.push('/singerlist/' + id)
+            },
+            albumdetail(id){
+                this.$router.push('/albumlist/' + id)
             }
         },
         computed:{

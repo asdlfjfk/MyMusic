@@ -19,8 +19,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="singer"><span>{{item.artists[0].name}}</span></div>
-                    <div class="album"><span>{{item.album.name}}</span></div>
+                    <div class="singer"><span @click="singerdetail(item.artists[0].id)">{{item.artists[0].name}}</span></div>
+                    <div class="album"><span @click="albumdetail(item.album.id)">{{item.album.name}}</span></div>
                     <div class="length"><span>{{format(item.duration)}}</span></div>
                 </div>
         </div>
@@ -75,10 +75,22 @@
             },
             mvdetail(id){
                 this.$router.push('/mvpage/' +  id)
+            },
+            singerdetail(id){
+                this.$router.push('/singerlist/' + id)
+            },
+            albumdetail(id){
+                this.$router.push('/albumlist/' + id)
             }
         },
         created(){
-
+            tosearch(this.keywords,100,this.page * 100,1).then(res => {
+                this.count = res.data.result.songCount
+                this.$store.commit('cleansongset')
+                this.$store.commit('pushallsong',res.data.result.songs)
+                this.$store.commit('changeflag',2)
+                this.loading = false
+            })
             //防止页面刷新后搜索关键字丢失
             window.addEventListener("pagehide",()=>{
                 sessionStorage.setItem("keywords",this.keywords)
@@ -89,14 +101,6 @@
                 }
                 this.$store.commit('changesearchkeyword',sessionStorage.getItem("keywords"));
             })
-
-            this.$store.commit('cleansongset')
-                tosearch(this.keywords,100,this.page * 100,1).then(res => {
-                    this.count = res.data.result.songCount
-                    this.$store.commit('pushallsong',res.data.result.songs)
-                    this.$store.commit('changeflag',2)
-                    this.loading = false
-                })
         },
         computed:{
             keywords(){
@@ -107,25 +111,25 @@
             },
             playerbackid(){
                 return this.$store.state.playerbackid
-            },
+            }
         },
         watch:{
             keywords(val){
                 this.loading = true
-                    tosearch(val,100,this.page * 100,1).then(res => {
-                        this.$store.commit('cleansongset')
-                        this.count = res.data.result.songCount
-                        this.$store.commit('pushallsong',res.data.result.songs)
-                        this.loading = false
-                    })
+                tosearch(val,100,this.page * 100,1).then(res => {
+                    this.$store.commit('cleansongset')
+                    this.count = res.data.result.songCount
+                    this.$store.commit('pushallsong',res.data.result.songs)
+                    this.loading = false
+                })
             }
         },
         activated(){
             //防止与最新音乐页面歌曲混乱
             this.loading = true
-            this.$store.commit('cleansongset')
             tosearch(this.keywords,100,this.page * 100,1).then(res => {
                 this.count = res.data.result.songCount
+                this.$store.commit('cleansongset')
                 this.$store.commit('pushallsong',res.data.result.songs)
                 this.$store.commit('changeflag',2)
                 this.loading = false

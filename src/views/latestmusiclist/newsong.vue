@@ -18,14 +18,14 @@
                         <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe674;</span>
                         <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
                         <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
-                        <span v-if="item.privilege.maxbr === 999000">
+                        <span v-if="item.privilege && item.privilege.maxbr === 999000">
                             <img src="~assets/sq.png" alt="" class="sqicon">
                         </span>
                     </div>
                 </div>
 
-                <div class="singer"><span>{{item.artists[0].name}}</span></div>
-                <div class="album"><span>{{item.album.name}}</span></div>
+                <div class="singer"><span @click="singerdetail(item.artists[0].id)">{{item.artists[0].name}}</span></div>
+                <div class="album"><span @click="albumdetail(item.album.id)">{{item.album.name}}</span></div>
                 <div class="length"><span>{{format(item.duration)}}</span></div>
 
             </div>
@@ -68,6 +68,12 @@
             },
             mvdetail(id){
                 this.$router.push('/mvpage/' +  id)
+            },
+            singerdetail(id){
+                this.$router.push('/singerlist/' + id)
+            },
+            albumdetail(id){
+                this.$router.push('/albumlist/' + id)
             }
         },
         computed:{

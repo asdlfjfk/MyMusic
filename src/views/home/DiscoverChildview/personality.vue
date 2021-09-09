@@ -73,7 +73,7 @@
                     <div class="singername">
                         <span class="iconfont" v-if="item.song.mvid" @click="mvdetail(item.song.mvid)">&#xe674;</span>
                         <img src="~assets/sq.png" class="sq" v-if="item.song.privilege.maxbr === 999000">
-                        {{item.song.artists[0].name}}
+                        <span  @click="singerdetail(item.song.artists[0].id)">{{item.song.artists[0].name}}</span>
                     </div>
                 </div>
             </div>
@@ -156,6 +156,9 @@
             },
             mvdetail(id){
                 this.$router.push('/mvpage/' +  id)
+            },
+            singerdetail(id){
+                this.$router.push('/singerlist/' + id)
             },
             linktoplaylist(){
                 this.$router.push('playlist')
