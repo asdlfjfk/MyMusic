@@ -130,7 +130,7 @@
         background-color: #fff;
         font-family: 微软雅黑;
         cursor: pointer;
-        margin-left: 44px;
+        margin-left: 80px;
     }
 
     button:hover{
@@ -138,7 +138,7 @@
     }
 
     span{
-        margin-left: 20px;
+        margin-left: 14px;
         font-size: 13px;
         padding: 0px 10px 0px 10px;
         color: rgb(0,0,0,.4);
@@ -152,9 +152,10 @@
     }
 
     .titlelist{
-        margin-left: 340px;
+        margin-left: 294px;
         display: flex;
         align-items: center;
+        white-space: nowrap;
     }
 
     .active{

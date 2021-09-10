@@ -185,7 +185,7 @@
 
     #songlist{
         height: calc(100vh - 160px);
-        width: 1184px;
+        width: 1180px;
         margin: 0 auto;
     }
 

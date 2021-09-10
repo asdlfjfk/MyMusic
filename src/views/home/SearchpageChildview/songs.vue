@@ -140,7 +140,7 @@
     .searchsongs{
         width: 1225px;
         margin: 0 auto;
-        height: calc(100vh - 200px);
+        height: calc(100vh - 160px);
     }
 
     .title{
