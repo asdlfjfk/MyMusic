@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="mvpage">
         <div class="headline">
             <div @click="goback" class="head back">< MV详情</div>
             <div class="head other">相关推荐</div>
@@ -258,6 +258,10 @@
 
 <style scoped>
 
+    #mvpage{
+        height: calc(100vh - 160px);
+    }
+
     .headline{
         display: flex;
         justify-content: space-between;
@@ -280,7 +284,7 @@
     .other{
         position: relative;
         top: 20px;
-        right: 320px;
+        right: 26.7%;
     }
 
     .icon{
@@ -342,8 +346,8 @@
         position: relative;
         left: 28%;
         right: 30%;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        margin-top: 4%;
+        bottom: 20px;
     }
 
     .newcomments >>> .el-pagination.is-background .el-pager li:not(.disabled).active{

@@ -5,7 +5,7 @@
         <div class="container" v-loading="loadingcarousel">
                 <el-carousel type="card" class="swiper" height="244px">
                     <el-carousel-item v-for="item in banners" :key="item.id" class="swiperitem">
-                        <div class="new" ><div>新歌首发</div></div>
+                        <div class="new" ><div>{{item.typeTitle}}</div></div>
                         <img :src="item.imageUrl" @click="swiperaddsongtoplay(item)">
                     </el-carousel-item>
                 </el-carousel>

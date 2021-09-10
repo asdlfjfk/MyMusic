@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="privatelist">
         <div class="title">< 独家放送</div>
         <div class="allvideos" ref="videos">
             <div v-for="item in list">
@@ -40,9 +40,10 @@
         methods:{
             Scroll(){
                 let box = this.$refs.videos
-                if (parseInt(box.getBoundingClientRect().bottom) === 669) {
+                if (parseInt(box.getBoundingClientRect().bottom) === 680) {
                     this.page += 1
-                }else if (parseInt(box.getBoundingClientRect().bottom) === 670){
+                }
+                else if (parseInt(box.getBoundingClientRect().bottom) === 679){
                     this.page += 1
                 }
             },
@@ -70,6 +71,10 @@
 </script>
 
 <style scoped>
+
+    #privatelist{
+        height: calc(100vh - 160px);
+    }
 
     .title{
         font-weight: 800;

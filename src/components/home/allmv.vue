@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="allmv">
         <div class="head">全部MV</div>
         <div class="allcate">
             <div class="category">
@@ -117,7 +117,10 @@
             },
             Scroll(){
                 let box = this.$refs.allmv
-                if (parseInt(box.getBoundingClientRect().bottom) === 650) {
+                console.log(box.getBoundingClientRect().bottom);
+                if (parseInt(box.getBoundingClientRect().bottom) === 679) {
+                    this.page += 1
+                }else if (parseInt(box.getBoundingClientRect().bottom) === 680) {
                     this.page += 1
                 }
             }
@@ -168,6 +171,10 @@
 </script>
 
 <style scoped>
+
+    #allmv{
+        height: calc(100vh - 160px);
+    }
 
     .main{
         position: relative;
