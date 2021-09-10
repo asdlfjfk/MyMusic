@@ -12,31 +12,32 @@
         </div>
 
         <!--推荐歌单-->
-        <div class="recommend">
-            <p class="titleText" @click="linktoplaylist">推荐歌单 ></p>
-        </div>
-
-        <div class="recommonlist" v-loading="loading">
-            <div v-for="item in recommonlist">
-
-                <div class="imgbox" @click="listdetail(item.id)">
-                    <div class="imgboxcontent" v-if="item.playCount >= 10000">
-                        <i class="el-icon-caret-right"></i>
-                        {{parseInt(item.playCount/10000)}}万
-                    </div>
-                    <div class="imgboxcontent" v-if="item.playCount < 10000">
-                        <i class="el-icon-caret-right"></i>
-                        {{item.playCount}}
-                    </div>
-                    <img :src="item.picUrl" class="itemimg">
-                    <div id="button">
-                        <i class="el-icon-caret-right" id="player"></i>
-                    </div>
-                </div>
-
-                <div class="name" @click="listdetail(item.id)">{{item.name}}</div>
+            <div class="recommend">
+                <p class="titleText" @click="linktoplaylist">推荐歌单 ></p>
             </div>
-        </div>
+
+            <div class="recommonlist" v-loading="loading">
+                <div v-for="item in recommonlist">
+
+                    <div class="imgbox" @click="listdetail(item.id)">
+                        <div class="imgboxcontent" v-if="item.playCount >= 10000">
+                            <i class="el-icon-caret-right"></i>
+                            {{parseInt(item.playCount/10000)}}万
+                        </div>
+                        <div class="imgboxcontent" v-if="item.playCount < 10000">
+                            <i class="el-icon-caret-right"></i>
+                            {{item.playCount}}
+                        </div>
+                        <img :src="item.picUrl" class="itemimg">
+                        <div id="button">
+                            <i class="el-icon-caret-right" id="player"></i>
+                        </div>
+                    </div>
+
+                    <div class="name" @click="listdetail(item.id)">{{item.name}}</div>
+                </div>
+            </div>
+
 
 
         <!--独家放送-->
@@ -56,28 +57,30 @@
 
 
         <!--最新音乐-->
-        <div class="recommend">
-            <p class="titleText" @click="linktolatestmusic">最新音乐 ></p>
-        </div>
+            <div class="recommend">
+                <p class="titleText" @click="linktolatestmusic">最新音乐 ></p>
+            </div>
 
-        <div class="newsongs">
-            <div v-for="item in newsongs" class="newsongsitem" @dblclick="addsongtoplay(item)">
-                <img :src="item.picUrl" alt="" class="newsongimg">
+            <div class="newsongs">
+                <div v-for="item in newsongs" class="newsongsitem" @dblclick="addsongtoplay(item)">
+                    <img :src="item.picUrl" alt="" class="newsongimg">
 
-                <div id="button2">
-                    <i class="el-icon-caret-right" id="player3"></i>
-                </div>
+                    <div id="button2">
+                        <i class="el-icon-caret-right" id="player3"></i>
+                    </div>
 
-                <div class="newsongname">
-                    <div class="songname">{{item.name}}</div>
-                    <div class="singername">
-                        <span class="iconfont" v-if="item.song.mvid" @click="mvdetail(item.song.mvid)">&#xe674;</span>
-                        <img src="~assets/sq.png" class="sq" v-if="item.song.privilege.maxbr === 999000">
-                        <span  @click="singerdetail(item.song.artists[0].id)">{{item.song.artists[0].name}}</span>
+                    <div class="newsongname">
+                        <div class="songname">{{item.name}}</div>
+                        <div class="singername">
+                            <span class="iconfont" v-if="item.song.mvid" @click="mvdetail(item.song.mvid)">&#xe674;</span>
+                            <img src="~assets/sq.png" class="sq" v-if="item.song.privilege.maxbr === 999000">
+                            <span  @click="singerdetail(item.song.artists[0].id)">{{item.song.artists[0].name}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+
 
 
 
@@ -212,8 +215,8 @@
     }
 
     #personal{
-        padding: 14px;
-        margin: 0px 10px 0px 10px;
+        width: 1200px;
+        margin: 0 auto;
     }
 
     .swiper{

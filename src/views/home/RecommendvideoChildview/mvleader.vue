@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="mvleader">
         <div class="line">
             <div  class="title">MV排行榜</div>
             <div class="category">
@@ -83,6 +83,12 @@
 </script>
 
 <style scoped>
+
+    #mvleader{
+        height: calc(100vh - 160px);
+        width: 1200px;
+        margin: 0 auto;
+    }
 
     .title{
         font-weight: 800;

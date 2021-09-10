@@ -81,6 +81,11 @@
 
 <style scoped>
 
+    .singerlist{
+        width: 1200px;
+        margin: 0 auto;
+    }
+
     .iconfont{
         font-family:"iconfont" !important;
         font-size:16px;font-style:normal;

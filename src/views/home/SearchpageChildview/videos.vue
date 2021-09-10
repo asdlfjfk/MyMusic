@@ -99,6 +99,11 @@
 
 <style scoped>
 
+    .searchvideos{
+        width: 1240px;
+        margin: 0 auto;
+    }
+
     .iconfont{
         font-family:"iconfont" !important;
         -webkit-font-smoothing: antialiased;

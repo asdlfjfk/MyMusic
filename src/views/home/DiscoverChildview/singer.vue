@@ -90,6 +90,8 @@
                     this.page += 1
                 }else if (parseInt(box.getBoundingClientRect().bottom) === 645) {
                     this.page += 1
+                }else if (parseInt(box.getBoundingClientRect().bottom) === 861) {
+                    this.page += 1
                 }
             },
             listdetail(id){
@@ -140,7 +142,8 @@
 <style scoped>
 
     #singer{
-        margin: 0px 14px 0px 14px;
+        width: 1200px;
+        margin:  auto;
     }
 
     .iconfont{

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="myplaylist">
         <div class="title">我创建的歌单</div>
         <div v-if="userplaylist.length > 0" class="allplaylist">
             <div v-for="item in userplaylist" class="playlistitem">
@@ -43,6 +43,10 @@
 </script>
 
 <style scoped>
+
+    #myplaylist{
+        height: calc(100vh - 160px);
+    }
 
     .allplaylist{
         display: flex;

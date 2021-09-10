@@ -89,8 +89,8 @@
         position: relative;
         left: 28%;
         right: 30%;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        margin-top: 60px;
+        bottom: 30px;
     }
 
     #albums >>> .el-pagination.is-background .el-pager li:not(.disabled).active{

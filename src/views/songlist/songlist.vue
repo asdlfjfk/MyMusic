@@ -184,8 +184,9 @@
 <style scoped>
 
     #songlist{
-        margin: 0px 35px 0px 10px;
         height: calc(100vh - 160px);
+        width: 1184px;
+        margin: 0 auto;
     }
 
     .head{
@@ -195,8 +196,8 @@
     }
 
     .headimg{
-        width: 240px;
-        height: 240px;
+        width: 220px;
+        height: 220px;
         border-radius: 5px;
         position: relative;
         left: 4%;

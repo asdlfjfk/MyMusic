@@ -57,7 +57,7 @@
         </div>
 
 
-        <div class="title title2">全球榜</div>
+        <div class="title">全球榜</div>
         <div class="worldlist" v-loading="loadingimg">
             <div v-for="item in otherlist[0]" class="listitem">
                 <div class="imgbox" @click="listdetail(item.id)">
@@ -132,9 +132,8 @@
 <style scoped>
 
     #leaderboard{
-        position: relative;
-        right: 12px;
-        height: 2420px;
+        width: 1200px;
+        margin: 0 auto;
     }
 
     .title {
@@ -146,14 +145,10 @@
         position: relative;
     }
 
-    .title2{
-        position: relative;
-        bottom: 28%;
-    }
-
     .allline{
         position: relative;
         top: 10px;
+        height: 840px;
     }
 
     .leaderline{
@@ -180,8 +175,7 @@
         display: flex;
         flex-wrap: wrap;
         margin-left: 80px;
-        position: relative;
-        bottom: 27.5%;
+        margin-bottom: 20px;
     }
 
     .listitem{
@@ -300,22 +294,22 @@
     .list1{
         position: relative;
         bottom: 318px;
-        right: 24.5%;
+        right: 25%;
     }
     .list2{
         position: relative;
         bottom: 290px;
-        right: 24.5%;
+        right: 25%;
     }
     .list3{
         position: relative;
         bottom: 260px;
-        right: 24.5%;
+        right: 25%;
     }
     .list4{
         position: relative;
         bottom: 232px;
-        right: 24.5%;
+        right: 25%;
     }
 
     .look{

@@ -139,6 +139,8 @@
 
     #singerlist{
         height: calc(100vh - 160px);
+        width: 1225px;
+        margin: 0 auto;
     }
 
     img{

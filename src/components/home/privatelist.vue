@@ -45,6 +45,8 @@
                 }
                 else if (parseInt(box.getBoundingClientRect().bottom) === 679){
                     this.page += 1
+                }else if (parseInt(box.getBoundingClientRect().bottom) === 895){
+                    this.page += 1
                 }
             },
             videodetail(item){
@@ -74,6 +76,8 @@
 
     #privatelist{
         height: calc(100vh - 160px);
+        width: 1200px;
+        margin: 0 auto;
     }
 
     .title{

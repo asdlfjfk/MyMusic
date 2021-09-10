@@ -122,6 +122,8 @@
                     this.page += 1
                 }else if (parseInt(box.getBoundingClientRect().bottom) === 680) {
                     this.page += 1
+                }else if (parseInt(box.getBoundingClientRect().bottom) === 897) {
+                    this.page += 1
                 }
             }
         },
@@ -174,6 +176,8 @@
 
     #allmv{
         height: calc(100vh - 160px);
+        width: 1240px;
+        margin: 0 auto;
     }
 
     .main{
@@ -186,7 +190,7 @@
         font-weight: 800;
         font-size: 20px;
         position: relative;
-        left: 20px;
+        left: 78px;
         top: 10px;
         font-family: 微软雅黑;
     }

@@ -26,11 +26,11 @@
         margin: 0px 66px 0px 40px;
     }
 
-.txt{
-    font-size: 14px;
-    margin-top: 10px;
-    opacity: .8;
-    text-indent: 2em;
-    line-height: 30px;
-}
+    .txt{
+        font-size: 14px;
+        /*margin-top: 10px;*/
+        opacity: .8;
+        text-indent: 2em;
+        line-height: 30px;
+    }
 </style>

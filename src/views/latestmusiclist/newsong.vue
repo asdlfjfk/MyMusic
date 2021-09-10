@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="newsong">
         <div class="playall" @click="pushallsong"><div class="text"><i class="el-icon-caret-right"></i>播放全部</div></div>
         <div class="button" @click="pushallsong"><div class="text"><i class="el-icon-folder-add"></i>收藏全部</div></div>
         <div class="allsong">
@@ -7,26 +7,28 @@
                  :class="{bgc: index%2 === 0,active: item.id === playerbackid,}"
                  @dblclick="addsongtoplay(item)">
 
-                <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
-                <div><img :src="item.album.blurPicUrl" alt=""></div>
-                <div class="button2">
-                    <i class="el-icon-caret-right player"></i>
-                </div>
-                <div class="name">
-                    <div class="name2">{{item.name}}</div><div v-if="item.alias.length > 0" class="alia">({{item.alias[0]}})</div>
-                    <div class="allicon">
-                        <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe674;</span>
-                        <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
-                        <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
-                        <span v-if="item.privilege && item.privilege.maxbr === 999000">
+
+                    <div class="number"><span>{{PrefixZero(index + 1)}}</span></div>
+                    <div><img :src="item.album.blurPicUrl" alt=""></div>
+                    <div class="button2">
+                        <i class="el-icon-caret-right player"></i>
+                    </div>
+                    <div class="name">
+                        <div class="name2">{{item.name}}</div><div v-if="item.alias.length > 0" class="alia">({{item.alias[0]}})</div>
+                        <div class="allicon">
+                            <span class="icon iconfont1" v-if="item.mvid" @click="mvdetail(item.mvid)">&#xe674;</span>
+                            <span class="icon iconfont" v-if="item.fee === 1">&#xe7d4;</span>
+                            <span class="icon iconfont2" v-if="item.fee === 1">&#xe671;</span>
+                            <span v-if="item.privilege && item.privilege.maxbr === 999000">
                             <img src="~assets/sq.png" alt="" class="sqicon">
                         </span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="singer"><span @click="singerdetail(item.artists[0].id)">{{item.artists[0].name}}</span></div>
-                <div class="album"><span @click="albumdetail(item.album.id)">{{item.album.name}}</span></div>
-                <div class="length"><span>{{format(item.duration)}}</span></div>
+                    <div class="singer"><span @click="singerdetail(item.artists[0].id)">{{item.artists[0].name}}</span></div>
+                    <div class="album"><span @click="albumdetail(item.album.id)">{{item.album.name}}</span></div>
+                    <div class="length"><span>{{format(item.duration)}}</span></div>
+
 
             </div>
         </div>
@@ -88,6 +90,12 @@
 </script>
 
 <style scoped>
+
+    #newsong{
+        margin: 0 auto;
+        width: 1200px;
+    }
+
     .allicon{
         display: flex;
         justify-content: flex-end;
@@ -143,7 +151,7 @@
         background-color: #fff;
         line-height: 50px;
         opacity: .8;
-        width: 100%;
+        width: 1200px;
         font-weight: 300;
         mso-bidi-font-weight:200;
         font-size: 14px;
@@ -188,7 +196,7 @@
     .album{
         width: 180px;
         position: relative;
-        left: 10%;
+        left: 11%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -196,7 +204,7 @@
     .length{
         width: 40px;
         position: relative;
-        left: 15%;
+        left: 14.5%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -244,7 +252,7 @@
         justify-content: space-evenly;
         cursor: pointer;
         position: relative;
-        left: 72%;
+        left: 73%;
         bottom: 10px;
         font-size: 14px;
         z-index: 10;
@@ -267,7 +275,7 @@
         justify-content: space-evenly;
         cursor: pointer;
         position: relative;
-        left: 85%;
+        left: 88%;
         bottom: 35px;
         font-size: 14px;
         z-index: 10;

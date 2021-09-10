@@ -189,7 +189,8 @@
 <style scoped>
 
     #playlist{
-        margin: 0px 17px 0px 17px;
+        width: 1200px;
+        margin: 0 auto;
     }
 
     .icon{

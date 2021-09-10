@@ -73,7 +73,8 @@
 <style scoped>
 
     #latestmusic{
-        width: 100%;
+        width: 1200px;
+        margin: 0 auto;
     }
 
     .line1{
@@ -84,7 +85,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        margin-left: 5%;
+        /*margin-left: 5%;*/
         position: relative;
         top: 10px;
         z-index: 10;

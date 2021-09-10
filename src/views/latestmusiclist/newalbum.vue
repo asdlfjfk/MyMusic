@@ -65,16 +65,18 @@
 
 <style scoped>
 
-    #allalbum{
+    #allalbum {
         position: relative;
-        top:14px;
+        top: 14px;
         left: 50px;
-        margin-bottom: 50px;
+        margin: 0 auto;
+        width: 1200px;
     }
 
     .albums{
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 50px;
     }
 
     img{

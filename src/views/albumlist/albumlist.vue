@@ -134,6 +134,8 @@
 
     #albumlist{
         height: calc(100vh - 160px);
+        width: 1227px;
+        margin: 0 auto;
     }
 
     .imgbox{

@@ -109,6 +109,8 @@
 
     #recovideo{
         height: calc(100vh - 230px);
+        width: 1200px;
+        margin: 0 auto;
     }
 
     .nav{

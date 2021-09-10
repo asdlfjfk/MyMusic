@@ -82,6 +82,11 @@
 
 <style scoped>
 
+    .playlist{
+        width: 1200px;
+        margin: 0 auto;
+    }
+
     .searchtitle{
         margin: 10px 0px 20px 20px;
         font-weight: 600;

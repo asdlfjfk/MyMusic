@@ -137,6 +137,12 @@
 
 <style scoped>
 
+    .searchsongs{
+        width: 1225px;
+        margin: 0 auto;
+        height: calc(100vh - 200px);
+    }
+
     .title{
         width: 100%;
         font-family: 微软雅黑;
