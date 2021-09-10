@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="loading">
+    <div v-loading="loading" id="singerlist">
         <el-header>
             <div class="head">
                 <img v-if="singer" :src="singer.img1v1Url" class="headimg">
@@ -136,6 +136,10 @@
 </script>
 
 <style scoped>
+
+    #singerlist{
+        height: calc(100vh - 160px);
+    }
 
     img{
         border: 1px solid gainsboro;

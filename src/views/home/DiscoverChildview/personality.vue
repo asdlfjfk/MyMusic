@@ -282,7 +282,7 @@
     .recommonlist{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         margin-bottom: 24px;
     }
 
@@ -290,6 +290,7 @@
         z-index: 1;
         height: 200px;
         margin-top: 5%;
+        margin-left: 30px;
     }
 
     .imgboxcontent{
@@ -350,6 +351,7 @@
         cursor: pointer;
         font-family: 微软雅黑;
         font-weight: 400;
+        margin-left: 30px;
     }
 
     .name:hover{

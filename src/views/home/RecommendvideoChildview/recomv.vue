@@ -180,6 +180,7 @@
 
     #recomv{
         overflow-x: hidden;
+        height: calc(100vh - 230px);
     }
 
     .line{
@@ -230,7 +231,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin: 0px 90px 0px 130px;
+        margin: 0px 90px 20px 130px;
         position: relative;
         right: 40px;
     }

@@ -147,7 +147,8 @@
     }
 
     .title2{
-        bottom: 680px;
+        position: relative;
+        bottom: 28%;
     }
 
     .allline{
@@ -180,7 +181,7 @@
         flex-wrap: wrap;
         margin-left: 80px;
         position: relative;
-        bottom: 680px;
+        bottom: 27.5%;
     }
 
     .listitem{
@@ -299,22 +300,22 @@
     .list1{
         position: relative;
         bottom: 318px;
-        right: 300px;
+        right: 24.5%;
     }
     .list2{
         position: relative;
         bottom: 290px;
-        right: 300px;
+        right: 24.5%;
     }
     .list3{
         position: relative;
         bottom: 260px;
-        right: 300px;
+        right: 24.5%;
     }
     .list4{
         position: relative;
         bottom: 232px;
-        right: 300px;
+        right: 24.5%;
     }
 
     .look{
@@ -330,7 +331,7 @@
     }
 
     .line{
-        width: 850px;
+        width: 70%;
         display: flex;
         align-items: center;
         justify-content:flex-start;
@@ -362,7 +363,7 @@
 
     .singername{
         position: absolute;
-        right: 385px;
+        right: 32%;
         font-size: 13px;
     }
 </style>

@@ -152,7 +152,7 @@
     .number{
         width: 70px;
         opacity: .6;
-        margin-left: 26px;
+        margin-left: 2%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -179,7 +179,7 @@
         color: rgb(80, 125, 175);
         width: 160px;
         position: relative;
-        left: 55px;
+        left: 7%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -188,7 +188,7 @@
     .album{
         width: 180px;
         position: relative;
-        left: 125px;
+        left: 10%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -196,7 +196,7 @@
     .length{
         width: 40px;
         position: relative;
-        left: 200px;
+        left: 15%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -224,7 +224,7 @@
         border-radius: 5px;
         position: relative;
         top:10px;
-        right: 15px;
+        right: 22%;
         border: 1px solid gainsboro;
     }
 
@@ -244,7 +244,7 @@
         justify-content: space-evenly;
         cursor: pointer;
         position: relative;
-        left: 900px;
+        left: 72%;
         bottom: 10px;
         font-size: 14px;
         z-index: 10;
@@ -267,7 +267,7 @@
         justify-content: space-evenly;
         cursor: pointer;
         position: relative;
-        left: 1040px;
+        left: 85%;
         bottom: 35px;
         font-size: 14px;
         z-index: 10;

@@ -22,7 +22,7 @@
             </div>
         </el-header>
 
-        <el-main style="height:560px" id="main">
+        <el-main id="main">
             <div>
                 <router-view></router-view>
             </div>
@@ -103,6 +103,7 @@
     #main{
         margin: 0;
         padding: 0;
+        height: calc(100vh - 200px);
     }
 
     #discovermusic{

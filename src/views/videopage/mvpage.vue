@@ -43,7 +43,7 @@
                 <el-input type="textarea" placeholder="请输入内容" :autosize="{ minRows: 4, maxRows: 6}" class="textarea"
                           maxlength="140" minlength="0" show-word-limit resize="none" v-model="input">
                 </el-input>
-                <el-button>评论</el-button>
+                <el-button @click="tocomment">评论</el-button>
             </div>
             <div class="hotcomments" v-if="hot.length > 0">
                 <span class="title">精彩评论({{hot.length}})</span>
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-    import {getmvdetail,getmvcomment,getmvurl,getrelatedvideo} from 'network/homedata'
+    import {getmvdetail,getmvcomment,getmvurl,getrelatedvideo,usercomment} from 'network/homedata'
     import {formatDate} from "common/util"
     export default {
         name: "mvpage",
@@ -209,6 +209,21 @@
                 let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
                 let s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
                 return m + s
+            },
+            tocomment(){
+                let logincookie = sessionStorage.getItem("logincookie")
+                if (logincookie) {
+                    if (this.input.length > 0){
+                        usercomment(1,1,this.id,this.input,logincookie).then(() => {
+                            this.input = ""
+                            this.$message.success("评论成功,刷新页面查看")
+                        })
+                    } else {
+                        this.$message.error("评论内容不能为空哦")
+                    }
+                }else {
+                    this.$message.error("请先登录再使用此功能哦")
+                }
             }
         },
         watch:{

@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="loading">
+    <div v-loading="loading" id="albumlist">
         <div class="head">
             <div class="imgbox">
                 <img :src="detail.blurPicUrl" alt="">
@@ -131,6 +131,10 @@
 </script>
 
 <style scoped>
+
+    #albumlist{
+        height: calc(100vh - 160px);
+    }
 
     .imgbox{
         position: relative;

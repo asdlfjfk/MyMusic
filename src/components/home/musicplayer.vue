@@ -540,15 +540,15 @@
     }
 
     .block{
-        width: 700px;
+        width: 45.5%;
         position: absolute;
-        top: 40px;
-        left: 410px;
+        top: 65%;
+        left: 26.8%;
     }
 
     .current{
         position: absolute;
-        top: 47.5px;
+        top: 80%;
         left: 23.4%;
         font-weight: 300;
         font-family: 微软雅黑;
@@ -557,7 +557,7 @@
     .size{
         position: absolute;
         left: 73.1%;
-        top: 47.5px;
+        top: 80%;
         font-weight: 300;
         font-family: 微软雅黑;
     }
@@ -571,6 +571,7 @@
 
     .block >>> .el-slider__bar{
         background-color: #ff4e4e;
+        position: absolute;
     }
 
     .right{

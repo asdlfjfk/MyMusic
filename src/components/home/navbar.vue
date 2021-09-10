@@ -42,13 +42,16 @@
             </div>
         </div>
 
-        <div class="login" v-if="loginshow">
-            <div class="icon iconfont"><div class="icon2" @click="close">&#xe605;</div></div>
-            <div class="title"><div class="titletext">登录</div></div>
-            <el-input placeholder="请输入手机号" class="number" @blur="checkphone(phone)" v-model="phone"></el-input>
-            <el-input placeholder="请输入密码" show-password class="password" v-model="password"  @blur="checkpassword(password)" @keyup.enter.native="login(phone,password)"></el-input>
-            <el-button @click="login(phone,password)">登录</el-button>
-        </div>
+        <transition name="el-fade-in">
+            <div class="login" v-if="loginshow">
+                <div class="icon iconfont"><div class="icon2" @click="close">&#xe605;</div></div>
+                <div class="title"><div class="titletext">登录</div></div>
+                <el-input placeholder="请输入手机号" class="number" @blur="checkphone(phone)" v-model="phone"></el-input>
+                <el-input placeholder="请输入密码" show-password class="password" v-model="password"  @blur="checkpassword(password)" @keyup.enter.native="login(phone,password)"></el-input>
+                <el-button @click="login(phone,password)">登录</el-button>
+            </div>
+        </transition>
+
     </el-header>
 
 </template>

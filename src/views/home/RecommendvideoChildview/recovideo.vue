@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="videos">
+        <div class="videos" v-loading="loading">
             <div v-if="show === true" class="category">
                 <div v-for="item in allcategory" class="cateitem" @click="changeOtherlist(item)">
                     <div class="catename" :class="{active2: item.name === tag}">{{item.name}}</div>
@@ -49,6 +49,7 @@
         name: "recovideo",
         data(){
           return {
+              loading:true,
               videos:[],
               category:[],
               allcategory:[],
@@ -62,11 +63,12 @@
         created(){
             let logincookie = sessionStorage.getItem("logincookie")
             if (logincookie) {
-                getallvideo(logincookie).then(res => {
-                    this.videos = res.data.datas
-                })
                 getvideocategorylist(logincookie).then(res => {
                     this.category = res.data.data
+                })
+                getallvideo(logincookie).then(res => {
+                    this.videos = res.data.datas
+                    this.loading = false
                 })
                 getvideolist().then(res => {
                     this.allcategory = res.data.data
@@ -78,12 +80,14 @@
         },
         methods:{
             changeOtherlist(item){
+                this.loading = true
                 let logincookie = sessionStorage.getItem("logincookie")
                 this.show = false
                 this.tag = item.name
                 this.tag2 = this.tag + " >"
                 getvideogroup(item.id,logincookie).then(res => {
                     this.videos = res.data.datas
+                    this.loading = false
                 })
             },
             showcategory(){
@@ -102,6 +106,11 @@
 </script>
 
 <style scoped>
+
+    #recovideo{
+        height: calc(100vh - 230px);
+    }
+
     .nav{
         display: flex;
         align-items: center;

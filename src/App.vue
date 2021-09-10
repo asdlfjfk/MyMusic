@@ -8,7 +8,7 @@
                 <!--主页面-->
                 <el-container>
                     <sidebar></sidebar>
-                    <el-main style="height: 640px" id="main">
+                    <el-main id="main">
                         <keep-alive exclude="songlist,singerlist,albumlist,videopage,mvpage,allmv">
                             <router-view></router-view>
                         </keep-alive>
@@ -60,7 +60,7 @@ export default {
 
     #footer{
         background-color: #fff;
-        position: relative;
+        position: absolute;
         bottom: 20px;
         left: 0;
         right: 0;

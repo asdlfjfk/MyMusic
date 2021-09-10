@@ -451,3 +451,13 @@
             }
         })
     }
+
+    //评论
+    export function usercomment(t,type,id,content,cookie) {
+        return request({
+            url:'/comment',
+            params:{
+                t,type,id,content,cookie
+            }
+        })
+    }

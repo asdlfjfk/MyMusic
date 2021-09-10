@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="latestmusic">
         <div class="line1">
             <div class="btn">
                 <div class="btn1" :class="{active: current === 1}" @click="changecurrent(1)">新歌速递</div>
@@ -72,15 +72,19 @@
 
 <style scoped>
 
+    #latestmusic{
+        width: 100%;
+    }
+
     .line1{
-        margin: 18px 510px 10px 470px;
+        margin: 18px 510px 10px 40%;
     }
 
     .line2{
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        margin-left: 80px;
+        margin-left: 5%;
         position: relative;
         top: 10px;
         z-index: 10;
@@ -133,18 +137,6 @@
     .active2{
         font-weight: 800;
         color: #000;
-    }
-
-    .line{
-        width: 850px;
-        display: flex;
-        align-items: center;
-        justify-content:flex-start;
-        line-height: 44px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 400;
-        color: rgb(0,0,0,.6);
     }
 
     .bgc{

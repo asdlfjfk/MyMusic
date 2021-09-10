@@ -185,19 +185,18 @@
 
     #songlist{
         margin: 0px 35px 0px 10px;
+        height: calc(100vh - 160px);
     }
 
     .head{
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        position: relative;
-        bottom: 10px;
     }
 
     .headimg{
-        width: 20%;
-        height: 20%;
+        width: 240px;
+        height: 240px;
         border-radius: 5px;
         position: relative;
         left: 4%;
@@ -401,8 +400,8 @@
     }
 
     #main{
-        margin-top: 200px;
-        margin-left: 10px;
+        margin-top: 18.5%;
+        margin-left: 1%;
     }
 
     .maintitle{
