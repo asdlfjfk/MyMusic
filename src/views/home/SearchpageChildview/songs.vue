@@ -140,7 +140,6 @@
     .searchsongs{
         width: 1225px;
         margin: 0 auto;
-        height: calc(100vh - 160px);
     }
 
     .title{
@@ -220,10 +219,10 @@
     }
 
     .allsong{
-        position: relative;
-        top: 14px;
+
         font-family: 微软雅黑;
-        z-index: 1;
+        z-index: 1;position: relative;
+        top: 14px;
     }
 
     .songs{
