@@ -101,7 +101,7 @@
     #main{
         margin: 0;
         padding: 0;
-        height: calc(100vh - 200px);
+        height: calc(100vh - 184px);
     }
 
     #searchpage{
