@@ -14,24 +14,29 @@
                 <i class="el-icon-arrow-right" style="cursor: pointer;"></i>
             </div>
 
-            <el-input class="el-input2" @keyup.enter.native="linktosearchpage(input)" v-model="input" suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini" @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
-            <div class="hotsearch" v-if="hotsearch">
-                <div class="box" v-loading="loading">
-                    <div class="leadertext">热搜榜</div>
-                    <div v-for="(item,index) in hotsearchlist" class="item" v-loading="loading" @mousedown="linktosearchpage(item.searchWord)">
-                        <div class="number" :class="{active: index + 1 === 1 || index + 1 === 2 || index + 1 === 3}">{{index + 1}}</div>
-                        <div>
-                            <div class="hotsearchname">
-                                <div class="searchname">{{item.searchWord}}</div>
-                                <div class="score">{{item.score}}</div>
-                                <div class="icon iconfont2" v-if="item.iconType === 1 || index + 1 === 1 || index + 1 === 2 || index + 1 === 3">&#xe740;</div>
-                                <div class="icon iconfont3" v-if="item.iconType === 2">&#xe741;</div>
+            <el-input class="el-input2" @keyup.enter.native="linktosearchpage(input)" v-model="input"
+                      suffix-icon="el-icon-search" placeholder="请输入歌曲名或歌手名" size="mini"
+                      @focus="hotsearchshow" @blur="hotsearchclose"></el-input>
+
+            <transition name="el-fade-in">
+                <div class="hotsearch" v-if="hotsearch">
+                    <div class="box" v-loading="loading">
+                        <div class="leadertext">热搜榜</div>
+                        <div v-for="(item,index) in hotsearchlist" class="item" v-loading="loading" @mousedown="linktosearchpage(item.searchWord)">
+                            <div class="number" :class="{active: index + 1 === 1 || index + 1 === 2 || index + 1 === 3}">{{index + 1}}</div>
+                            <div>
+                                <div class="hotsearchname">
+                                    <div class="searchname">{{item.searchWord}}</div>
+                                    <div class="score">{{item.score}}</div>
+                                    <div class="icon iconfont2" v-if="item.iconType === 1 || index + 1 === 1 || index + 1 === 2 || index + 1 === 3">&#xe740;</div>
+                                    <div class="icon iconfont3" v-if="item.iconType === 2">&#xe741;</div>
+                                </div>
+                                <div class="content">{{item.content}}</div>
                             </div>
-                            <div class="content">{{item.content}}</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </transition>
 
             <div class="userlogin">
                 <el-avatar icon="el-icon-user-solid" :size="34" v-if="avatar.length < 1"></el-avatar>
