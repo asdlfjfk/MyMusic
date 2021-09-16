@@ -4,7 +4,7 @@ export function request(config) {
     return new Promise((resolve,reject) => {
         const instance = axios.create({
             //创建实例
-            baseURL:'https://nicemusic-api.lxhcool.cn/',
+            baseURL:'https://musicapi-beige.vercel.app/',
             timeout:100000
         })
         //请求拦截
