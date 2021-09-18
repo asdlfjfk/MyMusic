@@ -461,3 +461,13 @@
             }
         })
     }
+
+    //回复评论
+    export function replycomment(t,type,id,content,commentId,cookie) {
+        return request({
+            url:'/comment',
+            params:{
+                t,type,id,content,cookie,commentId
+            }
+        })
+    }

@@ -2,7 +2,7 @@
     <div v-loading="loading">
         <div class="comment">
             <el-input type="textarea" placeholder="请输入内容" :autosize="{ minRows: 4, maxRows: 6}" class="textarea"
-                      maxlength="140" minlength="0" show-word-limit resize="none" v-model="input">
+                      maxlength="140" minlength="0" show-word-limit resize="none" v-model="input" ref="inputs">
             </el-input>
             <el-button @click="tocomment" plain>评论</el-button>
         </div>
@@ -16,7 +16,7 @@
                         <span class="inner">{{comment.content}}</span>
                         <div v-if="comment.beReplied.length > 0">
                             <div class="reply">
-                                <span class="username">{{comment.beReplied[0].user.nickname}}:</span>
+                                <span class="username">@{{comment.beReplied[0].user.nickname}}:</span>
                                 <span class="inner">{{comment.beReplied[0].content}}</span>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                         <span class="icon iconfont">&#xe6c9;</span>
                         <span>{{comment.likedCount}}</span>
                     </div>
-                    <div class="icon iconfont2">&#xe603;</div>
+                    <div class="icon iconfont2" @click="toreply(comment)">&#xe603;</div>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                         <span class="inner">{{comment.content}}</span>
                         <div v-if="comment.beReplied.length > 0">
                             <div class="reply">
-                                <span class="username">{{comment.beReplied[0].user.nickname}}:</span>
+                                <span class="username">@{{comment.beReplied[0].user.nickname}}:</span>
                                 <span class="inner">{{comment.beReplied[0].content}}</span>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                         <span class="icon iconfont">&#xe6c9;</span>
                         <span>{{comment.likedCount}}</span>
                     </div>
-                    <div class="icon iconfont2">&#xe603;</div>
+                    <div class="icon iconfont2" @click="toreply(comment)">&#xe603;</div>
                 </div>
             </div>
             <el-pagination
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {getplaylistcomment,gethotcomment,usercomment} from "network/homedata"
+    import {getplaylistcomment,gethotcomment,usercomment,replycomment} from "network/homedata"
     import {formatDate} from "common/util"
     export default {
         name: "comment",
@@ -87,6 +87,9 @@
         data(){
             return {
                 input:"",
+                reply:false,
+                replyinfo:"",
+                comment:"",
                 count:0,
                 commentid:"",
                 res:"",
@@ -124,14 +127,34 @@
             tocomment(){
                 let logincookie = sessionStorage.getItem("logincookie")
                 if (logincookie) {
-                    if (this.input.length > 0){
-                        usercomment(1,2,this.id,this.input,logincookie).then(() => {
+
+                    if (this.reply === true) {
+                        replycomment(2,2,this.id,this.replyinfo,this.comment.commentId,logincookie).then(() => {
                             this.input = ""
-                            this.$message.success("评论成功,刷新页面查看")
+                            this.$message.success("评论回复成功,刷新页面查看")
+                            this.reply = false
                         })
-                    } else {
-                        this.$message.error("评论内容不能为空哦")
+                    }else {
+                        if (this.input.length > 0){
+                            usercomment(1,2,this.id,this.input,logincookie).then(() => {
+                                this.input = ""
+                                this.$message.success("评论成功,刷新页面查看")
+                            })
+                        } else {
+                            this.$message.error("评论内容不能为空哦")
+                        }
                     }
+
+                }else {
+                    this.$message.error("请先登录再使用此功能哦")
+                }
+            },
+            toreply(comment){
+                let logincookie = sessionStorage.getItem("logincookie")
+                if (logincookie) {
+                    this.comment = comment
+                    this.input = "回复" + comment.user.nickname + " :"
+                    this.reply = true
                 }else {
                     this.$message.error("请先登录再使用此功能哦")
                 }
@@ -140,6 +163,15 @@
         computed:{
             id(){
                 return this.$route.params.id
+            }
+        },
+        watch:{
+            input(val){
+                if (this.reply === true){
+                    let index = val.lastIndexOf(":")
+                    let val2 = val.substring(index+1);
+                    this.replyinfo = val2
+                }
             }
         }
     }
@@ -161,6 +193,7 @@
     .iconfont2{
         font-size:24px;font-style:normal;
         opacity: .8;
+        cursor: pointer;
     }
 
     .comment{
@@ -207,6 +240,7 @@
         right: 30%;
         margin-top: 40px;
         margin-bottom: 40px;
+        bottom: 14px;
     }
 
     .newcomments >>> .el-pagination.is-background .el-pager li:not(.disabled).active{
