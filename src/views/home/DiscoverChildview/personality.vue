@@ -345,9 +345,9 @@
 
     .name {
         width: 200px;
-        height: auto;
         font-size: 14px;
-        margin-top: 10%;
+        height: 40px;
+        margin-top: 6%;
         color: rgb(0,0,0,.6);
         display: flex;
         justify-content: flex-start;
