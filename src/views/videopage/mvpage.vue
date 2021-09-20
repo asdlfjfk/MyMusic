@@ -471,9 +471,7 @@
         font-weight: 400;
         font-family: 微软雅黑;
         opacity: .7;
-        position: relative;
-        left: 60px;
-        margin: 15px 0px 15px 0px;
+        margin: 15px 0px 15px 66px;
     }
 
     .name{
@@ -484,8 +482,7 @@
         white-space: nowrap;
         font-weight: 800;
         font-size: 24px;
-        position: relative;
-        left: 48px;
+        margin-left: 54px;
         margin-top: 5px;
     }
 
@@ -493,7 +490,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin-left: 60px;
+        margin-left: 54px;
         font-size: 12px;
         opacity: .7;
     }
@@ -608,7 +605,7 @@
         font-family: 微软雅黑;
         font-weight: 400;
         font-size: 13px;
-        margin: 10px 85px 0px 60px;
+        margin: 10px 85px 0px 54px;
         opacity: .8;
     }
 
@@ -626,7 +623,7 @@
         align-items: center;
         justify-content: flex-start;
         position: relative;
-        left: 48px;
+        left: 40px;
         top: 16px;
         font-size: 14px;
         font-weight: 300;

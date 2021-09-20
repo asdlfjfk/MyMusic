@@ -495,7 +495,7 @@
         font-family: 微软雅黑;
         opacity: .7;
         position: relative;
-        left: 60px;
+        left: 54px;
         margin: 15px 0px 15px 0px;
     }
 
@@ -508,7 +508,7 @@
         font-weight: 800;
         font-size: 24px;
         position: relative;
-        left: 50px;
+        left: 54px;
         margin-top: 5px;
     }
 
@@ -516,7 +516,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin-left: 60px;
+        margin-left: 54px;
     }
 
     .play{
@@ -664,7 +664,7 @@
         align-items: center;
         justify-content: flex-start;
         position: relative;
-        left: 48px;
+        left: 40px;
         top: 15px;
         font-size: 14px;
         font-weight: 300;
