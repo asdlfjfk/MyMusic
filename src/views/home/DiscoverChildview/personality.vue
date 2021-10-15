@@ -188,7 +188,7 @@
             getprivatecontent().then(res => {
                 this.privatecontent = res.data.result
             })
-            getnewsongs(20).then(res => {
+            getnewsongs(22).then(res => {
                 this.newsongs = res.data.result
             })
             getrecommendMV().then(res => {
