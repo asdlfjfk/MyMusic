@@ -88,10 +88,12 @@
         },
         watch:{
             song(val){
-                this.detail = val.data.data[0]
-                this.url = val.data.data[0].url
-                if (val !== 0){
+                if (val !== 0 && val.data.data[0].url != null){
+                    this.detail = val.data.data[0]
+                    this.url = val.data.data[0].url
                     this.disab = false
+                } else {
+                  this.$message.warning("暂无该歌曲资源")
                 }
                 getsongdetail(this.detail.id).then(res => {
                     this.songalia = res.data.songs[0].alia[0]
@@ -109,6 +111,8 @@
 
                 this.icon = "&#xe606;"
                 this.playpause = true
+                this.$refs.audio.load()
+                this.$refs.audio.play()
             },
             volume(val){
                 let audio = document.querySelector("audio");

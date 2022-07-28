@@ -196,7 +196,7 @@
         left: 370px;
         top: 200px;
         border: 1px solid gainsboro;
-        width: 53%;
+        width: 50.2%;
         z-index: 20;
         background: #fff;
         padding:10px 10px 10px 10px;

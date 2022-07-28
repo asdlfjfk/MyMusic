@@ -52,7 +52,7 @@
                 }else {
                     this.$store.commit('changebackid',item.data.songs[0].id)
                     getsongurl(item.data.songs[0].id).then(res => {
-                        this.$store.commit('changesong',{res,item})
+                      this.$store.commit('changesong',{res,item})
                     },500)
                 }
             },

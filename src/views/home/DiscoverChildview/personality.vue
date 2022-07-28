@@ -147,8 +147,12 @@
                     getsongurl(item.targetId).then(res => {
                         this.$store.commit('changesong2',res)
                     },500)
-                }else {
-                    this.$message.error('暂无权限播放此歌曲')
+                }
+                else if(item.targetType == 1004){
+                    this.$router.push('/mvpage/' +  item.targetId)
+                }
+                else {
+                    this.$message.error('抱歉,暂无权限')
                 }
             },
             addsongtoplay(item){
@@ -388,6 +392,10 @@
         margin-left: 5%;
         margin-right: 2%;
         font-weight: 400;
+        white-space: nowrap;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .privatename:hover{
