@@ -471,3 +471,50 @@
             }
         })
     }
+
+    //获取登录二维码的key
+    export function getQRcodeKey(timestamp) {
+        return request({
+            url:'/login/qr/key',
+            params:{
+                timestamp
+            }
+        })
+    }
+
+    //获取登录二维码图像
+    export function getQRcodeImg(key,timestamp) {
+        return request({
+            url:'/login/qr/create',
+            params:{
+                key,
+                qrimg:true,
+                timestamp
+            }
+        })
+    }
+
+    //轮询接口 用于实时检测是否已经扫码完成登录
+    export function getQRcodeCheck(key,timestamp) {
+        return request({
+            url:'/login/qr/check',
+            params:{
+                key,
+                timestamp
+            }
+        })
+    }
+
+    //获取登录状态
+    export function getLoginStatus(cookie) {
+        return request({
+            url:'/login/status',
+            method:"post",
+            data:{
+                cookie
+            }
+        })
+    }
+
+
+

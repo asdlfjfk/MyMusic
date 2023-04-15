@@ -48,12 +48,26 @@
         </div>
 
         <transition name="el-fade-in">
-            <div class="login" v-if="loginshow"  v-drags>
+            <div class="login" v-if="loginshow" v-drags>
                 <div class="icon iconfont"><div class="icon2" @click="close">&#xe605;</div></div>
                 <div class="title"><div class="titletext">登录</div></div>
+
+              <div v-show="!QrCodeShow">
                 <el-input placeholder="请输入手机号" class="number" @blur="checkphone(phone)" v-model="phone"></el-input>
                 <el-input placeholder="请输入密码" show-password class="password" v-model="password"  @blur="checkpassword(password)" @keyup.enter.native="login(phone,password)"></el-input>
                 <el-button @click="login(phone,password)">登录</el-button>
+              </div>
+
+              <div v-show="QrCodeShow">
+                <el-image
+                    style="width: 200px; height: 200px; margin-top: 70px;cursor: pointer"
+                    :src="QrCodeImg"
+                    @click.native="getQrCode"
+                    ></el-image>
+                <div class="QrCodeStatus">{{status}}</div>
+              </div>
+
+                <div class="changeLoginType" @click="QrCodeShow = !QrCodeShow">切换登录方式</div>
             </div>
         </transition>
 
@@ -63,13 +77,14 @@
 
 
 <script>
-    import {gethotsearch,login} from "network/homedata"
+    import {gethotsearch,login,getQRcodeKey,getQRcodeImg,getQRcodeCheck,getLoginStatus} from "network/homedata"
     export default {
         name: "navbar",
         data(){
           return {
               loading:true,
               loginshow:false,
+              QrCodeShow:false,
               hotsearch:false,
               hotsearchlist:[],
               logintf:false,
@@ -78,7 +93,12 @@
               password:"",
               avatar:"",
               username:"",
-              logintoastflag:0
+              logintoastflag:0,
+              QrCodeKey:"",
+              QrCodeImg:"",
+              timer:"",
+              status:"",
+              timestamp:Date.now()
           }
         },
         created(){
@@ -88,8 +108,12 @@
             let flag = sessionStorage.getItem("toastflag")
             if (logincookie) {
                 this.logintoastflag = flag
-                this.login(phone,password)
+                // this.login(phone,password)
+                this.getloginstatus(logincookie)
             }
+        },
+        mounted() {
+          this.getQrCode()
         },
         methods:{
             back(){
@@ -130,7 +154,6 @@
             },
             login(phone,password){
                 if (phone && password){
-
                             login(phone,password).then(res => {
                                 if (res.data.code === 502) {
                                     this.$message.error(res.data.message);
@@ -152,7 +175,7 @@
                                     }
                                 }
                             }).catch(() => {
-                                this.$message.error("该账户不存在或密码错误超过次数限制")
+                                this.$message.error("该账户不存在或密码错误")
                             })
 
                 } else {
@@ -167,7 +190,7 @@
                 sessionStorage.removeItem("password");
                 sessionStorage.removeItem("userid");
                 this.$message.success("退出登录成功")
-                this.$router.go(0)
+                this.$router.push('/home')
             },
             linktosearchpage(input){
                 this.hotsearch = false
@@ -179,11 +202,61 @@
                     this.$store.commit('changesearchkeyword',input)
                     this.$router.push('/searchpage')
                 }
+            },
+            getloginstatus() {
+              getLoginStatus(sessionStorage.getItem("logincookie")).then(res => {
+                this.logintf = true
+                this.avatar = res.data.data.profile.avatarUrl
+                this.username = res.data.data.profile.nickname
+              })
+            },
+            async getQrCode() {
+              await getQRcodeKey(this.timestamp).then(res => {
+                if (res.status == 200) {
+                  this.QrCodeKey = res.data.data.unikey
+                }
+              })
+              await getQRcodeImg(this.QrCodeKey,this.timestamp).then(res => {
+                if (res.status == 200) {
+                  this.QrCodeImg = res.data.data.qrimg
+                }
+              })
+            },
+            startIsLoginThread() {
+              let that = this
+              this.clearTimer()
+              this.timer = setInterval(() => {
+                getQRcodeCheck(that.QrCodeKey,that.timestamp).then(res => {
+                  that.status = res.data.message
+                  if (res.data.code == 803) {
+                    this.clearTimer()
+                    sessionStorage.setItem("logincookie",res.data.cookie)
+                    that.loginshow = false
+                    that.logintf = true
+                    that.$message.success("登录成功!")
+                    that.getloginstatus()
+                  }
+                })
+              },2000);
+            },
+            clearTimer() {
+              if (this.timer != "") {
+                clearInterval(this.timer)
+              }
             }
         },
         watch:{
-            loginshow(val){
-
+            loginShow(val) {
+              if (!val) {
+                this.clearTimer()
+              }
+            },
+            QrCodeShow(val) {
+                if (val && this.loginshow) {
+                  this.startIsLoginThread()
+                } else {
+                  this.clearTimer()
+                }
             },
             hotsearch(val){
                 if (val){
@@ -198,6 +271,10 @@
 </script>
 
 <style scoped>
+
+    .QrCodeStatus {
+      font-family: "微软雅黑";
+    }
 
     .icon{
         font-family:"iconfont" !important;
@@ -345,6 +422,14 @@
         left: 740px;
         z-index: 50;
         box-shadow: rgb(0,0,0,.4) 0px 0px 24px;
+    }
+
+    .changeLoginType {
+      cursor: pointer;
+      font-family: 微软雅黑;
+      font-size: 12px;
+      position: relative;
+      top: 50px;
     }
 
     .title{
