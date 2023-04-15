@@ -161,9 +161,6 @@
                         this.$store.commit('changesong2',res)
                     },500)
             },
-            mvdetail(id){
-                this.$router.push('/mvpage/' +  id)
-            },
             singerdetail(id){
                 this.$router.push('/singerlist/' + id)
             },
@@ -186,7 +183,7 @@
                 this.loadingcarousel = false
             })
             getrecommonlist().then(res => {
-                this.recommonlist = res.data.result
+              this.recommonlist = res.data.result
                 this.loading = false
             })
             getprivatecontent().then(res => {
@@ -196,10 +193,7 @@
                 this.newsongs = res.data.result
             })
             getrecommendMV().then(res => {
-                this.recommendMV.push(res.data.result[0])
-                this.recommendMV.push(res.data.result[1])
-                this.recommendMV.push(res.data.result[2])
-                this.recommendMV.push(res.data.result[3])
+              if (res.status == 200) this.recommendMV = res.data.result;
             })
         }
     }
@@ -255,7 +249,7 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     .recommend{
         display: flex;
         align-items: center;
@@ -518,7 +512,7 @@
         background-color: #fff;
         opacity: .9;
     }
-    
+
     #player3{
         font-size: 24px;
         color: #c62f2f;
@@ -578,7 +572,7 @@
         opacity: .8;
         cursor: pointer;
     }
-    
+
     .mvplaycount{
         display: flex;
         justify-content: flex-end;
