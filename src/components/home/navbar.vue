@@ -64,7 +64,7 @@
                     :src="QrCodeImg"
                     @click.native="getQrCode"
                     ></el-image>
-                <div class="QrCodeStatus">{{status}}</div>
+                <div class="QrCodeStatus">{{status.message}}</div>
               </div>
 
                 <div class="changeLoginType" @click="QrCodeShow = !QrCodeShow">切换登录方式</div>
@@ -109,11 +109,16 @@
             if (logincookie) {
                 this.logintoastflag = flag
                 // this.login(phone,password)
-                this.getloginstatus(logincookie)
+                this.getLoginStatus(logincookie)
             }
         },
         mounted() {
           this.getQrCode()
+        },
+        computed: {
+            code() {
+              return this.status.code
+            }
         },
         methods:{
             back(){
@@ -203,7 +208,7 @@
                     this.$router.push('/searchpage')
                 }
             },
-            getloginstatus() {
+            getLoginStatus() {
               getLoginStatus(sessionStorage.getItem("logincookie")).then(res => {
                 this.logintf = true
                 this.avatar = res.data.data.profile.avatarUrl
@@ -222,21 +227,16 @@
                 }
               })
             },
+            getCheck() {
+              getQRcodeCheck(this.QrCodeKey,this.timestamp).then(res => {
+                this.status = res.data;
+              })
+            },
             startIsLoginThread() {
               let that = this
               this.clearTimer()
-              this.timer = setInterval(() => {
-                getQRcodeCheck(that.QrCodeKey,that.timestamp).then(res => {
-                  that.status = res.data.message
-                  if (res.data.code == 803) {
-                    this.clearTimer()
-                    sessionStorage.setItem("logincookie",res.data.cookie)
-                    that.loginshow = false
-                    that.logintf = true
-                    that.$message.success("登录成功!")
-                    that.getloginstatus()
-                  }
-                })
+              this.timer = setInterval(async () => {
+                that.getCheck()
               },2000);
             },
             clearTimer() {
@@ -257,6 +257,16 @@
                 } else {
                   this.clearTimer()
                 }
+            },
+            code(val) {
+              if (val == 803) {
+                this.clearTimer()
+                sessionStorage.setItem("logincookie",this.status.cookie)
+                this.loginshow = false
+                this.logintf = true
+                this.$message.success("登录成功!")
+                this.getLoginStatus()
+              }
             },
             hotsearch(val){
                 if (val){

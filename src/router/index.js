@@ -3,6 +3,14 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+//解决vue路由重复导航错误
+//获取原型对象上的push函数
+const originalPush = VueRouter.prototype.push
+//修改原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
+
 const home = () => import('../views/home/Discovermusic.vue')
 const video = () => import('../views/home/Recommendvideo.vue')
 const myplaylist = () => import('../views/home/MyCloudDisk.vue')
