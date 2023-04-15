@@ -48,7 +48,7 @@
         </div>
 
         <transition name="el-fade-in">
-            <div class="login" v-if="loginshow">
+            <div class="login" v-if="loginshow"  v-drags>
                 <div class="icon iconfont"><div class="icon2" @click="close">&#xe605;</div></div>
                 <div class="title"><div class="titletext">登录</div></div>
                 <el-input placeholder="请输入手机号" class="number" @blur="checkphone(phone)" v-model="phone"></el-input>

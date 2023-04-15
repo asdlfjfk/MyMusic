@@ -142,10 +142,10 @@
               this.$router.push('/mvpage/' +  id)
             },
             swiperaddsongtoplay(item){
-                if (item.targetType === 1){
+              if (item.targetType === 1){
                     this.$store.commit('changebackid',item.targetId)  //用于歌单中存在该歌曲 显示为活跃播放状态
                     getsongurl(item.targetId).then(res => {
-                        this.$store.commit('changesong2',res)
+                      this.$store.commit('changesong2',res)
                     },500)
                 }
                 else if(item.targetType == 1004){

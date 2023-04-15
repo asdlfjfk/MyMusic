@@ -88,9 +88,10 @@
         },
         watch:{
             song(val){
-                if (val !== 0 && val.data.data[0].url != null){
+              console.log(val);
+              if (val && val.data.data.url != null){
                     this.detail = val.data.data[0]
-                    this.url = val.data.data[0].url
+                    this.url = val.data.data.url
                     this.disab = false
                 } else {
                   this.$message.warning("暂无该歌曲资源")
