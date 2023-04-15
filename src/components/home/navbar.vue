@@ -211,6 +211,7 @@
             getLoginStatus() {
               getLoginStatus(sessionStorage.getItem("logincookie")).then(res => {
                 this.logintf = true
+                sessionStorage.setItem("userid", res.data.data.profile.userId)
                 this.avatar = res.data.data.profile.avatarUrl
                 this.username = res.data.data.profile.nickname
               })
